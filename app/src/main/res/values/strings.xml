@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Magic Haptic Assistant</string>
+    <string name="tab_control">Control</string>
+    <string name="tab_test">Test</string>
+    <string name="tab_settings">Settings</string>
+</resources>
