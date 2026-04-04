@@ -29,6 +29,12 @@ class AppDataStore(private val context: Context) {
     val currentDeckId: Flow<String> = context.dataStore.data.map { it[CURRENT_DECK_ID] ?: "DEFAULT" }
     val customDeckData: Flow<String> = context.dataStore.data.map { it[CUSTOM_DECK_DATA] ?: "" }
     val speedPreset: Flow<String> = context.dataStore.data.map { it[SPEED_PRESET] ?: "NORMAL" }
+    
+    val customShort: Flow<Long> = context.dataStore.data.map { it[CUSTOM_SHORT] ?: 100L }
+    val customLong: Flow<Long> = context.dataStore.data.map { it[CUSTOM_LONG] ?: 300L }
+    val customGap: Flow<Long> = context.dataStore.data.map { it[CUSTOM_GAP] ?: 150L }
+    val customSep: Flow<Long> = context.dataStore.data.map { it[CUSTOM_SEP] ?: 500L }
+
     val debounceSec: Flow<Int> = context.dataStore.data.map { it[DEBOUNCE_SEC] ?: 3 }
     val notifTitle: Flow<String> = context.dataStore.data.map { it[NOTIF_TITLE] ?: "System Optimizer" }
     val notifBody: Flow<String> = context.dataStore.data.map { it[NOTIF_BODY] ?: "Running..." }
@@ -47,6 +53,15 @@ class AppDataStore(private val context: Context) {
 
     suspend fun saveDebounceSec(sec: Int) {
         context.dataStore.edit { it[DEBOUNCE_SEC] = sec }
+    }
+
+    suspend fun saveCustomDurations(short: Long, long: Long, gap: Long, sep: Long) {
+        context.dataStore.edit {
+            it[CUSTOM_SHORT] = short
+            it[CUSTOM_LONG] = long
+            it[CUSTOM_GAP] = gap
+            it[CUSTOM_SEP] = sep
+        }
     }
 
     suspend fun saveNotifConfig(title: String, body: String) {

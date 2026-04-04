@@ -136,6 +136,43 @@ class SettingsFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+
+        setupCustomHapticValues()
+    }
+
+    private fun setupCustomHapticValues() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            dataStore.customShort.collectLatest { if (binding.etShort.text.isEmpty()) binding.etShort.setText(it.toString()) }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            dataStore.customLong.collectLatest { if (binding.etLong.text.isEmpty()) binding.etLong.setText(it.toString()) }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            dataStore.customGap.collectLatest { if (binding.etGap.text.isEmpty()) binding.etGap.setText(it.toString()) }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            dataStore.customSep.collectLatest { if (binding.etSep.text.isEmpty()) binding.etSep.setText(it.toString()) }
+        }
+
+        binding.btnSaveCustomHaptic.setOnClickListener {
+            val s = binding.etShort.text.toString().toLongOrNull() ?: 100L
+            val l = binding.etLong.text.toString().toLongOrNull() ?: 300L
+            val g = binding.etGap.text.toString().toLongOrNull() ?: 150L
+            val sep = binding.etSep.text.toString().toLongOrNull() ?: 500L
+
+            // Worst-case duration for King of Clubs (K: L G L G L, Sep, Clubs: L G S)
+            // Duration = (4 * L) + (1 * S) + (3 * G) + (1 * SEP)
+            val worstCase = (4 * l) + (1 * s) + (3 * g) + (1 * sep)
+
+            if (worstCase > 4000) {
+                binding.btnSaveCustomHaptic.error = "Worst-case duration ($worstCase ms) exceeds 4000ms limit!"
+            } else {
+                binding.btnSaveCustomHaptic.error = null
+                lifecycleScope.launch {
+                    dataStore.saveCustomDurations(s, l, g, sep)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

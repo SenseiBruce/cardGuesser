@@ -52,6 +52,13 @@ The project includes unit tests for core logic:
 - `HapticEncoderTest`: Verifies unique waveforms for all 52 cards.
 - `ParserTest`: Validates regex trigger phrase matching and number word conversion.
 
+## 🔋 Performance & Battery Optimization
+
+- **Continuous Microphone Usage**: Expect significant battery drain (~10-15% per hour) due to continuous listening.
+- **OEM Battery Optimizations**: Some manufacturers (Samsung, Xiaomi, Huawei) aggressively kill background services.
+  - **Resolution**: Users should navigate to *System Settings > Apps > Magic Haptic Assistant > Battery* and select **"Unrestricted"** or disable **"Battery Optimization"**.
+- **Speech Accuracy**: The Vosk "small" model is optimized for resource efficiency. Accuracy may degrade in very loud environments.
+
 ## 📜 Section 15: What NOT to build
 - This app does NOT use any cloud APIs.
 - It does NOT provide audio confirmation (beeps/TTS).

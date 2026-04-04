@@ -111,12 +111,21 @@ class AudioListenerService : Service() {
         }
         
         serviceScope.launch {
-            dataStore.speedPreset.collectLatest { preset ->
-                currentHapticConfig = when (preset) {
+            combine(
+                dataStore.speedPreset,
+                dataStore.customShort,
+                dataStore.customLong,
+                dataStore.customGap,
+                dataStore.customSep
+            ) { preset, s, l, g, sep ->
+                when (preset) {
                     "FAST" -> HapticConfig(80, 200, 100, 350)
                     "SLOW" -> HapticConfig(150, 400, 200, 600)
+                    "CUSTOM" -> HapticConfig(s, l, g, sep)
                     else -> HapticConfig(100, 300, 150, 500)
                 }
+            }.collectLatest { config ->
+                currentHapticConfig = config
             }
         }
 
@@ -149,6 +158,17 @@ class AudioListenerService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     // Simple helper function to combine flows
+    private fun <T1, T2, T3, T4, T5, R> combine(
+        flow1: kotlinx.coroutines.flow.Flow<T1>,
+        flow2: kotlinx.coroutines.flow.Flow<T2>,
+        flow3: kotlinx.coroutines.flow.Flow<T3>,
+        flow4: kotlinx.coroutines.flow.Flow<T4>,
+        flow5: kotlinx.coroutines.flow.Flow<T5>,
+        transform: suspend (T1, T2, T3, T4, T5) -> R
+    ): kotlinx.coroutines.flow.Flow<R> {
+        return kotlinx.coroutines.flow.combine(flow1, flow2, flow3, flow4, flow5, transform)
+    }
+
     private fun <T1, T2, R> combine(flow1: kotlinx.coroutines.flow.Flow<T1>, flow2: kotlinx.coroutines.flow.Flow<T2>, transform: suspend (T1, T2) -> R): kotlinx.coroutines.flow.Flow<R> {
         return kotlinx.coroutines.flow.combine(flow1, flow2, transform)
     }
