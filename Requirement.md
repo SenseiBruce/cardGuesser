@@ -201,24 +201,24 @@ Rank	Pattern	Description
 A	S	1 short
 2	S S	2 shorts
 3	S S S	3 shorts
-4	S S S S	4 shorts
+4	S L	1 short + 1 long
 5	L	1 long
 6	L S	1 long + 1 short
 7	L S S	1 long + 2 shorts
 8	L S S S	1 long + 3 shorts
-9	L S S S S	1 long + 4 shorts
+9	L S L	1 long + 1 short + 1 long
 10	L L	2 longs
-J	S L	1 short + 1 long
+J	S L L	1 short + 2 longs
 Q	S S L	2 shorts + 1 long
 K	L L L	3 longs
 ⚠️ NOTE: Queen is S S L, NOT L S. This was changed to avoid collision with rank 6 (L S). Verify this in your implementation.
 
 4.3 Suit Encoding (4 unique patterns)
 Suit	Pattern	Mnemonic
-Spades ♠	L	Single long
-Hearts ♥	S S	Heartbeat (two beats)
-Diamonds ♦	S L	Dot-dash
-Clubs ♣	L S	Club (dash-dot)
+Spades ♠	S L S	Sandwich
+Hearts ♥	S S S S	Fast heartbeat
+Diamonds ♦	L L S	Dash-dash-dot
+Clubs ♣	S S S L	Slow build
 4.4 Full Vibration Structure
 text
 [RANK pulses] → [500ms silence SEPARATOR] → [SUIT pulses]

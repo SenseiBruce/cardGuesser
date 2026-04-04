@@ -66,14 +66,14 @@ class HapticEncoder {
             Rank.A -> listOf(PulseType.SHORT)
             Rank.TWO -> listOf(PulseType.SHORT, PulseType.SHORT)
             Rank.THREE -> listOf(PulseType.SHORT, PulseType.SHORT, PulseType.SHORT)
-            Rank.FOUR -> listOf(PulseType.SHORT, PulseType.SHORT, PulseType.SHORT, PulseType.SHORT)
+            Rank.FOUR -> listOf(PulseType.SHORT, PulseType.LONG)
             Rank.FIVE -> listOf(PulseType.LONG)
             Rank.SIX -> listOf(PulseType.LONG, PulseType.SHORT)
             Rank.SEVEN -> listOf(PulseType.LONG, PulseType.SHORT, PulseType.SHORT)
             Rank.EIGHT -> listOf(PulseType.LONG, PulseType.SHORT, PulseType.SHORT, PulseType.SHORT)
-            Rank.NINE -> listOf(PulseType.LONG, PulseType.SHORT, PulseType.SHORT, PulseType.SHORT, PulseType.SHORT)
+            Rank.NINE -> listOf(PulseType.LONG, PulseType.SHORT, PulseType.LONG)
             Rank.TEN -> listOf(PulseType.LONG, PulseType.LONG)
-            Rank.J -> listOf(PulseType.SHORT, PulseType.LONG)
+            Rank.J -> listOf(PulseType.SHORT, PulseType.LONG, PulseType.LONG)
             Rank.Q -> listOf(PulseType.SHORT, PulseType.SHORT, PulseType.LONG)
             Rank.K -> listOf(PulseType.LONG, PulseType.LONG, PulseType.LONG)
         }
@@ -81,10 +81,10 @@ class HapticEncoder {
 
     private fun getSuitPulses(suit: Suit): List<PulseType> {
         return when (suit) {
-            Suit.SPADES -> listOf(PulseType.LONG)
-            Suit.HEARTS -> listOf(PulseType.SHORT, PulseType.SHORT)
-            Suit.DIAMONDS -> listOf(PulseType.SHORT, PulseType.LONG)
-            Suit.CLUBS -> listOf(PulseType.LONG, PulseType.SHORT)
+            Suit.SPADES -> listOf(PulseType.SHORT, PulseType.LONG, PulseType.SHORT)
+            Suit.HEARTS -> listOf(PulseType.SHORT, PulseType.SHORT, PulseType.SHORT, PulseType.SHORT)
+            Suit.DIAMONDS -> listOf(PulseType.LONG, PulseType.LONG, PulseType.SHORT)
+            Suit.CLUBS -> listOf(PulseType.SHORT, PulseType.SHORT, PulseType.SHORT, PulseType.LONG)
         }
     }
 

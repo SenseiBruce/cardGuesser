@@ -57,16 +57,18 @@ gantt
     axisFormat %s
     section Rank (Q)
     S (100ms)    :a1, 0, 100ms
-    Gap (150ms)  :blank, after a1, 250ms
-    S (100ms)    :a2, after blank, 350ms
-    Gap (150ms)  :blank, after a2, 500ms
-    L (300ms)    :a3, after blank, 800ms
+    Gap (150ms)  :blank1, after a1, 250ms
+    S (100ms)    :a2, after blank1, 350ms
+    Gap (150ms)  :blank2, after a2, 500ms
+    L (300ms)    :a3, after blank2, 800ms
     section Boundary
     SEP (500ms)  :sep, after a3, 1300ms
     section Suit (D)
-    S (100ms)    :b1, after sep, 1400ms
-    Gap (150ms)  :blank, after b1, 1550ms
-    L (300ms)    :b2, after blank, 1850ms
+    L (300ms)    :b1, after sep, 1600ms
+    Gap (150ms)  :blank3, after b1, 1750ms
+    L (300ms)    :b2, after blank3, 2050ms
+    Gap (150ms)  :blank4, after b2, 2200ms
+    S (100ms)    :b3, after blank4, 2300ms
 ```
 
 ---
