@@ -25,10 +25,12 @@ class NumberWordConverter {
     )
 
     fun convert(text: String): Int? {
-        val cleanText = text.lowercase(Locale.ROOT).replace("-", " ").trim()
+        val cleanText = text.lowercase(Locale.ROOT)
+            .replace(Regex("([a-z])-([a-z])"), "$1 $2")
+            .trim()
         
-        // 1. Try direct digit parsing
-        val digitMatch = Regex("\\d+").find(cleanText)
+        // 1. Try direct digit parsing (handle negative numbers too)
+        val digitMatch = Regex("-?\\d+").find(cleanText)
         if (digitMatch != null) {
             return digitMatch.value.toIntOrNull()
         }

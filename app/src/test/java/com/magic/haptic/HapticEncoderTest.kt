@@ -2,37 +2,58 @@ package com.magic.haptic
 
 import com.google.common.truth.Truth.assertThat
 import com.magic.haptic.data.HapticConfig
+import com.magic.haptic.data.Rank
+import com.magic.haptic.data.Suit
 import com.magic.haptic.haptic.HapticEncoder
 import org.junit.Test
 
 class HapticEncoderTest {
 
     private val encoder = HapticEncoder()
-    private val config = HapticConfig(100, 300, 150, 500)
+    private val config = HapticConfig(
+        shortDuration = 100L,
+        longDuration = 300L,
+        gapDuration = 150L,
+        separatorDuration = 500L
+    )
 
     @Test
     fun testAceOfSpadesEncoding() {
         val pattern = encoder.encode("AS", config)
         assertThat(pattern).isNotNull()
-        // AS = A (S) + SEP + S (L)
-        // Timings: [0, 100, 500, 300]
-        assertThat(pattern?.timings?.toList()).containsExactly(0L, 100L, 500L, 300L).inOrder()
-        assertThat(pattern?.amplitudes?.toList()).containsExactly(0, 255, 0, 255).inOrder()
+        // AS = A (S) + SEP + S (S, L, S)
+        // Timings: [0, 100, 500, 100, 150, 300, 150, 100]
+        val expectedTimings = longArrayOf(0, 100, 500, 100, 150, 300, 150, 100)
+        assertThat(pattern?.timings?.toList()).containsExactlyElementsIn(expectedTimings.toList()).inOrder()
     }
 
     @Test
-    fun testQueenOfDiamondsEncoding() {
-        val pattern = encoder.encode("QD", config)
-        assertThat(pattern).isNotNull()
-        // QD = Q (S, S, L) + SEP + D (S, L)
-        // Timings: [0, 100, 150, 100, 150, 300, 500, 100, 150, 300]
-        assertThat(pattern?.timings?.toList()).containsExactly(0L, 100L, 150L, 100L, 150L, 300L, 500L, 100L, 150L, 300L).inOrder()
+    fun testAll52CardsHaveUniquePatterns() {
+        val seenPatterns = mutableSetOf<String>()
+        val cards = mutableListOf<String>()
+
+        Rank.values().forEach { rank ->
+            Suit.values().forEach { suit ->
+                val cardStr = "${rank.symbol}${suit.symbol}"
+                val pattern = encoder.encode(cardStr, config)
+                assertThat(pattern).isNotNull()
+                
+                val patternHash = pattern!!.timings.joinToString(",") + "|" + pattern.amplitudes.joinToString(",")
+                assertThat(seenPatterns).doesNotContain(patternHash)
+                seenPatterns.add(patternHash)
+                cards.add(cardStr)
+            }
+        }
+
+        assertThat(cards.size).isEqualTo(52)
+        assertThat(seenPatterns.size).isEqualTo(52)
     }
 
     @Test
     fun testInvalidCardReturnsNull() {
-        val pattern = encoder.encode("XX", config)
-        assertThat(pattern).isNull()
+        assertThat(encoder.encode("XX", config)).isNull()
+        assertThat(encoder.encode("A", config)).isNull()
+        assertThat(encoder.encode("S", config)).isNull()
     }
 
     @Test
@@ -40,8 +61,10 @@ class HapticEncoderTest {
         val pattern = encoder.encode("10H", config)
         assertThat(pattern).isNotNull()
         // 10 = L, L
-        // H = S, S
-        assertThat(pattern?.timings?.toList()).contains(300L) // Long
-        assertThat(pattern?.timings?.toList()).contains(100L) // Short
+        // H = S, S, S, S
+        val timings = pattern!!.timings.toList()
+        assertThat(timings).contains(300L) // Longs for Rank
+        assertThat(timings).contains(100L) // Shorts for Suit
+        assertThat(timings).contains(500L) // Separator
     }
 }

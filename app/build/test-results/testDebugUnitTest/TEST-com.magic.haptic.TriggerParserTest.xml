@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.magic.haptic.TriggerParserTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-04-04T18:23:07.596Z" hostname="APAC-MB05JPK9V" time="0.02">
+  <properties/>
+  <testcase name="testBoundsRejection" classname="com.magic.haptic.TriggerParserTest" time="0.015"/>
+  <testcase name="testTriggerParserPatterns" classname="com.magic.haptic.TriggerParserTest" time="0.002"/>
+  <testcase name="testDifferentTriggersAreNotDebouncedAgainstEachOther" classname="com.magic.haptic.TriggerParserTest" time="0.001"/>
+  <testcase name="testNumberWordConverter" classname="com.magic.haptic.TriggerParserTest" time="0.001"/>
+  <testcase name="testDebounce" classname="com.magic.haptic.TriggerParserTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

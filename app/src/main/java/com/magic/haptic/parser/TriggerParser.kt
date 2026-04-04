@@ -8,12 +8,12 @@ class TriggerParser(private val wordConverter: NumberWordConverter) {
     private var debounceMs: Long = 3000
 
     private val patterns = listOf(
-        Regex("card at position (.+)", RegexOption.IGNORE_CASE),
-        Regex("position (.+) card", RegexOption.IGNORE_CASE),
-        Regex("(.+) position", RegexOption.IGNORE_CASE),
-        Regex("position number (.+)", RegexOption.IGNORE_CASE),
-        Regex("card number (.+)", RegexOption.IGNORE_CASE),
-        Regex("number (.+) card", RegexOption.IGNORE_CASE)
+        Regex("^card at position (.+)$", RegexOption.IGNORE_CASE),
+        Regex("^position (.+) card$", RegexOption.IGNORE_CASE),
+        Regex("^(.+) position$", RegexOption.IGNORE_CASE),
+        Regex("^position number (.+)$", RegexOption.IGNORE_CASE),
+        Regex("^card number (.+)$", RegexOption.IGNORE_CASE),
+        Regex("^number (.+) card$", RegexOption.IGNORE_CASE)
     )
 
     fun setDebounce(seconds: Int) {
@@ -21,11 +21,12 @@ class TriggerParser(private val wordConverter: NumberWordConverter) {
     }
 
     fun parse(text: String): TriggerResult? {
+        val trimmedText = text.trim()
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastTriggerTime < debounceMs) return null
 
         for (pattern in patterns) {
-            val match = pattern.find(text)
+            val match = pattern.find(trimmedText)
             if (match != null) {
                 val groupValue = match.groupValues[1]
                 val position = wordConverter.convert(groupValue)

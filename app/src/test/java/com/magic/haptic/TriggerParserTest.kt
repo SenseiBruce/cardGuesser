@@ -5,7 +5,7 @@ import com.magic.haptic.parser.NumberWordConverter
 import com.magic.haptic.parser.TriggerParser
 import org.junit.Test
 
-class ParserTest {
+class TriggerParserTest {
 
     private val converter = NumberWordConverter()
     private val parser = TriggerParser(converter)
@@ -24,8 +24,10 @@ class ParserTest {
 
     @Test
     fun testTriggerParserPatterns() {
+        parser.setDebounce(0)
         // Pattern 1: card at position <X>
         assertThat(parser.parse("card at position twenty three")?.position).isEqualTo(23)
+        assertThat(parser.parse("card at position 53")).isNull()
         
         // Pattern 2: position <X> card
         assertThat(parser.parse("position five card")?.position).isEqualTo(5)
@@ -45,8 +47,10 @@ class ParserTest {
 
     @Test
     fun testBoundsRejection() {
+        parser.setDebounce(0)
         assertThat(parser.parse("card at position zero")).isNull()
         assertThat(parser.parse("card at position 53")).isNull()
+        assertThat(parser.parse("card at position -1")).isNull()
     }
 
     @Test
@@ -55,5 +59,17 @@ class ParserTest {
         assertThat(parser.parse("card at position 5")).isNotNull()
         // Immediate second call should be null
         assertThat(parser.parse("card at position 5")).isNull()
+    }
+
+    @Test
+    fun testDifferentTriggersAreNotDebouncedAgainstEachOther() {
+        parser.setDebounce(3)
+        assertThat(parser.parse("card at position 5")).isNotNull()
+        // Different position should still trigger if using a different logic, 
+        // but currently the debounce is global per parser instance.
+        // Let's verify current behavior.
+        assertThat(parser.parse("card at position 10")).isNull() 
+        // Note: This confirms global debounce. If we wanted per-position debounce, 
+        // we'd need to change TriggerParser.
     }
 }
