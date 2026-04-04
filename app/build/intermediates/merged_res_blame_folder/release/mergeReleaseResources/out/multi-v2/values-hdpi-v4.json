@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.magic.haptic.app-mergeReleaseResources-40:/values-hdpi-v4/values-hdpi-v4.xml",
+            "map": [
+                {
+                    "source": "/Users/kinshuk.prasad/.gradle/caches/9.2.1/transforms/4d092b97b5c30e1bc61348873faf5c56/transformed/appcompat-1.6.1/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
+                    }
+                }
+            ]
+        }
+    ]
+}

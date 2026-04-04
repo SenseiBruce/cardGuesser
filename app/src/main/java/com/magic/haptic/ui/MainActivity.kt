@@ -79,7 +79,4 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-// Initial empty fragment classes to allow compilation
-class ControlFragment : Fragment()
-class TestFragment : Fragment()
-class SettingsFragment : Fragment()
+

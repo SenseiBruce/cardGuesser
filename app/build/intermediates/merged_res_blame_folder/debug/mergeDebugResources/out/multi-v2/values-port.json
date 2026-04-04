@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.magic.haptic.app-mergeDebugResources-40:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/kinshuk.prasad/.gradle/caches/9.2.1/transforms/4d092b97b5c30e1bc61348873faf5c56/transformed/appcompat-1.6.1/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

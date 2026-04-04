@@ -7,8 +7,6 @@ import android.media.MediaRecorder
 import org.vosk.Model
 import org.vosk.Recognizer
 import org.vosk.android.StorageService
-import java.io.IOException
-import java.io.InputStream
 import java.util.concurrent.Executors
 
 class VoskRecognizerManager(private val context: Context) {
@@ -30,8 +28,12 @@ class VoskRecognizerManager(private val context: Context) {
             { model: Model? ->
                 this.model = model
                 if (model != null) {
-                    recognizer = Recognizer(model, 16000.0f)
-                    callback(true)
+                    try {
+                        recognizer = Recognizer(model, 16000.0f)
+                        callback(true)
+                    } catch (e: Exception) {
+                        callback(false)
+                    }
                 } else {
                     callback(false)
                 }
@@ -44,37 +46,44 @@ class VoskRecognizerManager(private val context: Context) {
         if (isListening) return
         isListening = true
 
-        val bufferSize = AudioRecord.getMinBufferSize(16000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.CHANNEL_IN_PCM_16BIT) * 2
+        val sampleRate = 16000
+        val bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)
         audioRecord = AudioRecord(
             MediaRecorder.AudioSource.VOICE_RECOGNITION,
-            16000,
+            sampleRate,
             AudioFormat.CHANNEL_IN_MONO,
-            AudioFormat.CHANNEL_IN_PCM_16BIT,
+            AudioFormat.ENCODING_PCM_16BIT,
             bufferSize
         )
 
         if (audioRecord?.state != AudioRecord.STATE_INITIALIZED) {
             callback.onError(Exception("Failed to initialize AudioRecord"))
+            isListening = false
             return
         }
 
         audioRecord?.startRecording()
 
         executor.execute {
-            val buffer = ByteArray(bufferSize)
+            val buffer = ShortArray(bufferSize)
             try {
                 while (isListening) {
                     val read = audioRecord?.read(buffer, 0, buffer.size) ?: 0
                     if (read > 0) {
-                        if (recognizer?.acceptWaveform(buffer, read) == true) {
-                            callback.onResult(recognizer?.result ?: "")
-                        } else {
-                            callback.onPartialResult(recognizer?.partialResult ?: "")
+                        val rec = recognizer
+                        if (rec != null) {
+                            if (rec.acceptWaveForm(buffer, read)) {
+                                callback.onResult(rec.getResult() ?: "")
+                            } else {
+                                callback.onPartialResult(rec.getPartialResult() ?: "")
+                            }
                         }
                     }
                 }
             } catch (e: Exception) {
                 callback.onError(e)
+            } finally {
+                stop()
             }
         }
     }

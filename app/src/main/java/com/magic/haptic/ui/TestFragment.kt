@@ -24,9 +24,9 @@ class TestFragment : Fragment() {
 
     private lateinit var adapter: SpeechLogAdapter
     private lateinit var cardRepository: CardRepository
-    private lateinit var hapticEncoder: HapticEncoder
-    private lateinit var hapticPlayer: HapticPlayer
-    private lateinit var dataStore: AppDataStore
+    private lateinit var encoder: HapticEncoder
+    private lateinit var player: HapticPlayer
+    private lateinit var appDataStore: AppDataStore
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTestBinding.inflate(inflater, container, false)
@@ -36,10 +36,10 @@ class TestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dataStore = AppDataStore(requireContext())
-        cardRepository = CardRepository(dataStore)
-        hapticEncoder = HapticEncoder()
-        hapticPlayer = HapticPlayer(requireContext())
+        appDataStore = AppDataStore(requireContext())
+        cardRepository = CardRepository(appDataStore)
+        encoder = HapticEncoder()
+        player = HapticPlayer(requireContext())
 
         setupSpeechLog()
         setupManualVibrate()
@@ -70,9 +70,9 @@ class TestFragment : Fragment() {
         if (card != null) {
             binding.tvManualCardInfo.text = "Card: $card"
             val config = HapticConfig(100, 300, 150, 500) // Default for test
-            val pattern = hapticEncoder.encode(card, config)
+            val pattern = encoder.encode(card, config)
             if (pattern != null) {
-                hapticPlayer.vibrate(pattern)
+                player.vibrate(pattern)
             }
         }
     }
@@ -83,13 +83,13 @@ class TestFragment : Fragment() {
         )
         
         binding.cardGrid.removeAllViews()
-        quickTestCards.forEach { card ->
+        quickTestCards.forEach { cardCode ->
             val button = Button(requireContext()).apply {
-                text = card
+                text = cardCode
                 setOnClickListener { 
                     val config = HapticConfig(100, 300, 150, 500)
-                    val pattern = hapticEncoder.encode(card, config)
-                    if (pattern != null) hapticPlayer.vibrate(pattern)
+                    val pattern = this@TestFragment.encoder.encode(cardCode, config)
+                    if (pattern != null) this@TestFragment.player.vibrate(pattern)
                 }
             }
             binding.cardGrid.addView(button)

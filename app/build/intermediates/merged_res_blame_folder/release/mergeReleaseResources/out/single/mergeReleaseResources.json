@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.magic.haptic.app-release-42:/layout_dialog_custom_deck.xml.flat",
+        "source": "com.magic.haptic.app-main-43:/layout/dialog_custom_deck.xml"
+    },
+    {
+        "merged": "com.magic.haptic.app-release-42:/layout_activity_main.xml.flat",
+        "source": "com.magic.haptic.app-main-43:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.magic.haptic.app-release-42:/layout_item_speech_log.xml.flat",
+        "source": "com.magic.haptic.app-main-43:/layout/item_speech_log.xml"
+    },
+    {
+        "merged": "com.magic.haptic.app-release-42:/layout_fragment_control.xml.flat",
+        "source": "com.magic.haptic.app-main-43:/layout/fragment_control.xml"
+    },
+    {
+        "merged": "com.magic.haptic.app-release-42:/layout_fragment_test.xml.flat",
+        "source": "com.magic.haptic.app-main-43:/layout/fragment_test.xml"
+    },
+    {
+        "merged": "com.magic.haptic.app-release-42:/layout_fragment_settings.xml.flat",
+        "source": "com.magic.haptic.app-main-43:/layout/fragment_settings.xml"
+    }
+]

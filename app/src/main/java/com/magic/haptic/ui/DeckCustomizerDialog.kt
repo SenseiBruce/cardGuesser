@@ -12,7 +12,7 @@ import com.magic.haptic.databinding.DialogCustomDeckBinding
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class DeckCustomizerDialog(private val dataStore: AppDataStore) : DialogFragment() {
+class DeckCustomizerDialog(private val appDataStore: AppDataStore) : DialogFragment() {
 
     private var _binding: DialogCustomDeckBinding? = null
     private val binding get() = _binding!!
@@ -26,7 +26,7 @@ class DeckCustomizerDialog(private val dataStore: AppDataStore) : DialogFragment
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
-            val currentData = dataStore.customDeckData.first()
+            val currentData = appDataStore.customDeckData.first()
             binding.etCustomDeck.setText(currentData)
         }
 
@@ -39,7 +39,7 @@ class DeckCustomizerDialog(private val dataStore: AppDataStore) : DialogFragment
             val result = DeckValidator.validate(binding.etCustomDeck.text.toString())
             if (result.isValid) {
                 lifecycleScope.launch {
-                    dataStore.saveCustomDeckData(binding.etCustomDeck.text.toString())
+                    appDataStore.saveCustomDeckData(binding.etCustomDeck.text.toString())
                     dismiss()
                 }
             } else {

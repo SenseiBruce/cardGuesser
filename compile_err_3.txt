@@ -1,0 +1,178 @@
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:dataBindingMergeDependencyArtifactsDebug
+> Task :app:generateDebugResValues
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:mapDebugSourceSetPaths
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:parseDebugLocalResources
+> Task :app:checkDebugAarMetadata
+> Task :app:extractDeepLinksDebug
+> Task :app:mergeDebugResources
+
+> Task :app:processDebugMainManifest
+package="com.magic.haptic" found in source AndroidManifest.xml: /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.magic.haptic" from the source AndroidManifest.xml: /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/AndroidManifest.xml.
+
+> Task :app:dataBindingGenBaseClassesDebug
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources
+
+> Task :app:compileDebugKotlin FAILED
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/speech/VoskRecognizerManager.kt:47:103 Unresolved reference 'CHANNEL_IN_PCM_16BIT'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/speech/VoskRecognizerManager.kt:52:25 Unresolved reference 'CHANNEL_IN_PCM_16BIT'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/speech/VoskRecognizerManager.kt:69:41 Unresolved reference 'acceptWaveform'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/ControlFragment.kt:21:7 Redeclaration:
+class ControlFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/MainActivity.kt:83:7 Redeclaration:
+class ControlFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/MainActivity.kt:84:7 Redeclaration:
+class TestFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/MainActivity.kt:85:7 Redeclaration:
+class SettingsFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:18:7 Redeclaration:
+class SettingsFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:21:33 Unresolved reference '_binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:26:9 Unresolved reference '_binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:27:16 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:27:16 Return type mismatch: expected 'android.view.View', actual 'java.io.File'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:33:9 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:34:9 Unresolved reference 'setupDeckSpinner'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:35:9 Unresolved reference 'setupHapticSpeed'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:36:9 Unresolved reference 'setupNotificationDisguise'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:37:9 Unresolved reference 'setupDebounce'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:44:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:47:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:47:53 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:49:31 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:53:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:56:21 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:62:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:63:34 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:69:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:69:51 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:71:31 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:72:33 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:73:31 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:75:25 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:76:25 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:82:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:82:60 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:82:63 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:84:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:85:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:86:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:87:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:90:37 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:91:13 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:97:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:97:50 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:98:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:98:68 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:102:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:102:49 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:103:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:103:66 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:107:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:109:41 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:109:81 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:115:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:117:41 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:117:67 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:126:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:126:51 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:127:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:127:75 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:131:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:134:41 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:140:9 Unresolved reference 'setupCustomHapticValues'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:145:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:145:49 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:145:55 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:145:87 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:148:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:148:48 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:148:54 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:148:85 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:151:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:151:47 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:151:53 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:151:83 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:154:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:154:47 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:154:53 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:154:83 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:157:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:158:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:159:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:160:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:161:23 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:168:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:170:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:172:21 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:180:9 Unresolved reference '_binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:20:7 Redeclaration:
+class TestFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:23:33 Unresolved reference '_binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:32:9 Unresolved reference '_binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:33:16 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:33:16 Return type mismatch: expected 'android.view.View', actual 'java.io.File'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:39:9 Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+val Context.dataStore: DataStore<Preferences>
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:39:9 'val' cannot be reassigned.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:39:21 Assignment type mismatch: actual type is 'com.magic.haptic.data.AppDataStore', but 'androidx.datastore.core.DataStore<androidx.datastore.preferences.core.Preferences>' was expected.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:40:9 Unresolved reference 'cardRepository'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:40:41 Smart cast to 'com.magic.haptic.data.AppDataStore' is impossible, because 'dataStore' is a delegated property.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:40:41 Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+val Context.dataStore: DataStore<Preferences>
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:41:9 Unresolved reference 'hapticEncoder'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:42:9 Unresolved reference 'hapticPlayer'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:44:9 Unresolved reference 'setupSpeechLog'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:45:9 Unresolved reference 'setupManualVibrate'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:46:9 Unresolved reference 'setupQuickTest'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:47:9 Unresolved reference 'observeSpeech'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:51:9 Unresolved reference 'adapter'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:52:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:53:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:53:39 Unresolved reference 'adapter'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:57:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:58:26 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:61:17 Unresolved reference 'testVibrate'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:69:20 Unresolved reference 'cardRepository'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:71:13 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:73:27 Unresolved reference 'hapticEncoder'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:75:17 Unresolved reference 'hapticPlayer'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:85:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:91:35 Unresolved reference 'hapticEncoder'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:92:42 Unresolved reference 'hapticPlayer'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:95:13 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:102:17 Unresolved reference 'adapter'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:109:9 Unresolved reference '_binding'.
+
+[Incubating] Problems report is available at: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to generate a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 10s
+16 actionable tasks: 16 executed

@@ -1,0 +1,491 @@
+Initialized native services in: /Users/kinshuk.prasad/.gradle/native
+Initialized jansi services in: /Users/kinshuk.prasad/.gradle/native
+The client will now receive all logging from the daemon (pid: 42588). The daemon log file: /Users/kinshuk.prasad/.gradle/daemon/9.2.1/daemon-42588.out.log
+Starting 9th build in daemon [uptime: 6 mins 49.075 secs, performance: 99%, GC rate: 0.00/s, heap usage: 0% of 512 MiB, non-heap usage: 62% of 384 MiB]
+Using 8 worker leases.
+Operational build model parameters: {requiresToolingModels=false, parallelProjectExecution=false, configureOnDemand=false, configurationCache=false, configurationCacheParallelStore=false, configurationCacheParallelLoad=true, isolatedProjects=false, parallelProjectConfiguration=false, intermediateModelCache=false, parallelToolingApiActions=false, invalidateCoupledProjects=false, modelAsProjectDependency=false, resilientModelBuilding=false}
+Now considering [/Users/kinshuk.prasad/Documents/Project_X/cardGuesser] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/settings.gradle.kts'.
+Projects loaded. Root project using build file '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/build.gradle.kts'.
+Included projects: [root project 'Magic Haptic Assistant', project ':app']
+
+> Configure project :
+Evaluating root project 'Magic Haptic Assistant' using build file '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/build.gradle.kts'.
+
+> Configure project :app
+Evaluating project ':app' using build file '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build.gradle.kts'.
+Resolved plugin [id: 'com.android.application']
+Resolved plugin [id: 'org.jetbrains.kotlin.android']
+Using default execution profile
+Using Kotlin Gradle Plugin gradle85 variant
+All projects evaluated.
+Task name matched 'assembleDebug'
+Selected primary task 'assembleDebug' from project :
+Tasks to be executed: [task ':app:preBuild', task ':app:preDebugBuild', task ':app:mergeDebugNativeDebugMetadata', task ':app:checkKotlinGradlePluginConfigurationErrors', task ':app:dataBindingMergeDependencyArtifactsDebug', task ':app:generateDebugResValues', task ':app:generateDebugResources', task ':app:mergeDebugResources', task ':app:packageDebugResources', task ':app:parseDebugLocalResources', task ':app:dataBindingGenBaseClassesDebug', task ':app:checkDebugAarMetadata', task ':app:mapDebugSourceSetPaths', task ':app:createDebugCompatibleScreenManifests', task ':app:extractDeepLinksDebug', task ':app:processDebugMainManifest', task ':app:processDebugManifest', task ':app:processDebugManifestForPackage', task ':app:processDebugResources', task ':app:compileDebugKotlin', task ':app:javaPreCompileDebug', task ':app:compileDebugJavaWithJavac', task ':app:mergeDebugShaders', task ':app:compileDebugShaders', task ':app:generateDebugAssets', task ':app:mergeDebugAssets', task ':app:compressDebugAssets', task ':app:processDebugJavaRes', task ':app:mergeDebugJavaResource', task ':app:checkDebugDuplicateClasses', task ':app:desugarDebugFileDependencies', task ':app:mergeExtDexDebug', task ':app:mergeLibDexDebug', task ':app:dexBuilderDebug', task ':app:mergeProjectDexDebug', task ':app:mergeDebugJniLibFolders', task ':app:mergeDebugNativeLibs', task ':app:stripDebugDebugSymbols', task ':app:validateSigningDebug', task ':app:writeDebugAppMetadata', task ':app:writeDebugSigningConfigVersions', task ':app:packageDebug', task ':app:createDebugApkListingFileRedirect', task ':app:assembleDebug']
+Tasks that were excluded: []
+Resolve mutations for :app:preBuild (Thread[Execution worker,5,main]) started.
+:app:preBuild (Thread[Execution worker,5,main]) started.
+
+> Task :app:preBuild UP-TO-DATE
+Skipping task ':app:preBuild' as it has no actions.
+Resolve mutations for :app:preDebugBuild (Thread[Execution worker,5,main]) started.
+:app:preDebugBuild (Thread[Execution worker,5,main]) started.
+
+> Task :app:preDebugBuild UP-TO-DATE
+Skipping task ':app:preDebugBuild' as it has no actions.
+Resolve mutations for :app:mergeDebugNativeDebugMetadata (Thread[Execution worker,5,main]) started.
+:app:mergeDebugNativeDebugMetadata (Thread[Execution worker,5,main]) started.
+
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+Skipping task ':app:mergeDebugNativeDebugMetadata' as it has no source files and no previous output files.
+Resolve mutations for :app:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker,5,main]) started.
+:app:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker,5,main]) started.
+
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':app:checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+Resolve mutations for :app:dataBindingMergeDependencyArtifactsDebug (Thread[Execution worker,5,main]) started.
+:app:dataBindingMergeDependencyArtifactsDebug (Thread[Execution worker,5,main]) started.
+
+> Task :app:dataBindingMergeDependencyArtifactsDebug UP-TO-DATE
+Caching disabled for task ':app:dataBindingMergeDependencyArtifactsDebug' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:dataBindingMergeDependencyArtifactsDebug' as it is up-to-date.
+Resolve mutations for :app:generateDebugResValues (Thread[Execution worker,5,main]) started.
+:app:generateDebugResValues (Thread[Execution worker,5,main]) started.
+
+> Task :app:generateDebugResValues UP-TO-DATE
+Caching disabled for task ':app:generateDebugResValues' because:
+  Build cache is disabled
+Skipping task ':app:generateDebugResValues' as it is up-to-date.
+Resolve mutations for :app:generateDebugResources (Thread[Execution worker,5,main]) started.
+:app:generateDebugResources (Thread[Execution worker,5,main]) started.
+
+> Task :app:generateDebugResources UP-TO-DATE
+Caching disabled for task ':app:generateDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:generateDebugResources' as it is up-to-date.
+Resolve mutations for :app:mergeDebugResources (Thread[Execution worker,5,main]) started.
+:app:mergeDebugResources (Thread[Execution worker,5,main]) started.
+
+> Task :app:mergeDebugResources UP-TO-DATE
+Caching disabled for task ':app:mergeDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:mergeDebugResources' as it is up-to-date.
+Resolve mutations for :app:packageDebugResources (Thread[Execution worker,5,main]) started.
+:app:packageDebugResources (Thread[Execution worker,5,main]) started.
+
+> Task :app:packageDebugResources UP-TO-DATE
+Caching disabled for task ':app:packageDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:packageDebugResources' as it is up-to-date.
+Resolve mutations for :app:parseDebugLocalResources (Thread[Execution worker,5,main]) started.
+:app:parseDebugLocalResources (Thread[Execution worker,5,main]) started.
+
+> Task :app:parseDebugLocalResources UP-TO-DATE
+Caching disabled for task ':app:parseDebugLocalResources' because:
+  Build cache is disabled
+Skipping task ':app:parseDebugLocalResources' as it is up-to-date.
+Resolve mutations for :app:dataBindingGenBaseClassesDebug (Thread[Execution worker,5,main]) started.
+:app:dataBindingGenBaseClassesDebug (Thread[Execution worker,5,main]) started.
+
+> Task :app:dataBindingGenBaseClassesDebug UP-TO-DATE
+Caching disabled for task ':app:dataBindingGenBaseClassesDebug' because:
+  Build cache is disabled
+Skipping task ':app:dataBindingGenBaseClassesDebug' as it is up-to-date.
+Resolve mutations for :app:checkDebugAarMetadata (Thread[Execution worker,5,main]) started.
+:app:checkDebugAarMetadata (Thread[Execution worker,5,main]) started.
+
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+Caching disabled for task ':app:checkDebugAarMetadata' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:checkDebugAarMetadata' as it is up-to-date.
+Resolve mutations for :app:mapDebugSourceSetPaths (Thread[Execution worker,5,main]) started.
+:app:mapDebugSourceSetPaths (Thread[Execution worker,5,main]) started.
+
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+Caching disabled for task ':app:mapDebugSourceSetPaths' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:mapDebugSourceSetPaths' as it is up-to-date.
+Resolve mutations for :app:createDebugCompatibleScreenManifests (Thread[Execution worker,5,main]) started.
+:app:createDebugCompatibleScreenManifests (Thread[Execution worker,5,main]) started.
+
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+Caching disabled for task ':app:createDebugCompatibleScreenManifests' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:createDebugCompatibleScreenManifests' as it is up-to-date.
+Resolve mutations for :app:extractDeepLinksDebug (Thread[Execution worker,5,main]) started.
+:app:extractDeepLinksDebug (Thread[Execution worker,5,main]) started.
+
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+Caching disabled for task ':app:extractDeepLinksDebug' because:
+  Build cache is disabled
+Skipping task ':app:extractDeepLinksDebug' as it is up-to-date.
+Resolve mutations for :app:processDebugMainManifest (Thread[Execution worker,5,main]) started.
+:app:processDebugMainManifest (Thread[Execution worker,5,main]) started.
+
+> Task :app:processDebugMainManifest UP-TO-DATE
+Caching disabled for task ':app:processDebugMainManifest' because:
+  Build cache is disabled
+Skipping task ':app:processDebugMainManifest' as it is up-to-date.
+Resolve mutations for :app:processDebugManifest (Thread[Execution worker,5,main]) started.
+:app:processDebugManifest (Thread[Execution worker,5,main]) started.
+
+> Task :app:processDebugManifest UP-TO-DATE
+Caching disabled for task ':app:processDebugManifest' because:
+  Build cache is disabled
+Skipping task ':app:processDebugManifest' as it is up-to-date.
+Resolve mutations for :app:processDebugManifestForPackage (Thread[Execution worker Thread 4,5,main]) started.
+:app:processDebugManifestForPackage (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+Custom actions are attached to task ':app:processDebugManifestForPackage'.
+Caching disabled for task ':app:processDebugManifestForPackage' because:
+  Build cache is disabled
+Skipping task ':app:processDebugManifestForPackage' as it is up-to-date.
+Resolve mutations for :app:processDebugResources (Thread[Execution worker Thread 4,5,main]) started.
+:app:processDebugResources (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :app:processDebugResources UP-TO-DATE
+Caching disabled for task ':app:processDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:processDebugResources' as it is up-to-date.
+Resolve mutations for :app:compileDebugKotlin (Thread[Execution worker Thread 4,5,main]) started.
+:app:compileDebugKotlin (Thread[Execution worker Thread 4,5,main]) started.
+Resolve mutations for :app:javaPreCompileDebug (Thread[Execution worker Thread 2,5,main]) started.
+:app:javaPreCompileDebug (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:javaPreCompileDebug UP-TO-DATE
+Caching disabled for task ':app:javaPreCompileDebug' because:
+  Build cache is disabled
+Skipping task ':app:javaPreCompileDebug' as it is up-to-date.
+Resolve mutations for :app:mergeDebugShaders (Thread[Execution worker Thread 2,5,main]) started.
+:app:mergeDebugShaders (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:mergeDebugShaders UP-TO-DATE
+Caching disabled for task ':app:mergeDebugShaders' because:
+  Build cache is disabled
+  Simple merging task
+Skipping task ':app:mergeDebugShaders' as it is up-to-date.
+Resolve mutations for :app:compileDebugShaders (Thread[Execution worker Thread 2,5,main]) started.
+:app:compileDebugShaders (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:compileDebugShaders NO-SOURCE
+Skipping task ':app:compileDebugShaders' as it has no source files and no previous output files.
+Resolve mutations for :app:generateDebugAssets (Thread[Execution worker Thread 2,5,main]) started.
+:app:generateDebugAssets (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:generateDebugAssets UP-TO-DATE
+Skipping task ':app:generateDebugAssets' as it has no actions.
+Resolve mutations for :app:mergeDebugAssets (Thread[Execution worker Thread 2,5,main]) started.
+:app:mergeDebugAssets (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:mergeDebugAssets UP-TO-DATE
+Caching disabled for task ':app:mergeDebugAssets' because:
+  Build cache is disabled
+  Simple merging task
+Skipping task ':app:mergeDebugAssets' as it is up-to-date.
+Resolve mutations for :app:compressDebugAssets (Thread[Execution worker Thread 2,5,main]) started.
+:app:compressDebugAssets (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:compressDebugAssets UP-TO-DATE
+Caching disabled for task ':app:compressDebugAssets' because:
+  Build cache is disabled
+Skipping task ':app:compressDebugAssets' as it is up-to-date.
+Resolve mutations for :app:checkDebugDuplicateClasses (Thread[Execution worker Thread 2,5,main]) started.
+:app:checkDebugDuplicateClasses (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+Caching disabled for task ':app:checkDebugDuplicateClasses' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:checkDebugDuplicateClasses' as it is up-to-date.
+Resolve mutations for :app:desugarDebugFileDependencies (Thread[Execution worker Thread 2,5,main]) started.
+:app:desugarDebugFileDependencies (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+Caching disabled for task ':app:desugarDebugFileDependencies' because:
+  Build cache is disabled
+Skipping task ':app:desugarDebugFileDependencies' as it is up-to-date.
+Resolve mutations for :app:mergeExtDexDebug (Thread[Execution worker Thread 7,5,main]) started.
+:app:mergeExtDexDebug (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:mergeExtDexDebug UP-TO-DATE
+Caching disabled for task ':app:mergeExtDexDebug' because:
+  Build cache is disabled
+Skipping task ':app:mergeExtDexDebug' as it is up-to-date.
+Resolve mutations for :app:mergeLibDexDebug (Thread[Execution worker Thread 2,5,main]) started.
+:app:mergeLibDexDebug (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:mergeLibDexDebug UP-TO-DATE
+Caching disabled for task ':app:mergeLibDexDebug' because:
+  Build cache is disabled
+Skipping task ':app:mergeLibDexDebug' as it is up-to-date.
+Resolve mutations for :app:mergeDebugJniLibFolders (Thread[Execution worker Thread 2,5,main]) started.
+:app:mergeDebugJniLibFolders (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+Caching disabled for task ':app:mergeDebugJniLibFolders' because:
+  Build cache is disabled
+  Simple merging task
+Skipping task ':app:mergeDebugJniLibFolders' as it is up-to-date.
+Resolve mutations for :app:mergeDebugNativeLibs (Thread[Execution worker Thread 2,5,main]) started.
+:app:mergeDebugNativeLibs (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+Caching disabled for task ':app:mergeDebugNativeLibs' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:mergeDebugNativeLibs' as it is up-to-date.
+Resolve mutations for :app:stripDebugDebugSymbols (Thread[Execution worker Thread 2,5,main]) started.
+:app:stripDebugDebugSymbols (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+Caching disabled for task ':app:stripDebugDebugSymbols' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:stripDebugDebugSymbols' as it is up-to-date.
+Resolve mutations for :app:validateSigningDebug (Thread[Execution worker Thread 2,5,main]) started.
+:app:validateSigningDebug (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:validateSigningDebug UP-TO-DATE
+Caching disabled for task ':app:validateSigningDebug' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:validateSigningDebug' as it is up-to-date.
+Resolve mutations for :app:writeDebugAppMetadata (Thread[Execution worker Thread 2,5,main]) started.
+:app:writeDebugAppMetadata (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+Caching disabled for task ':app:writeDebugAppMetadata' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:writeDebugAppMetadata' as it is up-to-date.
+Resolve mutations for :app:writeDebugSigningConfigVersions (Thread[Execution worker Thread 2,5,main]) started.
+:app:writeDebugSigningConfigVersions (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+Caching disabled for task ':app:writeDebugSigningConfigVersions' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:writeDebugSigningConfigVersions' as it is up-to-date.
+
+> Task :app:compileDebugKotlin
+GradleBuildProject.Builder should not be accessed through AnalyticsConfiguratorService after AnalyticsService is created. Analytics information of this build might be incomplete.
+Caching disabled for task ':app:compileDebugKotlin' because:
+  Build cache is disabled
+Task ':app:compileDebugKotlin' is not up-to-date because:
+  Task has failed previously.
+The input changes require a full rebuild for incremental task ':app:compileDebugKotlin'.
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/kotlin', not found
+file or directory '/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/debug/java', not found
+Kotlin source files: /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/ControlFragment.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/MainActivity.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/DeckCustomizerDialog.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SpeechLogAdapter.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/card/CardRepository.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/card/DeckPresets.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/card/DeckValidator.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/MagicApp.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/parser/TriggerParser.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/parser/NumberWordConverter.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/speech/VoskRecognizerManager.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/haptic/HapticEncoder.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/haptic/HapticPlayer.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/service/AudioListenerService.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/service/NotificationHelper.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/data/Models.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/data/ServiceEventBus.kt, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/data/AppDataStore.kt
+Java source files: /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/generated/data_binding_base_class_source_out/debug/out/com/magic/haptic/databinding/FragmentControlBinding.java, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/generated/data_binding_base_class_source_out/debug/out/com/magic/haptic/databinding/FragmentSettingsBinding.java, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/generated/data_binding_base_class_source_out/debug/out/com/magic/haptic/databinding/ActivityMainBinding.java, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/generated/data_binding_base_class_source_out/debug/out/com/magic/haptic/databinding/FragmentTestBinding.java, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/generated/data_binding_base_class_source_out/debug/out/com/magic/haptic/databinding/ItemSpeechLogBinding.java, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/generated/data_binding_base_class_source_out/debug/out/com/magic/haptic/databinding/DialogCustomDeckBinding.java
+Script source files: 
+Script file extensions: 
+Using Kotlin/JVM incremental compilation
+[KOTLIN] Kotlin compilation 'jdkHome' argument: null
+Options for KOTLIN DAEMON: IncrementalCompilationOptions(super=CompilationOptions(compilerMode=INCREMENTAL_COMPILER, targetPlatform=JVM, reportCategories=[0, 3], reportSeverity=2, requestedCompilationResults=[0], kotlinScriptExtensions=[]), areFileChangesKnown=false, modifiedFiles=null, deletedFiles=null, classpathChanges=NotAvailableForNonIncrementalRun, workingDir=/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/kotlin/compileDebugKotlin/cacheable, multiModuleICSettings=MultiModuleICSettings(buildHistoryFile=/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/kotlin/compileDebugKotlin/local-state/build-history.bin, useModuleDetection=true), usePreciseJavaTracking=true, icFeatures=IncrementalCompilationFeatures(withAbiSnapshot=false, preciseCompilationResultsBackup=true, keepIncrementalCompilationCachesInMemory=true, enableUnsafeIncrementalCompilationForMultiplatform=false), outputFiles=[/Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/tmp/kotlin-classes/debug, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/kotlin/compileDebugKotlin/cacheable, /Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/build/kotlin/compileDebugKotlin/local-state])
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/speech/VoskRecognizerManager.kt:47:103 Unresolved reference 'CHANNEL_IN_PCM_16BIT'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/speech/VoskRecognizerManager.kt:52:25 Unresolved reference 'CHANNEL_IN_PCM_16BIT'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/speech/VoskRecognizerManager.kt:69:41 Unresolved reference 'acceptWaveform'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/ControlFragment.kt:21:7 Redeclaration:
+class ControlFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/MainActivity.kt:83:7 Redeclaration:
+class ControlFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/MainActivity.kt:84:7 Redeclaration:
+class TestFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/MainActivity.kt:85:7 Redeclaration:
+class SettingsFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:18:7 Redeclaration:
+class SettingsFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:21:33 Unresolved reference '_binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:26:9 Unresolved reference '_binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:27:16 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:27:16 Return type mismatch: expected 'android.view.View', actual 'java.io.File'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:33:9 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:34:9 Unresolved reference 'setupDeckSpinner'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:35:9 Unresolved reference 'setupHapticSpeed'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:36:9 Unresolved reference 'setupNotificationDisguise'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:37:9 Unresolved reference 'setupDebounce'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:44:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:47:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:47:53 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:49:31 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:53:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:56:21 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:62:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:63:34 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:69:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:69:51 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:71:31 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:72:33 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:73:31 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:75:25 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:76:25 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:82:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:82:60 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:82:63 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:84:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:85:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:86:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:87:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:90:37 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:91:13 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:97:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:97:50 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:98:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:98:68 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:102:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:102:49 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:103:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:103:66 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:107:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:109:41 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:109:81 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:115:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:117:41 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:117:67 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:126:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:126:51 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:127:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:127:75 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:131:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:134:41 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:140:9 Unresolved reference 'setupCustomHapticValues'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:145:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:145:49 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:145:55 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:145:87 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:148:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:148:48 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:148:54 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:148:85 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:151:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:151:47 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:151:53 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:151:83 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:154:13 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:154:47 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:154:53 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:154:83 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:157:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:158:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:159:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:160:21 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:161:23 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:168:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:170:17 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:172:21 Unresolved reference 'dataStore'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/SettingsFragment.kt:180:9 Unresolved reference '_binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:20:7 Redeclaration:
+class TestFragment : Fragment
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:23:33 Unresolved reference '_binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:32:9 Unresolved reference '_binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:33:16 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:33:16 Return type mismatch: expected 'android.view.View', actual 'java.io.File'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:39:9 Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+val Context.dataStore: DataStore<Preferences>
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:39:9 'val' cannot be reassigned.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:39:21 Assignment type mismatch: actual type is 'com.magic.haptic.data.AppDataStore', but 'androidx.datastore.core.DataStore<androidx.datastore.preferences.core.Preferences>' was expected.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:40:9 Unresolved reference 'cardRepository'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:40:41 Smart cast to 'com.magic.haptic.data.AppDataStore' is impossible, because 'dataStore' is a delegated property.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:40:41 Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+val Context.dataStore: DataStore<Preferences>
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:41:9 Unresolved reference 'hapticEncoder'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:42:9 Unresolved reference 'hapticPlayer'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:44:9 Unresolved reference 'setupSpeechLog'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:45:9 Unresolved reference 'setupManualVibrate'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:46:9 Unresolved reference 'setupQuickTest'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:47:9 Unresolved reference 'observeSpeech'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:51:9 Unresolved reference 'adapter'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:52:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:53:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:53:39 Unresolved reference 'adapter'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:57:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:58:26 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:61:17 Unresolved reference 'testVibrate'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:69:20 Unresolved reference 'cardRepository'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:71:13 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:73:27 Unresolved reference 'hapticEncoder'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:75:17 Unresolved reference 'hapticPlayer'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:85:9 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:91:35 Unresolved reference 'hapticEncoder'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:92:42 Unresolved reference 'hapticPlayer'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:95:13 Unresolved reference 'binding'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:102:17 Unresolved reference 'adapter'.
+e: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/app/src/main/java/com/magic/haptic/ui/TestFragment.kt:109:9 Unresolved reference '_binding'.
+Finished executing kotlin compiler using DAEMON strategy
+
+> Task :app:compileDebugKotlin FAILED
+
+[Incubating] Problems report is available at: file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --debug option to get more log output.
+> Run with --scan to generate a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 10s
+30 actionable tasks: 1 executed, 29 up-to-date
+Watched directory hierarchies: [/Users/kinshuk.prasad/Documents/Project_X/cardGuesser]
