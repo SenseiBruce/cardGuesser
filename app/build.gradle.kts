@@ -34,6 +34,16 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    // Custom APK naming: MagicHapticAssistant-v1.0-debug.apk
+    applicationVariants.all {
+        val variant = this
+        variant.outputs
+            .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+            .forEach { output ->
+                output.outputFileName = "MagicHapticAssistant-v${variant.versionName}-${variant.buildType.name}.apk"
+            }
+    }
 }
 
 dependencies {
