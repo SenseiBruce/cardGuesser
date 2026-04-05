@@ -28,28 +28,46 @@ class NumberWordConverter {
         val cleanText = text.lowercase(Locale.ROOT)
             .replace(Regex("([a-z])-([a-z])"), "$1 $2")
             .trim()
-        
-        // 1. Try direct digit parsing (handle negative numbers too)
+            
+        // 1. Try finding numeric digits anywhere
         val digitMatch = Regex("-?\\d+").find(cleanText)
         if (digitMatch != null) {
             return digitMatch.value.toIntOrNull()
         }
 
-        // 2. Try ordinal words
-        ordinals[cleanText]?.let { return it }
+        // Split text into words to scan for numbers anywhere in the phrase
+        val words = cleanText.split("\\s+".toRegex())
 
-        // 3. Handle compound ordinals ("twenty first")
-        for ((tenWord, tenValue) in tens) {
-            if (cleanText.startsWith("$tenWord ")) {
-                val unitPart = cleanText.substringAfter("$tenWord ")
-                ordinals[unitPart]?.let { return tenValue + it }
-                units[unitPart]?.let { return tenValue + it }
+        for (i in words.indices) {
+            // 2. Try compound "thirty five"
+            if (i < words.size - 1) {
+                val tenWord = words[i]
+                val unitWord = words[i + 1]
+                
+                if (tens.containsKey(tenWord)) {
+                    val tenValue = tens[tenWord]!!
+                    val unitValue = units[unitWord] ?: ordinals[unitWord]
+                    if (unitValue != null) {
+                        return tenValue + unitValue
+                    }
+                }
+                
+                // 3. Try two single digits "three five" -> 35
+                if (units.containsKey(tenWord) && (units.containsKey(unitWord) || tenWord == "zero")) {
+                    val d1 = units[tenWord] ?: 0
+                    val d2 = units[unitWord] ?: 0
+                    if (d1 in 0..9 && d2 in 0..9) {
+                        return d1 * 10 + d2
+                    }
+                }
             }
+            
+            // 4. Try single words
+            val word = words[i]
+            ordinals[word]?.let { return it }
+            tens[word]?.let { return it }
+            units[word]?.let { return it }
         }
-
-        // 4. Handle base words ("twenty")
-        tens[cleanText]?.let { return it }
-        units[cleanText]?.let { return it }
 
         return null
     }

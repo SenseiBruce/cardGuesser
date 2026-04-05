@@ -24,23 +24,37 @@ class VoskRecognizerManager(private val context: Context) {
     }
 
     fun initModel(callback: (Boolean) -> Unit) {
+        android.util.Log.i("MagicHaptic", "Starting model unpack from assets: model-en-us")
+        val mainHandler = android.os.Handler(android.os.Looper.getMainLooper())
+        
         StorageService.unpack(context, "model-en-us", "model",
             { model: Model? ->
                 this.model = model
                 if (model != null) {
+                    android.util.Log.i("MagicHaptic", "Model unpacked successfully. Initializing recognizer...")
                     try {
                         recognizer = Recognizer(model, 16000.0f)
+                        android.util.Log.i("MagicHaptic", "Recognizer initialized. Ready to listen.")
                         callback(true)
                     } catch (e: Exception) {
+                        mainHandler.post { android.widget.Toast.makeText(context, "Voice Init Failed: ${e.message}", android.widget.Toast.LENGTH_LONG).show() }
+                        android.util.Log.e("MagicHaptic", "Recognizer init FAILED: ${e.message}", e)
                         callback(false)
                     }
                 } else {
+                    mainHandler.post { android.widget.Toast.makeText(context, "Model not found in assets", android.widget.Toast.LENGTH_LONG).show() }
+                    android.util.Log.e("MagicHaptic", "Model unpack returned null — model files may be missing from assets.")
                     callback(false)
                 }
             },
-            { callback(false) }
+            { e ->
+                mainHandler.post { android.widget.Toast.makeText(context, "Unpack Error: ${e?.message}", android.widget.Toast.LENGTH_LONG).show() }
+                android.util.Log.e("MagicHaptic", "StorageService.unpack FAILED: ${e?.message}", e)
+                callback(false)
+            }
         )
     }
+
 
     fun startListening(callback: RecognitionCallback) {
         if (isListening) return

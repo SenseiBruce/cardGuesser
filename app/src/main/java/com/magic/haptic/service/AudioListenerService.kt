@@ -38,7 +38,11 @@ class AudioListenerService : Service() {
         hapticEncoder = HapticEncoder()
         hapticPlayer = HapticPlayer(this)
 
-        startForeground(1, notificationHelper.buildNotification())
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            startForeground(1, notificationHelper.buildNotification(), android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE)
+        } else {
+            startForeground(1, notificationHelper.buildNotification())
+        }
         observeSettings()
     }
 

@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity() {
             tab.text = when (position) {
                 0 -> getString(R.string.tab_control)
                 1 -> getString(R.string.tab_test)
-                2 -> getString(R.string.tab_settings)
+                2 -> getString(R.string.tab_reference)
+                3 -> getString(R.string.tab_settings)
                 else -> ""
             }
         }.attach()
@@ -67,12 +68,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private inner class MainPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
-        override fun getItemCount(): Int = 3
+        override fun getItemCount(): Int = 4
         override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> ControlFragment()
                 1 -> TestFragment()
-                2 -> SettingsFragment()
+                2 -> ReferenceFragment()
+                3 -> SettingsFragment()
                 else -> throw IllegalStateException("Invalid position")
             }
         }
