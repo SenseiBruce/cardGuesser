@@ -30,10 +30,17 @@ class HapticEncoder {
         val suitPulses = getSuitPulses(card.suit)
         addPulses(timings, amplitudes, suitPulses, config)
 
+        val description = buildString {
+            rankPulses.forEach { append(if (it == PulseType.SHORT) "S" else "L") }
+            append("|")
+            suitPulses.forEach { append(if (it == PulseType.SHORT) "S" else "L") }
+        }
+
         return HapticPattern(
             timings = timings.toLongArray(),
             amplitudes = amplitudes.toIntArray(),
-            durationMs = timings.sum()
+            durationMs = timings.sum(),
+            description = description
         )
     }
 

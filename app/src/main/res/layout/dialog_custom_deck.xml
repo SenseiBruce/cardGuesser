@@ -1,58 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/obsidian_black"
     android:orientation="vertical"
     android:padding="24dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CUSTOM DECK EDITOR"
+        android:text="MEMORIZED STACK EDITOR"
+        android:textColor="@color/antique_gold"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/etCustomDeck"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:gravity="top"
-        android:hint="Paste 52 cards, comma-separated"
-        android:inputType="textMultiLine" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Paste 52 cards (e.g. AS,2H,3D...)"
+        android:textColorHint="@color/gold_glow"
+        app:boxStrokeColor="@color/antique_gold"
+        app:hintTextColor="@color/antique_gold">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCustomDeck"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:textColor="@color/magic_white"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tvValidationStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Status: -" />
+        android:layout_marginTop="12dp"
+        android:text="Status: Pending Validation"
+        android:textColor="@color/gold_glow"
+        android:textSize="12sp"
+        android:alpha="0.8" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnValidate"
+            android:id="@+id/btnCancelCustom"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="VALIDATE" />
+            android:text="CANCEL"
+            android:textColor="@color/antique_gold" />
+
+        <Button
+            android:id="@+id/btnValidate"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="CHECK"
+            android:textColor="@color/antique_gold" />
 
         <Button
             android:id="@+id/btnSaveDeck"
+            style="@style/Widget.Material3.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="SAVE" />
+            android:text="SAVE"
+            android:textColor="@color/obsidian_black"
+            app:backgroundTint="@color/antique_gold" />
 
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="CANCEL" />
     </LinearLayout>
 
 </LinearLayout>

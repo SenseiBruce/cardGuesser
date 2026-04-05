@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.textfield.TextInputEditText;
 import com.magic.haptic.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -22,7 +22,7 @@ public final class DialogCustomDeckBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
-  public final Button btnCancel;
+  public final Button btnCancelCustom;
 
   @NonNull
   public final Button btnSaveDeck;
@@ -31,16 +31,16 @@ public final class DialogCustomDeckBinding implements ViewBinding {
   public final Button btnValidate;
 
   @NonNull
-  public final EditText etCustomDeck;
+  public final TextInputEditText etCustomDeck;
 
   @NonNull
   public final TextView tvValidationStatus;
 
-  private DialogCustomDeckBinding(@NonNull LinearLayout rootView, @NonNull Button btnCancel,
-      @NonNull Button btnSaveDeck, @NonNull Button btnValidate, @NonNull EditText etCustomDeck,
-      @NonNull TextView tvValidationStatus) {
+  private DialogCustomDeckBinding(@NonNull LinearLayout rootView, @NonNull Button btnCancelCustom,
+      @NonNull Button btnSaveDeck, @NonNull Button btnValidate,
+      @NonNull TextInputEditText etCustomDeck, @NonNull TextView tvValidationStatus) {
     this.rootView = rootView;
-    this.btnCancel = btnCancel;
+    this.btnCancelCustom = btnCancelCustom;
     this.btnSaveDeck = btnSaveDeck;
     this.btnValidate = btnValidate;
     this.etCustomDeck = etCustomDeck;
@@ -74,9 +74,9 @@ public final class DialogCustomDeckBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btnCancel;
-      Button btnCancel = ViewBindings.findChildViewById(rootView, id);
-      if (btnCancel == null) {
+      id = R.id.btnCancelCustom;
+      Button btnCancelCustom = ViewBindings.findChildViewById(rootView, id);
+      if (btnCancelCustom == null) {
         break missingId;
       }
 
@@ -93,7 +93,7 @@ public final class DialogCustomDeckBinding implements ViewBinding {
       }
 
       id = R.id.etCustomDeck;
-      EditText etCustomDeck = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etCustomDeck = ViewBindings.findChildViewById(rootView, id);
       if (etCustomDeck == null) {
         break missingId;
       }
@@ -104,7 +104,7 @@ public final class DialogCustomDeckBinding implements ViewBinding {
         break missingId;
       }
 
-      return new DialogCustomDeckBinding((LinearLayout) rootView, btnCancel, btnSaveDeck,
+      return new DialogCustomDeckBinding((LinearLayout) rootView, btnCancelCustom, btnSaveDeck,
           btnValidate, etCustomDeck, tvValidationStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);

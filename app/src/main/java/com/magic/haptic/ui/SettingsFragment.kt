@@ -142,16 +142,16 @@ class SettingsFragment : Fragment() {
 
     private fun setupCustomHapticValues() {
         viewLifecycleOwner.lifecycleScope.launch {
-            appDataStore.customShort.collectLatest { if (binding.etShort.text.isEmpty()) binding.etShort.setText(it.toString()) }
+            appDataStore.customShort.collectLatest { if (binding.etShort.text?.isEmpty() == true) binding.etShort.setText(it.toString()) }
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            appDataStore.customLong.collectLatest { if (binding.etLong.text.isEmpty()) binding.etLong.setText(it.toString()) }
+            appDataStore.customLong.collectLatest { if (binding.etLong.text?.isEmpty() == true) binding.etLong.setText(it.toString()) }
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            appDataStore.customGap.collectLatest { if (binding.etGap.text.isEmpty()) binding.etGap.setText(it.toString()) }
+            appDataStore.customGap.collectLatest { if (binding.etGap.text?.isEmpty() == true) binding.etGap.setText(it.toString()) }
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            appDataStore.customSep.collectLatest { if (binding.etSep.text.isEmpty()) binding.etSep.setText(it.toString()) }
+            appDataStore.customSep.collectLatest { if (binding.etSep.text?.isEmpty() == true) binding.etSep.setText(it.toString()) }
         }
 
         binding.btnSaveCustomHaptic.setOnClickListener {

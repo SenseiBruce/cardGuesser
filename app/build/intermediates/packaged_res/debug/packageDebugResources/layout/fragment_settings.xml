@@ -1,152 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/obsidian_black">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="── Deck ──"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/spinnerDeck"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
-
-        <Button
-            android:id="@+id/btnEditCustomDeck"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Edit Custom Deck" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="── Haptic Speed ──"
-            android:textStyle="bold" />
-
-        <RadioGroup
-            android:id="@+id/rgHapticSpeed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
-
-            <RadioButton
-                android:id="@+id/rbFast"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fast" />
-
-            <RadioButton
-                android:id="@+id/rbNormal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Normal" />
-
-            <RadioButton
-                android:id="@+id/rbSlow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Slow" />
-
-            <RadioButton
-                android:id="@+id/rbCustom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Custom" />
-        </RadioGroup>
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/llCustomHaptic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:padding="24dp">
 
-            <EditText
-                android:id="@+id/etShort"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CONFIGURATION"
+                android:textColor="@color/antique_gold"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Deck Section -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Short (ms)"
-                android:inputType="number" />
+                android:layout_marginTop="32dp"
+                app:cardBackgroundColor="#1A1B1E"
+                app:cardCornerRadius="12dp">
 
-            <EditText
-                android:id="@+id/etLong"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="STACK ORDER"
+                        android:textColor="@color/antique_gold"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spinnerDeck"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="@color/antique_gold" />
+
+                    <Button
+                        android:id="@+id/btnEditCustomDeck"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="EDIT CUSTOM STACK"
+                        android:textColor="@color/antique_gold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Haptic Section -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Long (ms)"
-                android:inputType="number" />
+                android:layout_marginTop="24dp"
+                app:cardBackgroundColor="#1A1B1E"
+                app:cardCornerRadius="12dp">
 
-            <EditText
-                android:id="@+id/etGap"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HAPTIC SENSITIVITY"
+                        android:textColor="@color/antique_gold"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rgHapticSpeed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbFast"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/antique_gold"
+                            android:text="Fast"
+                            android:textColor="@color/magic_white" />
+
+                        <RadioButton
+                            android:id="@+id/rbNormal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/antique_gold"
+                            android:text="Normal"
+                            android:textColor="@color/magic_white" />
+
+                        <RadioButton
+                            android:id="@+id/rbSlow"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/antique_gold"
+                            android:text="Slow"
+                            android:textColor="@color/magic_white" />
+                    </RadioGroup>
+
+                    <RadioButton
+                        android:id="@+id/rbCustom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/antique_gold"
+                        android:text="Custom Timings"
+                        android:textColor="@color/magic_white" />
+
+                    <LinearLayout
+                        android:id="@+id/llCustomHaptic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <!-- Custom Inputs with TextInputLayout -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Short Pulse (ms)"
+                            android:textColorHint="@color/gold_glow"
+                            app:boxStrokeColor="@color/antique_gold">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etShort"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/magic_white" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:hint="Long Pulse (ms)"
+                            android:textColorHint="@color/gold_glow"
+                            app:boxStrokeColor="@color/antique_gold">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etLong"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/magic_white" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:hint="Gap Between Pulses (ms)"
+                            android:textColorHint="@color/gold_glow"
+                            app:boxStrokeColor="@color/antique_gold">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etGap"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/magic_white" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:hint="Separator Gap (ms)"
+                            android:textColorHint="@color/gold_glow"
+                            app:boxStrokeColor="@color/antique_gold">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etSep"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/magic_white" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:hint="Trigger Debounce (seconds)"
+                            android:textColorHint="@color/gold_glow"
+                            app:boxStrokeColor="@color/antique_gold">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etDebounce"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/magic_white" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <Button
+                            android:id="@+id/btnSaveCustomHaptic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="SAVE TIMINGS"
+                            android:textColor="@color/obsidian_black"
+                            app:backgroundTint="@color/antique_gold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Disguise Section -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Gap (ms)"
-                android:inputType="number" />
+                android:layout_marginTop="24dp"
+                app:cardBackgroundColor="#1A1B1E"
+                app:cardCornerRadius="12dp">
 
-            <EditText
-                android:id="@+id/etSep"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Separator (ms)"
-                android:inputType="number" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-            <Button
-                android:id="@+id/btnSaveCustomHaptic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Validate &amp; Save" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="STEALTH DISGUISE"
+                        android:textColor="@color/antique_gold"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Notification Title"
+                        android:textColorHint="@color/gold_glow"
+                        app:boxStrokeColor="@color/antique_gold">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etNotifTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/magic_white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="Notification Body"
+                        android:textColorHint="@color/gold_glow"
+                        app:boxStrokeColor="@color/antique_gold">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etNotifBody"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/magic_white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="── Notification Disguise ──"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/etNotifTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Title" />
-
-        <EditText
-            android:id="@+id/etNotifBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Body" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="── Advanced ──"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/etDebounce"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Debounce (seconds)"
-            android:inputType="number" />
-
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

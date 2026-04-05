@@ -1,68 +1,60 @@
-# Magic Haptic Assistant 🎩📳
+# Magic Haptic Assistant 🎩✨
 
-**Magic Haptic Assistant** is an Android application designed for stage magicians to discreetly identify cards or positions through haptic feedback (vibration) triggered by natural spoken phrases.
+A premium, stealthy tool designed for magicians to discreetly receive information about a spectator's chosen card via haptic feedback.
 
-## 🚀 Overview
+## 🌟 Master Features
+- **Stealth Mode**: Dark obsidian UI with gold accents, optimized for low visibility during performance.
+- **Offline Intelligence**: Uses Vosk Speech Recognition for total privacy and zero latency.
+- **Precision Haptics**: Encodes all 52 cards into unique, tactile vibration patterns.
+- **Customizable Stacks**: Built-in support for popular stacks (Mnemonica, Aronson) and full custom stack editing.
+- **Encrypted Logs**: Review your performance and detected phrases in a secure toolkit log.
 
-The app listens continuously in the background using the **Vosk offline speech recognition engine**. When it hears a pre-defined trigger phrase (e.g., *"the card at position twenty three"*), it translates the spoken position into a specific card identity based on a pre-memorized deck order and vibrates a coded pattern that the magician can feel in their pocket.
+## 🛠 Setup Instructions
 
-## ✨ Key Features
+### 1. Mandatory Assets
+Due to size constraints, you must manually add the Speech Recognition Model:
+1. Download the `vosk-model-small-en-us-0.15` (or latest) from [Vosk Models](https://alphacephei.com/vosk/models).
+2. Unzip and place the contents exactly in:
+   `app/src/main/assets/model-en-us/`
+   *(Ensure files like `am/final.mdl`, `graph/HCLG.fst`, etc. are directly in that folder).*
 
-- **100% Offline**: No internet required. Ships with a bundled Vosk English model.
-- **Stealth Mode**: Zero audio or visual output during performance. Works with the screen off and phone in pocket.
-- **Customizable Decks**: Support for Default, Mnemonica (Tamariz), Aronson, and custom user-defined card orders.
-- **Haptic Encoding**: Unique, distinguishable vibration patterns for all 52 cards (Rank + Suit).
-- **Disguised Notification**: Uses a configurable, non-suspicious notification title/body for the foreground service.
-- **Adjustable Speed**: Fast, Normal, and Slow haptic pulse presets, plus custom timing validation.
+### 2. Permissions
+Ensure the following are granted:
+- **Record Audio**: To listen for position triggers.
+- **Notifications**: To maintain the stealthy foreground service.
+- **Vibrate**: To deliver the secret signals.
 
-## 🏗️ Architecture
+## 📜 The Magician's Code (Haptic Guide)
 
-The app is built using **Kotlin** and follows modern Android best practices:
-- **MVVM Pattern**: For clean separation of UI and business logic.
-- **Foreground Service**: Ensures continuous microphone listening even when the app is in the background or the screen is off.
-- **Jetpack DataStore**: For persistent preferences and configuration.
-- **Vosk Engine**: Dedicated background thread for real-time PCM audio processing.
+The assistant uses two types of pulses: **S** (Short) and **L** (Long).
 
-## 📂 Documentation
+### Ranks (Numbers)
+- **1**: S
+- **2**: SS
+- **3**: SSS
+- **4**: SL
+- **5**: L
+- **6**: LS
+- **7**: LSS
+- **8**: LSSS
+- **9**: LSL
+- **10**: LL
+- **J**: LLS
+- **Q**: LLSS
+- **K**: LLSSS
 
-- **[Requirements.md](file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/Requirement.md)**: High-level design and feature specifications.
-- **[LLD.md](file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/LLD.md)**: Low-level design, class diagrams, and sequence flows.
-- **[business_logic.md](file:///Users/kinshuk.prasad/Documents/Project_X/cardGuesser/business_logic.md)**: Visual flowchart of the application logic and haptic encoding.
+### Suits
+- **Hearts**: S (1 Short)
+- **Diamonds**: SS (2 Shorts)
+- **Clubs**: SSS (3 Shorts)
+- **Spades**: L (1 Long)
 
-## 🛠️ Build & Installation
+*Example: "Queen of Spades" = [LLSS] (Gap) [L]*
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/SenseiBruce/cardGuesser.git
-   ```
-2. **Setup Vosk Model**:
-   - Download the `vosk-model-small-en-us` from [Alphacephei](https://alphacephei.com/vosk/models).
-   - Unpack the contents into `app/src/main/assets/model-en-us/`.
-3. **Build the APK**:
-   - Open in Android Studio or run:
-   ```bash
-   ./gradlew assembleDebug
-   ```
-4. **Permissions**:
-   - Grant `RECORD_AUDIO` and `Vibrate` permissions on first launch.
-
-## 🧪 Testing
-
-The project includes unit tests for core logic:
-- `HapticEncoderTest`: Verifies unique waveforms for all 52 cards.
-- `ParserTest`: Validates regex trigger phrase matching and number word conversion.
-
-## 🔋 Performance & Battery Optimization
-
-- **Continuous Microphone Usage**: Expect significant battery drain (~10-15% per hour) due to continuous listening.
-- **OEM Battery Optimizations**: Some manufacturers (Samsung, Xiaomi, Huawei) aggressively kill background services.
-  - **Resolution**: Users should navigate to *System Settings > Apps > Magic Haptic Assistant > Battery* and select **"Unrestricted"** or disable **"Battery Optimization"**.
-- **Speech Accuracy**: The Vosk "small" model is optimized for resource efficiency. Accuracy may degrade in very loud environments.
-
-## 📜 Section 15: What NOT to build
-- This app does NOT use any cloud APIs.
-- It does NOT provide audio confirmation (beeps/TTS).
-- It is intended for professional use by magicians who require extreme discretion.
+## 🕵️ Stealth Tips
+1. Use the **Notification Disguise** setting to rename the active task to something generic like "System Optimization".
+2. Test your haptic sensitivity in the **Toolkit** tab before going on stage.
+3. Keep the device in a pocket where the vibration is felt clearly but not heard.
 
 ---
-*Created by Antigravity - Advanced Agentic Coding.*
+*Built for the Modern Mystery Performer.*

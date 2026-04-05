@@ -8,7 +8,9 @@ import kotlinx.coroutines.launch
 
 class CardRepository(private val dataStore: AppDataStore) {
 
-    private var currentDeck: List<String> = DeckPresets.DEFAULT
+    private val _currentDeck = kotlinx.coroutines.flow.MutableStateFlow(DeckPresets.DEFAULT)
+    val currentDeck: kotlinx.coroutines.flow.StateFlow<List<String>> = _currentDeck
+
     private var customDeck: List<String> = emptyList()
 
     init {
@@ -20,7 +22,7 @@ class CardRepository(private val dataStore: AppDataStore) {
         
         CoroutineScope(Dispatchers.IO).launch {
             dataStore.currentDeckId.collectLatest { id ->
-                currentDeck = when (id) {
+                _currentDeck.value = when (id) {
                     "MNEMONICA" -> DeckPresets.MNEMONICA
                     "ARONSON" -> DeckPresets.ARONSON
                     "CUSTOM" -> if (customDeck.size == 52) customDeck else DeckPresets.DEFAULT
@@ -31,11 +33,12 @@ class CardRepository(private val dataStore: AppDataStore) {
     }
 
     fun getCard(position: Int): String? {
-        if (position < 1 || position > currentDeck.size) return null
-        return currentDeck[position - 1]
+        val deck = _currentDeck.value
+        if (position < 1 || position > deck.size) return null
+        return deck[position - 1]
     }
 
-    fun getCurrentDeck(): List<String> = currentDeck
+    fun getCurrentDeck(): List<String> = _currentDeck.value
 
     private fun parseCustomDeck(data: String): List<String> {
         return data.split(",")

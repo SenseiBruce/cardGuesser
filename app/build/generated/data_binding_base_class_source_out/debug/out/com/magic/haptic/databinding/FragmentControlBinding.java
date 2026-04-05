@@ -4,14 +4,16 @@ package com.magic.haptic.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.divider.MaterialDivider;
+import com.google.android.material.card.MaterialCardView;
 import com.magic.haptic.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -19,13 +21,25 @@ import java.lang.String;
 
 public final class FragmentControlBinding implements ViewBinding {
   @NonNull
-  private final NestedScrollView rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
-  public final Button btnToggleService;
+  public final ConstraintLayout btnToggleService;
 
   @NonNull
-  public final MaterialDivider divider;
+  public final MaterialCardView cardLastTrigger;
+
+  @NonNull
+  public final MaterialCardView cardToggleButton;
+
+  @NonNull
+  public final LinearLayout statsRow;
+
+  @NonNull
+  public final FrameLayout statusContainer;
+
+  @NonNull
+  public final TextView tvBtnLabel;
 
   @NonNull
   public final TextView tvDuration;
@@ -34,49 +48,50 @@ public final class FragmentControlBinding implements ViewBinding {
   public final TextView tvLastCard;
 
   @NonNull
+  public final TextView tvLastHeader;
+
+  @NonNull
   public final TextView tvLastPattern;
 
   @NonNull
   public final TextView tvLastPhrase;
 
   @NonNull
-  public final TextView tvLastPosition;
-
-  @NonNull
-  public final TextView tvLastTriggerHeader;
-
-  @NonNull
   public final TextView tvStatus;
-
-  @NonNull
-  public final TextView tvStatusLabel;
 
   @NonNull
   public final TextView tvTriggerCount;
 
-  private FragmentControlBinding(@NonNull NestedScrollView rootView,
-      @NonNull Button btnToggleService, @NonNull MaterialDivider divider,
-      @NonNull TextView tvDuration, @NonNull TextView tvLastCard, @NonNull TextView tvLastPattern,
-      @NonNull TextView tvLastPhrase, @NonNull TextView tvLastPosition,
-      @NonNull TextView tvLastTriggerHeader, @NonNull TextView tvStatus,
-      @NonNull TextView tvStatusLabel, @NonNull TextView tvTriggerCount) {
+  @NonNull
+  public final View vStatusGlow;
+
+  private FragmentControlBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull ConstraintLayout btnToggleService, @NonNull MaterialCardView cardLastTrigger,
+      @NonNull MaterialCardView cardToggleButton, @NonNull LinearLayout statsRow,
+      @NonNull FrameLayout statusContainer, @NonNull TextView tvBtnLabel,
+      @NonNull TextView tvDuration, @NonNull TextView tvLastCard, @NonNull TextView tvLastHeader,
+      @NonNull TextView tvLastPattern, @NonNull TextView tvLastPhrase, @NonNull TextView tvStatus,
+      @NonNull TextView tvTriggerCount, @NonNull View vStatusGlow) {
     this.rootView = rootView;
     this.btnToggleService = btnToggleService;
-    this.divider = divider;
+    this.cardLastTrigger = cardLastTrigger;
+    this.cardToggleButton = cardToggleButton;
+    this.statsRow = statsRow;
+    this.statusContainer = statusContainer;
+    this.tvBtnLabel = tvBtnLabel;
     this.tvDuration = tvDuration;
     this.tvLastCard = tvLastCard;
+    this.tvLastHeader = tvLastHeader;
     this.tvLastPattern = tvLastPattern;
     this.tvLastPhrase = tvLastPhrase;
-    this.tvLastPosition = tvLastPosition;
-    this.tvLastTriggerHeader = tvLastTriggerHeader;
     this.tvStatus = tvStatus;
-    this.tvStatusLabel = tvStatusLabel;
     this.tvTriggerCount = tvTriggerCount;
+    this.vStatusGlow = vStatusGlow;
   }
 
   @Override
   @NonNull
-  public NestedScrollView getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -102,14 +117,38 @@ public final class FragmentControlBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btnToggleService;
-      Button btnToggleService = ViewBindings.findChildViewById(rootView, id);
+      ConstraintLayout btnToggleService = ViewBindings.findChildViewById(rootView, id);
       if (btnToggleService == null) {
         break missingId;
       }
 
-      id = R.id.divider;
-      MaterialDivider divider = ViewBindings.findChildViewById(rootView, id);
-      if (divider == null) {
+      id = R.id.cardLastTrigger;
+      MaterialCardView cardLastTrigger = ViewBindings.findChildViewById(rootView, id);
+      if (cardLastTrigger == null) {
+        break missingId;
+      }
+
+      id = R.id.cardToggleButton;
+      MaterialCardView cardToggleButton = ViewBindings.findChildViewById(rootView, id);
+      if (cardToggleButton == null) {
+        break missingId;
+      }
+
+      id = R.id.statsRow;
+      LinearLayout statsRow = ViewBindings.findChildViewById(rootView, id);
+      if (statsRow == null) {
+        break missingId;
+      }
+
+      id = R.id.statusContainer;
+      FrameLayout statusContainer = ViewBindings.findChildViewById(rootView, id);
+      if (statusContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.tvBtnLabel;
+      TextView tvBtnLabel = ViewBindings.findChildViewById(rootView, id);
+      if (tvBtnLabel == null) {
         break missingId;
       }
 
@@ -125,6 +164,12 @@ public final class FragmentControlBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvLastHeader;
+      TextView tvLastHeader = ViewBindings.findChildViewById(rootView, id);
+      if (tvLastHeader == null) {
+        break missingId;
+      }
+
       id = R.id.tvLastPattern;
       TextView tvLastPattern = ViewBindings.findChildViewById(rootView, id);
       if (tvLastPattern == null) {
@@ -137,27 +182,9 @@ public final class FragmentControlBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tvLastPosition;
-      TextView tvLastPosition = ViewBindings.findChildViewById(rootView, id);
-      if (tvLastPosition == null) {
-        break missingId;
-      }
-
-      id = R.id.tvLastTriggerHeader;
-      TextView tvLastTriggerHeader = ViewBindings.findChildViewById(rootView, id);
-      if (tvLastTriggerHeader == null) {
-        break missingId;
-      }
-
       id = R.id.tvStatus;
       TextView tvStatus = ViewBindings.findChildViewById(rootView, id);
       if (tvStatus == null) {
-        break missingId;
-      }
-
-      id = R.id.tvStatusLabel;
-      TextView tvStatusLabel = ViewBindings.findChildViewById(rootView, id);
-      if (tvStatusLabel == null) {
         break missingId;
       }
 
@@ -167,9 +194,16 @@ public final class FragmentControlBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentControlBinding((NestedScrollView) rootView, btnToggleService, divider,
-          tvDuration, tvLastCard, tvLastPattern, tvLastPhrase, tvLastPosition, tvLastTriggerHeader,
-          tvStatus, tvStatusLabel, tvTriggerCount);
+      id = R.id.vStatusGlow;
+      View vStatusGlow = ViewBindings.findChildViewById(rootView, id);
+      if (vStatusGlow == null) {
+        break missingId;
+      }
+
+      return new FragmentControlBinding((CoordinatorLayout) rootView, btnToggleService,
+          cardLastTrigger, cardToggleButton, statsRow, statusContainer, tvBtnLabel, tvDuration,
+          tvLastCard, tvLastHeader, tvLastPattern, tvLastPhrase, tvStatus, tvTriggerCount,
+          vStatusGlow);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

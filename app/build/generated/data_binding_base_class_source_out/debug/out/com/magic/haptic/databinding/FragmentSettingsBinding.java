@@ -5,16 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.textfield.TextInputEditText;
 import com.magic.haptic.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -22,7 +22,7 @@ import java.lang.String;
 
 public final class FragmentSettingsBinding implements ViewBinding {
   @NonNull
-  private final NestedScrollView rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final Button btnEditCustomDeck;
@@ -31,25 +31,25 @@ public final class FragmentSettingsBinding implements ViewBinding {
   public final Button btnSaveCustomHaptic;
 
   @NonNull
-  public final EditText etDebounce;
+  public final TextInputEditText etDebounce;
 
   @NonNull
-  public final EditText etGap;
+  public final TextInputEditText etGap;
 
   @NonNull
-  public final EditText etLong;
+  public final TextInputEditText etLong;
 
   @NonNull
-  public final EditText etNotifBody;
+  public final TextInputEditText etNotifBody;
 
   @NonNull
-  public final EditText etNotifTitle;
+  public final TextInputEditText etNotifTitle;
 
   @NonNull
-  public final EditText etSep;
+  public final TextInputEditText etSep;
 
   @NonNull
-  public final EditText etShort;
+  public final TextInputEditText etShort;
 
   @NonNull
   public final LinearLayout llCustomHaptic;
@@ -72,11 +72,12 @@ public final class FragmentSettingsBinding implements ViewBinding {
   @NonNull
   public final Spinner spinnerDeck;
 
-  private FragmentSettingsBinding(@NonNull NestedScrollView rootView,
+  private FragmentSettingsBinding(@NonNull CoordinatorLayout rootView,
       @NonNull Button btnEditCustomDeck, @NonNull Button btnSaveCustomHaptic,
-      @NonNull EditText etDebounce, @NonNull EditText etGap, @NonNull EditText etLong,
-      @NonNull EditText etNotifBody, @NonNull EditText etNotifTitle, @NonNull EditText etSep,
-      @NonNull EditText etShort, @NonNull LinearLayout llCustomHaptic,
+      @NonNull TextInputEditText etDebounce, @NonNull TextInputEditText etGap,
+      @NonNull TextInputEditText etLong, @NonNull TextInputEditText etNotifBody,
+      @NonNull TextInputEditText etNotifTitle, @NonNull TextInputEditText etSep,
+      @NonNull TextInputEditText etShort, @NonNull LinearLayout llCustomHaptic,
       @NonNull RadioButton rbCustom, @NonNull RadioButton rbFast, @NonNull RadioButton rbNormal,
       @NonNull RadioButton rbSlow, @NonNull RadioGroup rgHapticSpeed,
       @NonNull Spinner spinnerDeck) {
@@ -101,7 +102,7 @@ public final class FragmentSettingsBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public NestedScrollView getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -139,43 +140,43 @@ public final class FragmentSettingsBinding implements ViewBinding {
       }
 
       id = R.id.etDebounce;
-      EditText etDebounce = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etDebounce = ViewBindings.findChildViewById(rootView, id);
       if (etDebounce == null) {
         break missingId;
       }
 
       id = R.id.etGap;
-      EditText etGap = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etGap = ViewBindings.findChildViewById(rootView, id);
       if (etGap == null) {
         break missingId;
       }
 
       id = R.id.etLong;
-      EditText etLong = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etLong = ViewBindings.findChildViewById(rootView, id);
       if (etLong == null) {
         break missingId;
       }
 
       id = R.id.etNotifBody;
-      EditText etNotifBody = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etNotifBody = ViewBindings.findChildViewById(rootView, id);
       if (etNotifBody == null) {
         break missingId;
       }
 
       id = R.id.etNotifTitle;
-      EditText etNotifTitle = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etNotifTitle = ViewBindings.findChildViewById(rootView, id);
       if (etNotifTitle == null) {
         break missingId;
       }
 
       id = R.id.etSep;
-      EditText etSep = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etSep = ViewBindings.findChildViewById(rootView, id);
       if (etSep == null) {
         break missingId;
       }
 
       id = R.id.etShort;
-      EditText etShort = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etShort = ViewBindings.findChildViewById(rootView, id);
       if (etShort == null) {
         break missingId;
       }
@@ -222,7 +223,7 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentSettingsBinding((NestedScrollView) rootView, btnEditCustomDeck,
+      return new FragmentSettingsBinding((CoordinatorLayout) rootView, btnEditCustomDeck,
           btnSaveCustomHaptic, etDebounce, etGap, etLong, etNotifBody, etNotifTitle, etSep, etShort,
           llCustomHaptic, rbCustom, rbFast, rbNormal, rbSlow, rgHapticSpeed, spinnerDeck);
     }

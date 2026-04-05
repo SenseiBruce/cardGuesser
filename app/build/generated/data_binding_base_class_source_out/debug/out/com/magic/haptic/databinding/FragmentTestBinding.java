@@ -5,15 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.divider.MaterialDivider;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.magic.haptic.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -21,7 +23,7 @@ import java.lang.String;
 
 public final class FragmentTestBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final Button btnVibrateManual;
@@ -30,10 +32,19 @@ public final class FragmentTestBinding implements ViewBinding {
   public final GridLayout cardGrid;
 
   @NonNull
-  public final EditText etManualPosition;
+  public final MaterialDivider divider1;
+
+  @NonNull
+  public final MaterialDivider divider2;
+
+  @NonNull
+  public final TextInputEditText etManualPosition;
 
   @NonNull
   public final RecyclerView rvSpeechLog;
+
+  @NonNull
+  public final TextInputLayout tilManualPosition;
 
   @NonNull
   public final TextView tvManualCardInfo;
@@ -47,16 +58,20 @@ public final class FragmentTestBinding implements ViewBinding {
   @NonNull
   public final TextView tvTestMode;
 
-  private FragmentTestBinding(@NonNull ConstraintLayout rootView, @NonNull Button btnVibrateManual,
-      @NonNull GridLayout cardGrid, @NonNull EditText etManualPosition,
-      @NonNull RecyclerView rvSpeechLog, @NonNull TextView tvManualCardInfo,
-      @NonNull TextView tvQuickTestHeader, @NonNull TextView tvSpeechLogHeader,
-      @NonNull TextView tvTestMode) {
+  private FragmentTestBinding(@NonNull CoordinatorLayout rootView, @NonNull Button btnVibrateManual,
+      @NonNull GridLayout cardGrid, @NonNull MaterialDivider divider1,
+      @NonNull MaterialDivider divider2, @NonNull TextInputEditText etManualPosition,
+      @NonNull RecyclerView rvSpeechLog, @NonNull TextInputLayout tilManualPosition,
+      @NonNull TextView tvManualCardInfo, @NonNull TextView tvQuickTestHeader,
+      @NonNull TextView tvSpeechLogHeader, @NonNull TextView tvTestMode) {
     this.rootView = rootView;
     this.btnVibrateManual = btnVibrateManual;
     this.cardGrid = cardGrid;
+    this.divider1 = divider1;
+    this.divider2 = divider2;
     this.etManualPosition = etManualPosition;
     this.rvSpeechLog = rvSpeechLog;
+    this.tilManualPosition = tilManualPosition;
     this.tvManualCardInfo = tvManualCardInfo;
     this.tvQuickTestHeader = tvQuickTestHeader;
     this.tvSpeechLogHeader = tvSpeechLogHeader;
@@ -65,7 +80,7 @@ public final class FragmentTestBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -102,8 +117,20 @@ public final class FragmentTestBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.divider1;
+      MaterialDivider divider1 = ViewBindings.findChildViewById(rootView, id);
+      if (divider1 == null) {
+        break missingId;
+      }
+
+      id = R.id.divider2;
+      MaterialDivider divider2 = ViewBindings.findChildViewById(rootView, id);
+      if (divider2 == null) {
+        break missingId;
+      }
+
       id = R.id.etManualPosition;
-      EditText etManualPosition = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etManualPosition = ViewBindings.findChildViewById(rootView, id);
       if (etManualPosition == null) {
         break missingId;
       }
@@ -111,6 +138,12 @@ public final class FragmentTestBinding implements ViewBinding {
       id = R.id.rvSpeechLog;
       RecyclerView rvSpeechLog = ViewBindings.findChildViewById(rootView, id);
       if (rvSpeechLog == null) {
+        break missingId;
+      }
+
+      id = R.id.tilManualPosition;
+      TextInputLayout tilManualPosition = ViewBindings.findChildViewById(rootView, id);
+      if (tilManualPosition == null) {
         break missingId;
       }
 
@@ -138,9 +171,9 @@ public final class FragmentTestBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentTestBinding((ConstraintLayout) rootView, btnVibrateManual, cardGrid,
-          etManualPosition, rvSpeechLog, tvManualCardInfo, tvQuickTestHeader, tvSpeechLogHeader,
-          tvTestMode);
+      return new FragmentTestBinding((CoordinatorLayout) rootView, btnVibrateManual, cardGrid,
+          divider1, divider2, etManualPosition, rvSpeechLog, tilManualPosition, tvManualCardInfo,
+          tvQuickTestHeader, tvSpeechLogHeader, tvTestMode);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -8,9 +8,15 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/obsidian_black"
         app:layout_constraintTop_toTopOf="parent"
+        app:tabBackground="@color/obsidian_black"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/antique_gold"
+        app:tabIndicatorHeight="3dp"
         app:tabMode="fixed"
-        app:tabGravity="fill" />
+        app:tabSelectedTextColor="@color/gold_glow"
+        app:tabTextColor="@color/antique_gold" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

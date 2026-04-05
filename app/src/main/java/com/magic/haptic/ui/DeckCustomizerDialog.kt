@@ -47,7 +47,7 @@ class DeckCustomizerDialog(private val appDataStore: AppDataStore) : DialogFragm
             }
         }
 
-        binding.btnCancel.setOnClickListener {
+        binding.btnCancelCustom.setOnClickListener {
             dismiss()
         }
     }

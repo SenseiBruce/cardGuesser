@@ -39,6 +39,16 @@ class AppDataStore(private val context: Context) {
     val notifTitle: Flow<String> = context.dataStore.data.map { it[NOTIF_TITLE] ?: "System Optimizer" }
     val notifBody: Flow<String> = context.dataStore.data.map { it[NOTIF_BODY] ?: "Running..." }
 
+    val hapticConfig: Flow<HapticConfig> = kotlinx.coroutines.flow.combine(
+        customShort, customLong, customGap, customSep, speedPreset
+    ) { s, l, g, sep, preset ->
+        when (preset) {
+            "FAST" -> HapticConfig(80, 200, 100, 400)
+            "SLOW" -> HapticConfig(150, 450, 200, 700)
+            else -> HapticConfig(s, l, g, sep) // Also for CUSTOM
+        }
+    }
+
     suspend fun saveCurrentDeckId(id: String) {
         context.dataStore.edit { it[CURRENT_DECK_ID] = id }
     }

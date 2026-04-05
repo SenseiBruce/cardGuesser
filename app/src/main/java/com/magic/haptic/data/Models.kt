@@ -34,7 +34,8 @@ data class HapticConfig(
 data class HapticPattern(
     val timings: LongArray,
     val amplitudes: IntArray,
-    val durationMs: Long
+    val durationMs: Long,
+    val description: String = ""
 )
 
 /** Service Status States */
