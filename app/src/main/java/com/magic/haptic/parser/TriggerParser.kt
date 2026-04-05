@@ -8,12 +8,13 @@ class TriggerParser(private val wordConverter: NumberWordConverter) {
     private var debounceMs: Long = 3000
 
     private val patterns = listOf(
-        Regex("^card at position (.+)$", RegexOption.IGNORE_CASE),
-        Regex("^position (.+) card$", RegexOption.IGNORE_CASE),
-        Regex("^(.+) position$", RegexOption.IGNORE_CASE),
-        Regex("^position number (.+)$", RegexOption.IGNORE_CASE),
-        Regex("^card number (.+)$", RegexOption.IGNORE_CASE),
-        Regex("^number (.+) card$", RegexOption.IGNORE_CASE)
+        Regex("card at position (.+)", RegexOption.IGNORE_CASE),
+        Regex("position (.+) card", RegexOption.IGNORE_CASE),
+        Regex("(.+) position", RegexOption.IGNORE_CASE),
+        Regex("position number (.+)", RegexOption.IGNORE_CASE),
+        Regex("card number (.+)", RegexOption.IGNORE_CASE),
+        Regex("number (.+) card", RegexOption.IGNORE_CASE),
+        Regex("the number (.+)", RegexOption.IGNORE_CASE)
     )
 
     fun setDebounce(seconds: Int) {

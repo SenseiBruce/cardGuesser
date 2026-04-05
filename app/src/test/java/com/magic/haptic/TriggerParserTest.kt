@@ -43,6 +43,10 @@ class TriggerParserTest {
         
         // Pattern 6: number <X> card
         assertThat(parser.parse("number twelve card")?.position).isEqualTo(12)
+
+        // Conversational phrases (no start-of-line anchor)
+        assertThat(parser.parse("you have chosen the number 11")?.position).isEqualTo(11)
+        assertThat(parser.parse("let's see card number twenty two")?.position).isEqualTo(22)
     }
 
     @Test

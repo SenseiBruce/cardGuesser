@@ -183,3 +183,25 @@ Using **Jetpack DataStore (Preferences)** for settings storage.
 - **Foreground Service**: Must show a persistent notification. On Android 14+, it requires `foregroundServiceType: microphone` and appropriate manifest flags.
 - **Card Lookup**: Repository will validate the deck list on load. If invalid, it defaults to the `DEFAULT` preset to prevent crashes.
 - **Debounce**: Implemented in `TriggerParser` using a simple `lastTriggerTimestamp` check.
+
+---
+
+## 🎨 Premium UI Design System ("Dark Magic")
+
+### Visual Palette
+| Element | Color Code | Purpose |
+| :--- | :--- | :--- |
+| **Obsidian Black** | `#0B0C0E` | Deep background for stealth and focus. |
+| **Antique Gold** | `#C5A059` | Primary accent for titles, borders, and buttons. |
+| **Velvet Purple** | `#3D1B5D` | Subtle secondary accent (e.g., status glow shadow). |
+| **Muted Grey** | `#3A3A3A` | Tertiary text and secondary dividers. |
+
+### Component Aesthetics
+1.  **Glassmorphism**: Cards use a 5% White translucent overlay with a subtle 1px border of Antique Gold at 30% opacity.
+2.  **Magic Glow**: The Listening status indicator uses an `ObjectAnimator` to pulse between 20% and 60% shadow radius of Antique Gold.
+3.  **Typography**: Serif fonts (Spectral) for titles to evoke a sense of tradition/magic; Sans-serif (Inter) for data points to ensure readability.
+
+### Animation Logic
+- **Fade-In**: New detected phrases/cards use a 300ms alpha fade to prevent jarring UI jumps.
+- **Pulse**: The status glow uses a linear `repeatMode` with a 2-second duration to create a "breathing" effect.
+- **Haptic Feedback**: When a pattern is displayed, the UI elements pulse slightly in sync with the vibration timings (S/L).
