@@ -89,7 +89,7 @@ Notes:
 
 ## Lint Results (summary)
 - Date: 2026-04-06
-- Lint outcome: 1 error, 90 warnings (debug)
+- Lint outcome (initial): 1 error, 90 warnings (debug). After fixing the MissingPermission issue, lint now reports 0 errors and 90 warnings.
 - Top error: MissingPermission at `app/src/main/java/com/magic/haptic/speech/VoskRecognizerManager.kt:65` — AudioRecord constructor is used without an explicit runtime `RECORD_AUDIO` permission check. See `LINT_REPORT.md` for full details and suggested fixes.
 
 Action items:
