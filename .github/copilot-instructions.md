@@ -1,0 +1,1 @@
+When using Copilot, always use askQuestions before ending a request to verify that the generated code meets the requirements, and iterate until the user is satisfied. Do not assume the first generated code is correct or complete.
