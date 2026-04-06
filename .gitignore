@@ -30,3 +30,7 @@ build/
 
 # Local properties
 local.properties
+
+# Local logs
+app_log.txt
+

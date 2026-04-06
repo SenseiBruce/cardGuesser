@@ -72,4 +72,36 @@
 - Trigger and haptic rules: `Requirement.md` Sections 3 and 4.
 - Persistence/keys/state handling: `LLD.md` Persistence + State Machine.
 - User workflow and visuals: `business_logic.md` and `README.md`.
+ 
+## Build Environment (verified)
+- JDK: Java 17 required (verified with `/usr/libexec/java_home -v 17`).
+- Gradle wrapper: project now includes a working Gradle wrapper configured to Gradle 8.7 (updated to satisfy AGP 8.6.0 requirements).
+- Android Gradle Plugin (AGP): 8.6.0 (declared in root `build.gradle.kts`).
+- Commands used to validate locally (run from repo root):
+  - `export JAVA_HOME="$(/usr/libexec/java_home -v 17)"`
+  - `./gradlew :app:compileDebugKotlin`
+  - `./gradlew :app:testDebugUnitTest`
+  - `./gradlew :app:lintDebug`  (lint may take several minutes)
+
+Notes:
+- The repository previously lacked wrapper binaries; the wrapper was regenerated and set to Gradle 8.7 (see `gradle/wrapper/gradle-wrapper.properties`).
+- If CI uses a different JDK, ensure it points to Java 17+.
+
+## Lint Results (summary)
+- Date: 2026-04-06
+- Lint outcome: 1 error, 90 warnings (debug)
+- Top error: MissingPermission at `app/src/main/java/com/magic/haptic/speech/VoskRecognizerManager.kt:65` — AudioRecord constructor is used without an explicit runtime `RECORD_AUDIO` permission check. See `LINT_REPORT.md` for full details and suggested fixes.
+
+Action items:
+- Add runtime permission checks (ContextCompat.checkSelfPermission) before creating `AudioRecord` and handle denial gracefully.
+- Consider adding a lint baseline if you want to defer fixing existing warnings: add `lint { baseline = file("lint-baseline.xml") }` to module `build.gradle.kts` and run `./gradlew updateLintBaseline`.
+
+## Task History
+### Task: Initialize project memory & fix Gradle wrapper
+- Date: 2026-04-06
+- Scope: Added Copilot prompt files; created `MEMORY_BANK.md` and `TASK_BOOTSTRAP.md`; restored and updated Gradle wrapper to 8.7; verified compilation and unit tests using Java 17.
+- Files changed: `.github/prompts/project-memory-init.prompt.md`, `MEMORY_BANK.md`, `TASK_BOOTSTRAP.md`, `gradlew`, `gradlew.bat`, `gradle/wrapper/gradle-wrapper.jar`, `gradle/wrapper/gradle-wrapper.properties`
+- Validation performed: `:app:compileDebugKotlin` (success), `:app:testDebugUnitTest` (success), `:app:lintDebug` (failed; 1 error — see LINT_REPORT.md)
+- Assumption: Local Java 17 is available at `/usr/libexec/java_home -v 17`. CI must be configured similarly.
+- Open question: Do you want lint results captured and appended here once complete, or would you prefer those in a separate `LINT_REPORT.md`?
 
