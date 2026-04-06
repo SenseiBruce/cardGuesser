@@ -4,6 +4,9 @@ import android.content.Context
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.core.content.ContextCompat
 import org.vosk.Model
 import org.vosk.Recognizer
 import org.vosk.android.StorageService
@@ -59,6 +62,13 @@ class VoskRecognizerManager(private val context: Context) {
     fun startListening(callback: RecognitionCallback) {
         if (isListening) return
         isListening = true
+
+        // Verify runtime RECORD_AUDIO permission before creating AudioRecord
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            callback.onError(SecurityException("RECORD_AUDIO permission not granted"))
+            isListening = false
+            return
+        }
 
         val sampleRate = 16000
         val bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)
