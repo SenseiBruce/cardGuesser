@@ -1,0 +1,18 @@
+{
+  "name": "Magic Haptic Assistant",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "mathiasfrohlich.Kotlin"
+      ]
+    }
+  },
+  "postCreateCommand": "chmod +x ./gradlew && ./gradlew :app:dependencies --no-daemon",
+  "forwardPorts": []
+}

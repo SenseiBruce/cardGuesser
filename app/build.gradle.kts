@@ -2,6 +2,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
+    jacoco
 }
 
 android {
@@ -23,6 +25,9 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        debug {
+            enableUnitTestCoverage = true
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -33,6 +38,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     // Custom APK naming: MagicHapticAssistant-v1.0-debug.apk
@@ -44,6 +50,54 @@ android {
                 output.outputFileName = "MagicHapticAssistant-v${variant.versionName}-${variant.buildType.name}.apk"
             }
     }
+}
+
+ktlint {
+    android.set(true)
+    ignoreFailures.set(false)
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+tasks.register<JacocoReport>("jacocoTestReport") {
+    dependsOn("testDebugUnitTest")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        csv.required.set(false)
+    }
+
+    val fileFilter =
+        listOf(
+            "**/R.class",
+            "**/R$*.class",
+            "**/BuildConfig.*",
+            "**/Manifest*.*",
+            "**/*Test*.*",
+            "android/**/*.*",
+        )
+
+    val debugTree =
+        fileTree("${project.layout.buildDirectory.get()}/tmp/kotlin-classes/debug") {
+            exclude(fileFilter)
+        }
+    val mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories.setFrom(files(mainSrc))
+    classDirectories.setFrom(files(debugTree))
+    executionData.setFrom(
+        files(
+            "${project.layout.buildDirectory.get()}/jacoco/testDebugUnitTest.exec",
+            "${project.layout.buildDirectory.get()}/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+        ),
+    )
+}
+
+dependencyLocking {
+    lockAllConfigurations()
 }
 
 dependencies {
@@ -67,6 +121,9 @@ dependencies {
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Structured logging
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
     // Testing
     testImplementation("junit:junit:4.13.2")

@@ -19,7 +19,6 @@ import com.magic.haptic.data.AppDataStore
 import com.magic.haptic.data.ServiceEventBus
 import com.magic.haptic.data.ServiceStatus
 import com.magic.haptic.databinding.FragmentControlBinding
-import com.magic.haptic.data.HapticConfig
 import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.service.AudioListenerService
 import kotlinx.coroutines.flow.collectLatest
@@ -27,7 +26,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class ControlFragment : Fragment() {
-
     private var _binding: FragmentControlBinding? = null
     private val binding get() = _binding!!
 
@@ -36,21 +34,29 @@ class ControlFragment : Fragment() {
     private val hapticEncoder = HapticEncoder()
 
     private val handler = Handler(Looper.getMainLooper())
-    private val timerRunnable = object : Runnable {
-        override fun run() {
-            updateDuration()
-            handler.postDelayed(this, 1000)
+    private val timerRunnable =
+        object : Runnable {
+            override fun run() {
+                updateDuration()
+                handler.postDelayed(this, 1000)
+            }
         }
-    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         _binding = FragmentControlBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         cardRepository = CardRepository(AppDataStore(requireContext()))
 
         binding.btnToggleService.setOnClickListener {
@@ -62,12 +68,13 @@ class ControlFragment : Fragment() {
     }
 
     private fun setupGlowAnimation() {
-        glowAnimator = ObjectAnimator.ofFloat(binding.vStatusGlow, "alpha", 0f, 0.6f).apply {
-            duration = 1500
-            repeatMode = ValueAnimator.REVERSE
-            repeatCount = ValueAnimator.INFINITE
-            interpolator = AccelerateDecelerateInterpolator()
-        }
+        glowAnimator =
+            ObjectAnimator.ofFloat(binding.vStatusGlow, "alpha", 0f, 0.6f).apply {
+                duration = 1500
+                repeatMode = ValueAnimator.REVERSE
+                repeatCount = ValueAnimator.INFINITE
+                interpolator = AccelerateDecelerateInterpolator()
+            }
     }
 
     private fun toggleService() {
@@ -104,11 +111,11 @@ class ControlFragment : Fragment() {
             ServiceEventBus.lastTrigger.collectLatest { trigger ->
                 if (trigger != null) {
                     binding.tvLastPhrase.text = "Phrase: \"${trigger.rawText}\""
-                    
+
                     // Lookup full card identity
                     val deck = cardRepository.currentDeck.first()
                     val card = if (trigger.position in 1..52) deck[trigger.position - 1] else null
-                    
+
                     if (card != null) {
                         binding.tvLastCard.text = card
                         val config = AppDataStore(requireContext()).hapticConfig.first()
@@ -124,15 +131,16 @@ class ControlFragment : Fragment() {
     }
 
     private fun updateStatusUi(status: ServiceStatus) {
-        val (text, colorRes) = when (status) {
-            ServiceStatus.STOPPED -> "● STOPPED" to R.color.antique_gold
-            ServiceStatus.INITIALIZING -> "● INITIALIZING" to R.color.status_yellow
-            ServiceStatus.LISTENING -> "● LISTENING" to R.color.status_green
-            ServiceStatus.ERROR -> "● ERROR" to R.color.status_red
-        }
+        val (text, colorRes) =
+            when (status) {
+                ServiceStatus.STOPPED -> "● STOPPED" to R.color.antique_gold
+                ServiceStatus.INITIALIZING -> "● INITIALIZING" to R.color.status_yellow
+                ServiceStatus.LISTENING -> "● LISTENING" to R.color.status_green
+                ServiceStatus.ERROR -> "● ERROR" to R.color.status_red
+            }
         binding.tvStatus.text = text
         binding.tvStatus.setTextColor(ContextCompat.getColor(requireContext(), colorRes))
-        
+
         binding.tvBtnLabel.text = if (status == ServiceStatus.STOPPED) "START LISTENING" else "STOP LISTENING"
         binding.cardToggleButton.strokeColor = ContextCompat.getColor(requireContext(), colorRes)
     }
@@ -140,12 +148,12 @@ class ControlFragment : Fragment() {
     private fun updateDuration() {
         val start = ServiceEventBus.sessionStartTime.value
         if (start == 0L) return
-        
+
         val diff = (System.currentTimeMillis() - start) / 1000
         val hours = diff / 3600
         val minutes = (diff % 3600) / 60
         val seconds = diff % 60
-        
+
         binding.tvDuration.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
     }
 

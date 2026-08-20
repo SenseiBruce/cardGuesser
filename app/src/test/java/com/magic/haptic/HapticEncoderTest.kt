@@ -8,14 +8,14 @@ import com.magic.haptic.haptic.HapticEncoder
 import org.junit.Test
 
 class HapticEncoderTest {
-
     private val encoder = HapticEncoder()
-    private val config = HapticConfig(
-        shortDuration = 100L,
-        longDuration = 300L,
-        gapDuration = 150L,
-        separatorDuration = 500L
-    )
+    private val config =
+        HapticConfig(
+            shortDuration = 100L,
+            longDuration = 300L,
+            gapDuration = 150L,
+            separatorDuration = 500L,
+        )
 
     @Test
     fun testAceOfSpadesEncoding() {
@@ -37,7 +37,7 @@ class HapticEncoderTest {
                 val cardStr = "${rank.symbol}${suit.symbol}"
                 val pattern = encoder.encode(cardStr, config)
                 assertThat(pattern).isNotNull()
-                
+
                 val patternHash = pattern!!.timings.joinToString(",") + "|" + pattern.amplitudes.joinToString(",")
                 assertThat(seenPatterns).doesNotContain(patternHash)
                 seenPatterns.add(patternHash)

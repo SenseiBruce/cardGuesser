@@ -16,18 +16,24 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class SettingsFragment : Fragment() {
-
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var appDataStore: AppDataStore
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         appDataStore = AppDataStore(requireContext())
@@ -50,14 +56,21 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        binding.spinnerDeck.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                lifecycleScope.launch {
-                    appDataStore.saveCurrentDeckId(presets[position])
+        binding.spinnerDeck.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long,
+                ) {
+                    lifecycleScope.launch {
+                        appDataStore.saveCurrentDeckId(presets[position])
+                    }
                 }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
 
         binding.btnEditCustomDeck.setOnClickListener {
             DeckCustomizerDialog(appDataStore).show(childFragmentManager, "DeckCustomizer")
@@ -80,13 +93,14 @@ class SettingsFragment : Fragment() {
         }
 
         binding.rgHapticSpeed.setOnCheckedChangeListener { _, checkedId ->
-            val preset = when (checkedId) {
-                binding.rbFast.id -> "FAST"
-                binding.rbNormal.id -> "NORMAL"
-                binding.rbSlow.id -> "SLOW"
-                binding.rbCustom.id -> "CUSTOM"
-                else -> "NORMAL"
-            }
+            val preset =
+                when (checkedId) {
+                    binding.rbFast.id -> "FAST"
+                    binding.rbNormal.id -> "NORMAL"
+                    binding.rbSlow.id -> "SLOW"
+                    binding.rbCustom.id -> "CUSTOM"
+                    else -> "NORMAL"
+                }
             lifecycleScope.launch { appDataStore.saveSpeedPreset(preset) }
             binding.llCustomHaptic.visibility = if (preset == "CUSTOM") View.VISIBLE else View.GONE
         }
@@ -104,21 +118,49 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        binding.etNotifTitle.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                lifecycleScope.launch { appDataStore.saveNotifConfig(s.toString(), binding.etNotifBody.text.toString()) }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
+        binding.etNotifTitle.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    lifecycleScope.launch { appDataStore.saveNotifConfig(s.toString(), binding.etNotifBody.text.toString()) }
+                }
 
-        binding.etNotifBody.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                lifecycleScope.launch { appDataStore.saveNotifConfig(binding.etNotifTitle.text.toString(), s.toString()) }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {}
+            },
+        )
+
+        binding.etNotifBody.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    lifecycleScope.launch { appDataStore.saveNotifConfig(binding.etNotifTitle.text.toString(), s.toString()) }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {}
+            },
+        )
     }
 
     private fun setupDebounce() {
@@ -128,14 +170,28 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        binding.etDebounce.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val sec = s.toString().toIntOrNull() ?: 3
-                lifecycleScope.launch { appDataStore.saveDebounceSec(sec) }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
+        binding.etDebounce.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    val sec = s.toString().toIntOrNull() ?: 3
+                    lifecycleScope.launch { appDataStore.saveDebounceSec(sec) }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {}
+            },
+        )
 
         setupCustomHapticValues()
     }

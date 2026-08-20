@@ -7,13 +7,15 @@ import com.magic.haptic.data.Rank
 import com.magic.haptic.data.Suit
 
 class HapticEncoder {
-
-    fun encode(cardString: String, config: HapticConfig): HapticPattern? {
+    fun encode(
+        cardString: String,
+        config: HapticConfig,
+    ): HapticPattern? {
         val card = parseCardString(cardString) ?: return null
-        
+
         val timings = mutableListOf<Long>()
         val amplitudes = mutableListOf<Int>()
-        
+
         // Always start with 0 delay
         timings.add(0)
         amplitudes.add(0)
@@ -30,17 +32,18 @@ class HapticEncoder {
         val suitPulses = getSuitPulses(card.suit)
         addPulses(timings, amplitudes, suitPulses, config)
 
-        val description = buildString {
-            rankPulses.forEach { append(if (it == PulseType.SHORT) "S" else "L") }
-            append("|")
-            suitPulses.forEach { append(if (it == PulseType.SHORT) "S" else "L") }
-        }
+        val description =
+            buildString {
+                rankPulses.forEach { append(if (it == PulseType.SHORT) "S" else "L") }
+                append("|")
+                suitPulses.forEach { append(if (it == PulseType.SHORT) "S" else "L") }
+            }
 
         return HapticPattern(
             timings = timings.toLongArray(),
             amplitudes = amplitudes.toIntArray(),
             durationMs = timings.sum(),
-            description = description
+            description = description,
         )
     }
 
@@ -48,14 +51,15 @@ class HapticEncoder {
         timings: MutableList<Long>,
         amplitudes: MutableList<Int>,
         pulses: List<PulseType>,
-        config: HapticConfig
+        config: HapticConfig,
     ) {
         pulses.forEachIndexed { index, pulse ->
-            val duration = when (pulse) {
-                PulseType.SHORT -> config.shortDuration
-                PulseType.LONG -> config.longDuration
-            }
-            
+            val duration =
+                when (pulse) {
+                    PulseType.SHORT -> config.shortDuration
+                    PulseType.LONG -> config.longDuration
+                }
+
             // Add the vibration pulse
             timings.add(duration)
             amplitudes.add(255) // Max amplitude
@@ -97,7 +101,7 @@ class HapticEncoder {
 
     private fun parseCardString(cardString: String): Card? {
         if (cardString.isEmpty()) return null
-        
+
         val rankPart = if (cardString.startsWith("10")) "10" else cardString.take(1)
         val suitPart = cardString.substring(rankPart.length)
 

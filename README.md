@@ -1,60 +1,107 @@
-# Magic Haptic Assistant 🎩✨
+# Magic Haptic Assistant
 
 A premium, stealthy tool designed for magicians to discreetly receive information about a spectator's chosen card via haptic feedback.
 
-## 🌟 Master Features
+## Features
+
 - **Stealth Mode**: Dark obsidian UI with gold accents, optimized for low visibility during performance.
 - **Offline Intelligence**: Uses Vosk Speech Recognition for total privacy and zero latency.
 - **Precision Haptics**: Encodes all 52 cards into unique, tactile vibration patterns.
 - **Customizable Stacks**: Built-in support for popular stacks (Mnemonica, Aronson) and full custom stack editing.
 - **Encrypted Logs**: Review your performance and detected phrases in a secure toolkit log.
 
-## 🛠 Setup Instructions
+## Architecture
 
-### 1. Mandatory Assets
-Due to size constraints, you must manually add the Speech Recognition Model:
-1. Download the `vosk-model-small-en-us-0.15` (or latest) from [Vosk Models](https://alphacephei.com/vosk/models).
-2. Unzip and place the contents exactly in:
-   `app/src/main/assets/model-en-us/`
-   *(Ensure files like `am/final.mdl`, `graph/HCLG.fst`, etc. are directly in that folder).*
+| Package | Responsibility |
+|---------|----------------|
+| `parser` | Voice-trigger phrase matching and number-word conversion |
+| `haptic` | Card → vibration pattern encoding and playback |
+| `card` | Deck presets and position → card lookup |
+| `data` | Preferences (`AppDataStore`), shared models, event bus |
+| `speech` | Vosk model unpack + continuous recognition |
+| `service` | Foreground audio listener orchestration |
+| `ui` | Activities/fragments for control, settings, and toolkit |
 
-### 2. Permissions
-Ensure the following are granted:
-- **Record Audio**: To listen for position triggers.
-- **Notifications**: To maintain the stealthy foreground service.
-- **Vibrate**: To deliver the secret signals.
+## Requirements
 
-## 📜 The Magician's Code (Haptic Guide)
+- JDK 17+
+- Android SDK platform 34 / build-tools 34.0.0
+- Gradle wrapper (included) — no global Gradle install required
 
-The assistant uses two types of pulses: **S** (Short) and **L** (Long).
+## Quick start (from a fresh clone)
 
-### Ranks (Numbers)
-- **1**: S
-- **2**: SS
-- **3**: SSS
-- **4**: SL
-- **5**: L
-- **6**: LS
-- **7**: LSS
-- **8**: LSSS
-- **9**: LSL
-- **10**: LL
-- **J**: LLS
-- **Q**: LLSS
-- **K**: LLSSS
+```bash
+git clone <repo-url> && cd cardGuesser
+chmod +x ./gradlew
+
+# Optional: create local.properties if ANDROID_HOME is not set
+# echo "sdk.dir=$ANDROID_HOME" > local.properties
+
+./gradlew :app:assembleDebug          # build debug APK
+./gradlew :app:testDebugUnitTest      # run unit tests
+./gradlew :app:jacocoTestReport       # coverage report → app/build/reports/jacoco/
+./gradlew :app:lintDebug ktlintCheck  # static analysis + style
+```
+
+### One-command containerized tests
+
+Buyers and contributors can exercise the suite without a local Android SDK:
+
+```bash
+docker compose run --rm unit-tests
+```
+
+Other compose targets: `assemble`, `lint`.
+
+### Speech model asset (device builds only)
+
+Unit tests do **not** require the Vosk model. For a runnable APK on device:
+
+1. Download `vosk-model-small-en-us-0.15` from [Vosk Models](https://alphacephei.com/vosk/models).
+2. Unzip contents into `app/src/main/assets/model-en-us/`  
+   (files such as `am/final.mdl`, `graph/HCLG.fst` must live directly under that folder).
+
+### Permissions
+
+- **Record Audio** — listen for position triggers
+- **Notifications** — keep the foreground service alive
+- **Vibrate** — deliver haptic signals
+
+## Haptic guide
+
+The assistant uses two pulse types: **S** (Short) and **L** (Long).
+
+### Ranks
+| Rank | Pattern | Rank | Pattern |
+|------|---------|------|---------|
+| 1 | S | 8 | LSSS |
+| 2 | SS | 9 | LSL |
+| 3 | SSS | 10 | LL |
+| 4 | SL | J | LLS |
+| 5 | L | Q | LLSS |
+| 6 | LS | K | LLSSS |
+| 7 | LSS | | |
 
 ### Suits
-- **Hearts**: S (1 Short)
-- **Diamonds**: SS (2 Shorts)
-- **Clubs**: SSS (3 Shorts)
-- **Spades**: L (1 Long)
+- **Hearts**: S · **Diamonds**: SS · **Clubs**: SSS · **Spades**: L
 
-*Example: "Queen of Spades" = [LLSS] (Gap) [L]*
+*Example: "Queen of Spades" = [LLSS] (gap) [L]*
 
-## 🕵️ Stealth Tips
-1. Use the **Notification Disguise** setting to rename the active task to something generic like "System Optimization".
-2. Test your haptic sensitivity in the **Toolkit** tab before going on stage.
-3. Keep the device in a pocket where the vibration is felt clearly but not heard.
+## Dependency locking
+
+Gradle lockfiles are committed (`gradle.lockfile`, `app/gradle.lockfile`). After changing dependencies:
+
+```bash
+./gradlew dependencies --write-locks
+```
+
+Dependabot opens weekly PRs for Gradle and GitHub Actions updates.
+
+## Stealth tips
+
+1. Use **Notification Disguise** to rename the active task (e.g. "System Optimization").
+2. Test haptic sensitivity in the **Toolkit** tab before performing.
+3. Keep the device where vibration is felt clearly but not heard.
 
 ---
 *Built for the Modern Mystery Performer.*

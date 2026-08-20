@@ -6,7 +6,6 @@ import com.magic.haptic.parser.TriggerParser
 import org.junit.Test
 
 class TriggerParserTest {
-
     private val converter = NumberWordConverter()
     private val parser = TriggerParser(converter)
 
@@ -28,19 +27,19 @@ class TriggerParserTest {
         // Pattern 1: card at position <X>
         assertThat(parser.parse("card at position twenty three")?.position).isEqualTo(23)
         assertThat(parser.parse("card at position 53")).isNull()
-        
+
         // Pattern 2: position <X> card
         assertThat(parser.parse("position five card")?.position).isEqualTo(5)
-        
+
         // Pattern 3: <X>th position
         assertThat(parser.parse("twenty third position")?.position).isEqualTo(23)
-        
+
         // Pattern 4: position number <X>
         assertThat(parser.parse("position number forty two")?.position).isEqualTo(42)
-        
+
         // Pattern 5: card number <X>
         assertThat(parser.parse("card number seven")?.position).isEqualTo(7)
-        
+
         // Pattern 6: number <X> card
         assertThat(parser.parse("number twelve card")?.position).isEqualTo(12)
 
@@ -69,11 +68,24 @@ class TriggerParserTest {
     fun testDifferentTriggersAreNotDebouncedAgainstEachOther() {
         parser.setDebounce(3)
         assertThat(parser.parse("card at position 5")).isNotNull()
-        // Different position should still trigger if using a different logic, 
+        // Different position should still trigger if using a different logic,
         // but currently the debounce is global per parser instance.
         // Let's verify current behavior.
-        assertThat(parser.parse("card at position 10")).isNull() 
-        // Note: This confirms global debounce. If we wanted per-position debounce, 
+        assertThat(parser.parse("card at position 10")).isNull()
+        // Note: This confirms global debounce. If we wanted per-position debounce,
         // we'd need to change TriggerParser.
+    }
+
+    @Test
+    fun testTheNumberPhraseWithDigitsAndWords() {
+        parser.setDebounce(0)
+        assertThat(parser.parse("the number 30")?.position).isEqualTo(30)
+        assertThat(parser.parse("the number 13")?.position).isEqualTo(13)
+        assertThat(parser.parse("the number 35")?.position).isEqualTo(35)
+        assertThat(parser.parse("the number 45")?.position).isEqualTo(45)
+        assertThat(parser.parse("the number thirty")?.position).isEqualTo(30)
+        assertThat(parser.parse("the number thirteen")?.position).isEqualTo(13)
+        assertThat(parser.parse("the number thirty five")?.position).isEqualTo(35)
+        assertThat(parser.parse("the number forty five")?.position).isEqualTo(45)
     }
 }
