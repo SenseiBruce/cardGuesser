@@ -32,15 +32,24 @@ A premium, stealthy tool designed for magicians to discreetly receive informatio
 
 ```bash
 git clone <repo-url> && cd cardGuesser
-chmod +x ./gradlew
+chmod +x ./gradlew ./scripts/test.sh ./scripts/build.sh
 
-# Optional: create local.properties if ANDROID_HOME is not set
-# echo "sdk.dir=$ANDROID_HOME" > local.properties
+# Optional: copy local SDK path
+# cp local.properties.example local.properties
 
-./gradlew :app:assembleDebug          # build debug APK
-./gradlew :app:testDebugUnitTest      # run unit tests
-./gradlew :app:jacocoTestReport       # coverage report → app/build/reports/jacoco/
-./gradlew :app:lintDebug ktlintCheck  # static analysis + style
+make test      # or: ./scripts/test.sh
+make build     # or: ./scripts/build.sh
+make coverage  # unit tests + JaCoCo report + 50% line gate
+make lint      # Android lint + ktlint
+```
+
+Equivalent Gradle commands:
+
+```bash
+./gradlew :app:assembleDebug
+./gradlew :app:testDebugUnitTest
+./gradlew :app:jacocoTestReport :app:jacocoTestCoverageVerification
+./gradlew :app:lintDebug ktlintCheck
 ```
 
 ### One-command containerized tests
