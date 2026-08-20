@@ -13,8 +13,8 @@ import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
 import com.magic.haptic.parser.NumberWordConverter
 import com.magic.haptic.parser.TriggerParser
+import com.magic.haptic.speech.SpeechJsonExtractor
 import com.magic.haptic.speech.VoskRecognizerManager
-import com.magic.haptic.util.AppLogger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -22,8 +22,6 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.json.JSONException
-import org.json.JSONObject
 
 class AudioListenerService : Service() {
     private lateinit var voskManager: VoskRecognizerManager
@@ -84,7 +82,7 @@ class AudioListenerService : Service() {
                     if (text.isEmpty() || text == "{\"partial\" : \"\"}") return
 
                     serviceScope.launch {
-                        val partialText = extractJsonText(text, "partial")
+                        val partialText = SpeechJsonExtractor.extract(text, "partial")
                         ServiceEventBus.emitSpeechLog(SpeechLogEntry(partialText))
                         processSpeech(partialText)
                     }
@@ -95,7 +93,7 @@ class AudioListenerService : Service() {
                     if (text.isEmpty() || text == "{\"text\" : \"\"}") return
 
                     serviceScope.launch {
-                        val resultText = extractJsonText(text, "text")
+                        val resultText = SpeechJsonExtractor.extract(text, "text")
                         ServiceEventBus.emitSpeechLog(SpeechLogEntry(resultText))
                         processSpeech(resultText)
                     }
@@ -157,21 +155,6 @@ class AudioListenerService : Service() {
                 val notificationManager = getSystemService(NOTIFICATION_SERVICE) as android.app.NotificationManager
                 notificationManager.notify(1, notification)
             }
-        }
-    }
-
-    private fun extractJsonText(
-        json: String,
-        key: String,
-    ): String {
-        return try {
-            JSONObject(json).getString(key)
-        } catch (e: JSONException) {
-            AppLogger.e("Failed to extract JSON key '$key' from speech result", e)
-            ""
-        } catch (e: Exception) {
-            AppLogger.e("Unexpected error extracting JSON key '$key'", e)
-            ""
         }
     }
 

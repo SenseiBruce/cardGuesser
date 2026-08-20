@@ -42,8 +42,11 @@ class NumberWordConverter {
         }
 
         // Split text into words to scan for numbers anywhere in the phrase
-        val words = cleanText.split("\\s+".toRegex())
-
+        val words =
+            cleanText
+                .replace(Regex("\\band\\b"), " ")
+                .split("\\s+".toRegex())
+                .filter { it.isNotEmpty() }
         for (i in words.indices) {
             // 2. Try compound "thirty five"
             if (i < words.size - 1) {

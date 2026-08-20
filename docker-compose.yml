@@ -12,7 +12,7 @@ services:
       - .:/workspace
       - gradle-cache:/home/android/.gradle
     working_dir: /workspace
-    command: ["./gradlew", ":app:testDebugUnitTest", ":app:jacocoTestReport", "--no-daemon"]
+    command: ["./gradlew", ":app:testDebugUnitTest", ":app:jacocoTestReport", ":app:jacocoTestCoverageVerification", "--no-daemon"]
 
   assemble:
     build:

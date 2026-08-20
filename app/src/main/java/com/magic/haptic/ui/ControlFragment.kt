@@ -12,26 +12,26 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.magic.haptic.R
-import com.magic.haptic.card.CardRepository
 import com.magic.haptic.data.AppDataStore
 import com.magic.haptic.data.ServiceEventBus
 import com.magic.haptic.data.ServiceStatus
 import com.magic.haptic.databinding.FragmentControlBinding
-import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.service.AudioListenerService
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class ControlFragment : Fragment() {
     private var _binding: FragmentControlBinding? = null
     private val binding get() = _binding!!
 
+    private val cardViewModel: CardViewModel by viewModels {
+        CardViewModel.Factory(AppDataStore(requireContext()))
+    }
+
     private var glowAnimator: ObjectAnimator? = null
-    private lateinit var cardRepository: CardRepository
-    private val hapticEncoder = HapticEncoder()
 
     private val handler = Handler(Looper.getMainLooper())
     private val timerRunnable =
@@ -56,8 +56,6 @@ class ControlFragment : Fragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-
-        cardRepository = CardRepository(AppDataStore(requireContext()))
 
         binding.btnToggleService.setOnClickListener {
             toggleService()
@@ -110,21 +108,15 @@ class ControlFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             ServiceEventBus.lastTrigger.collectLatest { trigger ->
                 if (trigger != null) {
-                    binding.tvLastPhrase.text = "Phrase: \"${trigger.rawText}\""
-
-                    // Lookup full card identity
-                    val deck = cardRepository.currentDeck.first()
-                    val card = if (trigger.position in 1..52) deck[trigger.position - 1] else null
-
-                    if (card != null) {
-                        binding.tvLastCard.text = card
-                        val config = AppDataStore(requireContext()).hapticConfig.first()
-                        val pattern = hapticEncoder.encode(card, config)
-                        binding.tvLastPattern.text = "Pattern: ${pattern?.description ?: "--"}"
-                    } else {
-                        binding.tvLastCard.text = "??"
-                        binding.tvLastPattern.text = "Pattern: -"
-                    }
+                    val display = cardViewModel.describeTrigger(trigger)
+                    binding.tvLastPhrase.text = "Phrase: \"${display.rawText}\""
+                    binding.tvLastCard.text = display.card ?: "??"
+                    binding.tvLastPattern.text =
+                        if (display.card != null) {
+                            "Pattern: ${display.patternDescription}"
+                        } else {
+                            "Pattern: -"
+                        }
                 }
             }
         }

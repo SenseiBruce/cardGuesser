@@ -1,0 +1,12 @@
+{
+  "primary_class": "mobile",
+  "secondary_classes": ["android", "kotlin"],
+  "not_classes": ["infra", "terraform", "kubernetes"],
+  "language": "Kotlin",
+  "platform": "Android",
+  "package_id": "com.magic.haptic",
+  "build_system": "gradle",
+  "test_command": "./scripts/test.sh",
+  "build_command": "./scripts/build.sh",
+  "notes": "Single-module Android app (Magic Haptic Assistant). No Terraform, Kubernetes, Helm, Pulumi, or Ansible. Score against mobile/Android rubrics, not IaC."
+}

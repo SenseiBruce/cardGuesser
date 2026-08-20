@@ -15,8 +15,13 @@
 ## Verify before opening a PR
 
 ```bash
-./gradlew :app:testDebugUnitTest :app:jacocoTestReport ktlintCheck :app:lintDebug --no-daemon
+make check
+# or
+./scripts/test.sh
+./gradlew :app:jacocoTestCoverageVerification ktlintCheck :app:lintDebug --no-daemon
 ```
+
+Branch protection on `main` should require the CI `test` job (and preferably `build` / `lint` / `dependency-audit`) to pass before merge.
 
 Or in isolation:
 

@@ -88,4 +88,24 @@ class TriggerParserTest {
         assertThat(parser.parse("the number thirty five")?.position).isEqualTo(35)
         assertThat(parser.parse("the number forty five")?.position).isEqualTo(45)
     }
+
+    @Test
+    fun testRejectsBlankAndOversizedInput() {
+        parser.setDebounce(0)
+        assertThat(parser.parse("")).isNull()
+        assertThat(parser.parse("   ")).isNull()
+        assertThat(parser.parse("x".repeat(TriggerParser.MAX_INPUT_LENGTH + 1))).isNull()
+    }
+
+    @Test
+    fun testIsValidInputHelper() {
+        assertThat(TriggerParser.isValidInput("card at position 5")).isTrue()
+        assertThat(TriggerParser.isValidInput("")).isFalse()
+        assertThat(TriggerParser.isValidInput("y".repeat(300))).isFalse()
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun testSetDebounceRejectsNegative() {
+        parser.setDebounce(-1)
+    }
 }
