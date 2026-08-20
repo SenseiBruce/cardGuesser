@@ -1,0 +1,38 @@
+# Build and unit-test Magic Haptic Assistant in an isolated environment.
+# Usage:
+#   docker compose run --rm unit-tests
+#   docker compose run --rm assemble
+
+services:
+  unit-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace
+      - gradle-cache:/home/android/.gradle
+    working_dir: /workspace
+    command: ["./gradlew", ":app:testDebugUnitTest", ":app:jacocoTestReport", "--no-daemon"]
+
+  assemble:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace
+      - gradle-cache:/home/android/.gradle
+    working_dir: /workspace
+    command: ["./gradlew", ":app:assembleDebug", "--no-daemon"]
+
+  lint:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace
+      - gradle-cache:/home/android/.gradle
+    working_dir: /workspace
+    command: ["./gradlew", ":app:lintDebug", "ktlintCheck", "--no-daemon"]
+
+volumes:
+  gradle-cache:

@@ -34,3 +34,10 @@ local.properties
 # Local logs
 app_log.txt
 
+# Coverage / reports (generated)
+*.exec
+coverage/
+
+# Lockfile write temp
+*.lockfile.written
+
