@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.magic.haptic.card.CardRepository
-import com.magic.haptic.data.*
+import com.magic.haptic.data.AppDataStore
+import com.magic.haptic.data.HapticConfig
+import com.magic.haptic.data.ServiceEventBus
 import com.magic.haptic.databinding.FragmentTestBinding
 import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
@@ -18,7 +20,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class TestFragment : Fragment() {
-
     private var _binding: FragmentTestBinding? = null
     private val binding get() = _binding!!
 
@@ -28,12 +29,19 @@ class TestFragment : Fragment() {
     private lateinit var player: HapticPlayer
     private lateinit var appDataStore: AppDataStore
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         _binding = FragmentTestBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         appDataStore = AppDataStore(requireContext())
@@ -78,20 +86,29 @@ class TestFragment : Fragment() {
     }
 
     private fun setupQuickTest() {
-        val quickTestCards = listOf(
-            "AS", "KC", "6S", "QH", "10D", "JC", "4H", "9S"
-        )
-        
+        val quickTestCards =
+            listOf(
+                "AS",
+                "KC",
+                "6S",
+                "QH",
+                "10D",
+                "JC",
+                "4H",
+                "9S",
+            )
+
         binding.cardGrid.removeAllViews()
         quickTestCards.forEach { cardCode ->
-            val button = Button(requireContext()).apply {
-                text = cardCode
-                setOnClickListener { 
-                    val config = HapticConfig(100, 300, 150, 500)
-                    val pattern = this@TestFragment.encoder.encode(cardCode, config)
-                    if (pattern != null) this@TestFragment.player.vibrate(pattern)
+            val button =
+                Button(requireContext()).apply {
+                    text = cardCode
+                    setOnClickListener {
+                        val config = HapticConfig(100, 300, 150, 500)
+                        val pattern = this@TestFragment.encoder.encode(cardCode, config)
+                        if (pattern != null) this@TestFragment.player.vibrate(pattern)
+                    }
                 }
-            }
             binding.cardGrid.addView(button)
         }
     }

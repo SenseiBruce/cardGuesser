@@ -4,11 +4,11 @@ import com.magic.haptic.data.Rank
 import com.magic.haptic.data.Suit
 
 object DeckValidator {
-
     fun validate(deckString: String): ValidationResult {
-        val cards = deckString.split(",")
-            .map { it.trim().uppercase() }
-            .filter { it.isNotEmpty() }
+        val cards =
+            deckString.split(",")
+                .map { it.trim().uppercase() }
+                .filter { it.isNotEmpty() }
 
         if (cards.size != 52) {
             return ValidationResult(false, "Invalid count: ${cards.size} cards (must be 52)")

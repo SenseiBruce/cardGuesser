@@ -6,8 +6,10 @@ import androidx.core.app.NotificationCompat
 import com.magic.haptic.MagicApp
 
 class NotificationHelper(private val context: Context) {
-
-    fun buildNotification(title: String = "System Optimizer", body: String = "Running..."): Notification {
+    fun buildNotification(
+        title: String = "System Optimizer",
+        body: String = "Running...",
+    ): Notification {
         return NotificationCompat.Builder(context, MagicApp.CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(body)

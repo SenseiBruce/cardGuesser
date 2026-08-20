@@ -2,12 +2,26 @@ package com.magic.haptic.data
 
 /** Card Rank and Suit Enums */
 enum class Rank(val symbol: String) {
-    A("A"), TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), SIX("6"), SEVEN("7"),
-    EIGHT("8"), NINE("9"), TEN("10"), J("J"), Q("Q"), K("K")
+    A("A"),
+    TWO("2"),
+    THREE("3"),
+    FOUR("4"),
+    FIVE("5"),
+    SIX("6"),
+    SEVEN("7"),
+    EIGHT("8"),
+    NINE("9"),
+    TEN("10"),
+    J("J"),
+    Q("Q"),
+    K("K"),
 }
 
 enum class Suit(val symbol: String) {
-    SPADES("S"), HEARTS("H"), DIAMONDS("D"), CLUBS("C")
+    SPADES("S"),
+    HEARTS("H"),
+    DIAMONDS("D"),
+    CLUBS("C"),
 }
 
 /** Represents a decoded card identifier */
@@ -19,7 +33,7 @@ data class Card(val rank: Rank, val suit: Suit) {
 data class TriggerResult(
     val position: Int,
     val rawText: String,
-    val timestamp: Long = System.currentTimeMillis()
+    val timestamp: Long = System.currentTimeMillis(),
 )
 
 /** Configuration for haptic timing */
@@ -27,7 +41,7 @@ data class HapticConfig(
     val shortDuration: Long,
     val longDuration: Long,
     val gapDuration: Long,
-    val separatorDuration: Long
+    val separatorDuration: Long,
 )
 
 /** The final pattern sent to the Android Vibrator */
@@ -35,7 +49,7 @@ data class HapticPattern(
     val timings: LongArray,
     val amplitudes: IntArray,
     val durationMs: Long,
-    val description: String = ""
+    val description: String = "",
 )
 
 /** Service Status States */
@@ -45,5 +59,5 @@ enum class ServiceStatus { STOPPED, INITIALIZING, LISTENING, ERROR }
 data class SpeechLogEntry(
     val text: String,
     val timestamp: Long = System.currentTimeMillis(),
-    val isMatch: Boolean = false
+    val isMatch: Boolean = false,
 )

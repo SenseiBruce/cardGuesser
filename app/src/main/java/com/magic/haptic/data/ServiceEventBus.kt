@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 object ServiceEventBus {
-
     private val _status = MutableStateFlow(ServiceStatus.STOPPED)
     val status = _status.asStateFlow()
 
