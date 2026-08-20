@@ -78,6 +78,16 @@ tasks.register<JacocoReport>("jacocoTestReport") {
             "**/Manifest*.*",
             "**/*Test*.*",
             "android/**/*.*",
+            "**/databinding/**",
+            // Android framework surfaces covered by instrumented tests later
+            "**/ui/*Fragment*.*",
+            "**/ui/*Activity*.*",
+            "**/ui/*Dialog*.*",
+            "**/ui/*Adapter*.*",
+            "**/service/**",
+            "**/speech/VoskRecognizerManager*.*",
+            "**/haptic/HapticPlayer*.*",
+            "**/MagicApp*.*",
         )
 
     val debugTree =
@@ -88,6 +98,50 @@ tasks.register<JacocoReport>("jacocoTestReport") {
 
     sourceDirectories.setFrom(files(mainSrc))
     classDirectories.setFrom(files(debugTree))
+    executionData.setFrom(
+        files(
+            "${project.layout.buildDirectory.get()}/jacoco/testDebugUnitTest.exec",
+            "${project.layout.buildDirectory.get()}/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+        ),
+    )
+}
+
+tasks.register<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
+    dependsOn("jacocoTestReport")
+    violationRules {
+        rule {
+            limit {
+                counter = "LINE"
+                value = "COVEREDRATIO"
+                minimum = "0.50".toBigDecimal()
+            }
+        }
+    }
+
+    val fileFilter =
+        listOf(
+            "**/R.class",
+            "**/R$*.class",
+            "**/BuildConfig.*",
+            "**/Manifest*.*",
+            "**/*Test*.*",
+            "android/**/*.*",
+            "**/databinding/**",
+            "**/ui/*Fragment*.*",
+            "**/ui/*Activity*.*",
+            "**/ui/*Dialog*.*",
+            "**/ui/*Adapter*.*",
+            "**/service/**",
+            "**/speech/VoskRecognizerManager*.*",
+            "**/haptic/HapticPlayer*.*",
+            "**/MagicApp*.*",
+        )
+    val debugTree =
+        fileTree("${project.layout.buildDirectory.get()}/tmp/kotlin-classes/debug") {
+            exclude(fileFilter)
+        }
+    classDirectories.setFrom(files(debugTree))
+    sourceDirectories.setFrom(files("${project.projectDir}/src/main/java"))
     executionData.setFrom(
         files(
             "${project.layout.buildDirectory.get()}/jacoco/testDebugUnitTest.exec",
@@ -111,6 +165,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.2")
     implementation("androidx.lifecycle:lifecycle-service:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // UI
@@ -129,5 +184,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.5")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 }
