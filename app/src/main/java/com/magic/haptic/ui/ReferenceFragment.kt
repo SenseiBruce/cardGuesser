@@ -6,22 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.magic.haptic.R
-import com.magic.haptic.card.CardRepository
 import com.magic.haptic.data.AppDataStore
 import com.magic.haptic.data.HapticPattern
-import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class ReferenceFragment : Fragment() {
     private var rvReference: RecyclerView? = null
-    private lateinit var cardRepository: CardRepository
-    private val hapticEncoder = HapticEncoder()
     private lateinit var hapticPlayer: HapticPlayer
+
+    private val cardViewModel: CardViewModel by viewModels {
+        CardViewModel.Factory(AppDataStore(requireContext()))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,21 +40,18 @@ class ReferenceFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        val context = requireContext()
-        cardRepository = CardRepository(AppDataStore(context))
-        hapticPlayer = HapticPlayer(context)
+        hapticPlayer = HapticPlayer(requireContext())
 
         viewLifecycleOwner.lifecycleScope.launch {
-            val deck = cardRepository.currentDeck.first()
-            val config = AppDataStore(context).hapticConfig.first()
-
-            val mappedItems =
-                deck.mapIndexed { index, cardName ->
-                    val pattern = hapticEncoder.encode(cardName, config)
-                    ReferenceItem(index + 1, cardName, pattern?.description ?: "--", pattern)
-                }
-
-            rvReference?.adapter = ReferenceAdapter(mappedItems)
+            cardViewModel.currentDeck.collectLatest { deck ->
+                val config = cardViewModel.hapticConfig.value
+                val mappedItems =
+                    deck.mapIndexed { index, cardName ->
+                        val pattern = cardViewModel.patternFor(cardName, config)
+                        ReferenceItem(index + 1, cardName, pattern?.description ?: "--", pattern)
+                    }
+                rvReference?.adapter = ReferenceAdapter(mappedItems)
+            }
         }
     }
 
