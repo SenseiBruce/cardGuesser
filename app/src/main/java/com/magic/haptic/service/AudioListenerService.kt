@@ -4,18 +4,28 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import com.magic.haptic.card.CardRepository
-import com.magic.haptic.data.*
+import com.magic.haptic.data.AppDataStore
+import com.magic.haptic.data.HapticConfig
+import com.magic.haptic.data.ServiceEventBus
+import com.magic.haptic.data.ServiceStatus
+import com.magic.haptic.data.SpeechLogEntry
 import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
 import com.magic.haptic.parser.NumberWordConverter
 import com.magic.haptic.parser.TriggerParser
 import com.magic.haptic.speech.VoskRecognizerManager
-import kotlinx.coroutines.*
+import com.magic.haptic.util.AppLogger
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import org.json.JSONException
 import org.json.JSONObject
 
 class AudioListenerService : Service() {
-
     private lateinit var voskManager: VoskRecognizerManager
     private lateinit var triggerParser: TriggerParser
     private lateinit var cardRepository: CardRepository
@@ -29,7 +39,7 @@ class AudioListenerService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        
+
         dataStore = AppDataStore(this)
         notificationHelper = NotificationHelper(this)
         voskManager = VoskRecognizerManager(this)
@@ -46,7 +56,11 @@ class AudioListenerService : Service() {
         observeSettings()
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onStartCommand(
+        intent: Intent?,
+        flags: Int,
+        startId: Int,
+    ): Int {
         ServiceEventBus.startSession()
         ServiceEventBus.updateStatus(ServiceStatus.INITIALIZING)
 
@@ -63,46 +77,48 @@ class AudioListenerService : Service() {
     }
 
     private fun startListening() {
-        voskManager.startListening(object : VoskRecognizerManager.RecognitionCallback {
-            override fun onPartialResult(text: String) {
-                // Ignore empty partials
-                if (text.isEmpty() || text == "{\"partial\" : \"\"}") return
-                
-                serviceScope.launch {
-                    val partialText = extractJsonText(text, "partial")
-                    ServiceEventBus.emitSpeechLog(SpeechLogEntry(partialText))
-                    processSpeech(partialText)
-                }
-            }
+        voskManager.startListening(
+            object : VoskRecognizerManager.RecognitionCallback {
+                override fun onPartialResult(text: String) {
+                    // Ignore empty partials
+                    if (text.isEmpty() || text == "{\"partial\" : \"\"}") return
 
-            override fun onResult(text: String) {
-                // Ignore empty results
-                if (text.isEmpty() || text == "{\"text\" : \"\"}") return
-
-                serviceScope.launch {
-                    val resultText = extractJsonText(text, "text")
-                    ServiceEventBus.emitSpeechLog(SpeechLogEntry(resultText))
-                    processSpeech(resultText)
+                    serviceScope.launch {
+                        val partialText = extractJsonText(text, "partial")
+                        ServiceEventBus.emitSpeechLog(SpeechLogEntry(partialText))
+                        processSpeech(partialText)
+                    }
                 }
-            }
 
-            override fun onError(e: Exception) {
-                ServiceEventBus.updateStatus(ServiceStatus.ERROR)
-                // Retry logic after 1s
-                serviceScope.launch {
-                    delay(1000)
-                    startListening()
+                override fun onResult(text: String) {
+                    // Ignore empty results
+                    if (text.isEmpty() || text == "{\"text\" : \"\"}") return
+
+                    serviceScope.launch {
+                        val resultText = extractJsonText(text, "text")
+                        ServiceEventBus.emitSpeechLog(SpeechLogEntry(resultText))
+                        processSpeech(resultText)
+                    }
                 }
-            }
-        })
+
+                override fun onError(e: Exception) {
+                    ServiceEventBus.updateStatus(ServiceStatus.ERROR)
+                    // Retry logic after 1s
+                    serviceScope.launch {
+                        delay(1000)
+                        startListening()
+                    }
+                }
+            },
+        )
     }
 
     private suspend fun processSpeech(text: String) {
         val trigger = triggerParser.parse(text) ?: return
-        
+
         ServiceEventBus.emitTrigger(trigger)
         val card = cardRepository.getCard(trigger.position) ?: return
-        
+
         val pattern = hapticEncoder.encode(card, currentHapticConfig) ?: return
         hapticPlayer.vibrate(pattern)
     }
@@ -113,14 +129,14 @@ class AudioListenerService : Service() {
                 triggerParser.setDebounce(sec)
             }
         }
-        
+
         serviceScope.launch {
             combine(
                 dataStore.speedPreset,
                 dataStore.customShort,
                 dataStore.customLong,
                 dataStore.customGap,
-                dataStore.customSep
+                dataStore.customSep,
             ) { preset, s, l, g, sep ->
                 when (preset) {
                     "FAST" -> HapticConfig(80, 200, 100, 350)
@@ -144,10 +160,17 @@ class AudioListenerService : Service() {
         }
     }
 
-    private fun extractJsonText(json: String, key: String): String {
+    private fun extractJsonText(
+        json: String,
+        key: String,
+    ): String {
         return try {
             JSONObject(json).getString(key)
+        } catch (e: JSONException) {
+            AppLogger.e("Failed to extract JSON key '$key' from speech result", e)
+            ""
         } catch (e: Exception) {
+            AppLogger.e("Unexpected error extracting JSON key '$key'", e)
             ""
         }
     }
@@ -168,12 +191,16 @@ class AudioListenerService : Service() {
         flow3: kotlinx.coroutines.flow.Flow<T3>,
         flow4: kotlinx.coroutines.flow.Flow<T4>,
         flow5: kotlinx.coroutines.flow.Flow<T5>,
-        transform: suspend (T1, T2, T3, T4, T5) -> R
+        transform: suspend (T1, T2, T3, T4, T5) -> R,
     ): kotlinx.coroutines.flow.Flow<R> {
         return kotlinx.coroutines.flow.combine(flow1, flow2, flow3, flow4, flow5, transform)
     }
 
-    private fun <T1, T2, R> combine(flow1: kotlinx.coroutines.flow.Flow<T1>, flow2: kotlinx.coroutines.flow.Flow<T2>, transform: suspend (T1, T2) -> R): kotlinx.coroutines.flow.Flow<R> {
+    private fun <T1, T2, R> combine(
+        flow1: kotlinx.coroutines.flow.Flow<T1>,
+        flow2: kotlinx.coroutines.flow.Flow<T2>,
+        transform: suspend (T1, T2) -> R,
+    ): kotlinx.coroutines.flow.Flow<R> {
         return kotlinx.coroutines.flow.combine(flow1, flow2, transform)
     }
 }
