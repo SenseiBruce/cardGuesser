@@ -159,7 +159,7 @@ dependencyLocking {
 dependencies {
     // Vosk offline speech recognition
     implementation("com.alphacephei:vosk-android:0.3.47")
-    implementation("net.java.dev.jna:jna:5.13.0@aar")
+    implementation("net.java.dev.jna:jna:5.19.1@aar")
 
     // Jetpack core
     implementation("androidx.core:core-ktx:1.12.0")
