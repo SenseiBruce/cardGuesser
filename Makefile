@@ -10,7 +10,7 @@ test:
 	./gradlew test --no-daemon
 
 build:
-	./gradlew build --no-daemon
+	./gradlew :app:assembleDebug --no-daemon
 
 assemble: build
 

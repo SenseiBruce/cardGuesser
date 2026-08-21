@@ -22,8 +22,8 @@ tasks.register("test") {
     dependsOn(":app:testDebugUnitTest")
 }
 
-tasks.register("build") {
+tasks.register("buildDebug") {
     group = "build"
-    description = "Assembles the debug APK"
+    description = "Assembles the debug APK (preferred over full 'build', which also runs release)"
     dependsOn(":app:assembleDebug")
 }

@@ -38,8 +38,8 @@ git clone <repo-url> && cd cardGuesser
 ./scripts/setup.sh          # creates .env + local.properties hints
 
 # Canonical commands (also what CI runs):
-./gradlew test              # unit test suite
-./gradlew build             # assemble debug APK
+./gradlew test                 # unit test suite
+./gradlew :app:assembleDebug   # debug APK (prefer over full `build`)
 ./gradlew :app:jacocoTestReport :app:jacocoTestCoverageVerification
 ./gradlew :app:lintDebug ktlintCheck
 ```
