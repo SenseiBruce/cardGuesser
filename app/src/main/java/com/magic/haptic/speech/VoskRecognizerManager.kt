@@ -29,7 +29,10 @@ class VoskRecognizerManager(private val context: Context) {
     }
 
     fun initModel(callback: (Boolean) -> Unit) {
-        AppLogger.i("Starting model unpack from assets: model-en-us")
+        AppLogger.i(
+            "Starting model unpack from assets: model-en-us",
+            fields = mapOf("event" to "vosk_unpack_start", "asset" to "model-en-us"),
+        )
         val mainHandler = android.os.Handler(android.os.Looper.getMainLooper())
 
         StorageService.unpack(
@@ -39,10 +42,16 @@ class VoskRecognizerManager(private val context: Context) {
             { model: Model? ->
                 this.model = model
                 if (model != null) {
-                    AppLogger.i("Model unpacked successfully. Initializing recognizer...")
+                    AppLogger.i(
+                        "Model unpacked successfully. Initializing recognizer...",
+                        fields = mapOf("event" to "vosk_unpack_ok"),
+                    )
                     try {
                         recognizer = Recognizer(model, 16000.0f)
-                        AppLogger.i("Recognizer initialized. Ready to listen.")
+                        AppLogger.i(
+                            "Recognizer initialized. Ready to listen.",
+                            fields = mapOf("event" to "vosk_ready"),
+                        )
                         callback(true)
                     } catch (e: Exception) {
                         mainHandler.post {
@@ -52,7 +61,19 @@ class VoskRecognizerManager(private val context: Context) {
                                 android.widget.Toast.LENGTH_LONG,
                             ).show()
                         }
-                        AppLogger.e("Recognizer init FAILED: ${e.message}", e)
+                        AppLogger.e(
+                            "Recognizer init FAILED",
+                            e,
+                            fields =
+                                mapOf(
+                                    "event" to "vosk_init_failed",
+                                    "errorType" to (e::class.simpleName ?: "Exception"),
+                                ),
+                        )
+                        com.magic.haptic.util.CrashReporter.record(
+                            e,
+                            mapOf("component" to "VoskRecognizerManager", "phase" to "init"),
+                        )
                         callback(false)
                     }
                 } else {
@@ -63,7 +84,10 @@ class VoskRecognizerManager(private val context: Context) {
                             android.widget.Toast.LENGTH_LONG,
                         ).show()
                     }
-                    AppLogger.e("Model unpack returned null — model files may be missing from assets.")
+                    AppLogger.e(
+                        "Model unpack returned null — model files may be missing from assets.",
+                        fields = mapOf("event" to "vosk_model_missing"),
+                    )
                     callback(false)
                 }
             },
@@ -75,7 +99,21 @@ class VoskRecognizerManager(private val context: Context) {
                         android.widget.Toast.LENGTH_LONG,
                     ).show()
                 }
-                AppLogger.e("StorageService.unpack FAILED: ${e?.message}", e)
+                AppLogger.e(
+                    "StorageService.unpack FAILED",
+                    e,
+                    fields =
+                        mapOf(
+                            "event" to "vosk_unpack_failed",
+                            "errorType" to (e?.let { it::class.simpleName } ?: "null"),
+                        ),
+                )
+                if (e != null) {
+                    com.magic.haptic.util.CrashReporter.record(
+                        e,
+                        mapOf("component" to "VoskRecognizerManager", "phase" to "unpack"),
+                    )
+                }
                 callback(false)
             },
         )
