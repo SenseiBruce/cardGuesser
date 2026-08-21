@@ -18,16 +18,16 @@ class TriggerParser(private val wordConverter: NumberWordConverter) {
         )
 
     fun setDebounce(seconds: Int) {
-        require(seconds >= 0) { "debounce seconds must be >= 0" }
+        val validation = SpeechInputSchema.validateDebounceSeconds(seconds)
+        require(validation.isValid) { validation.reason ?: "invalid debounce" }
         this.debounceMs = seconds.toLong() * 1000
     }
 
     /**
-     * Parses speech text for a deck position trigger.
-     * Rejects blank/oversized input and positions outside 1..52.
+     * Parses speech text for a deck position trigger using [SpeechInputSchema].
      */
     fun parse(text: String): TriggerResult? {
-        if (!isValidInput(text)) return null
+        if (!SpeechInputSchema.validateSpeechText(text).isValid) return null
 
         val trimmedText = text.trim()
         val currentTime = System.currentTimeMillis()
@@ -36,26 +36,23 @@ class TriggerParser(private val wordConverter: NumberWordConverter) {
         for (pattern in patterns) {
             val match = pattern.find(trimmedText) ?: continue
             val groupValue = match.groupValues[1].trim()
-            if (groupValue.isEmpty() || groupValue.length > MAX_CAPTURE_LENGTH) continue
+            if (groupValue.isEmpty() || groupValue.length > SpeechInputSchema.MAX_CAPTURE_LENGTH) continue
 
-            val position = wordConverter.convert(groupValue)
-            if (position != null && position in MIN_POSITION..MAX_POSITION) {
-                lastTriggerTime = currentTime
-                return TriggerResult(position, text)
-            }
+            val position = wordConverter.convert(groupValue) ?: continue
+            if (!SpeechInputSchema.validatePosition(position).isValid) continue
+
+            lastTriggerTime = currentTime
+            return TriggerResult(position, text)
         }
         return null
     }
 
     companion object {
-        const val MIN_POSITION = 1
-        const val MAX_POSITION = 52
-        const val MAX_INPUT_LENGTH = 256
-        const val MAX_CAPTURE_LENGTH = 64
+        const val MIN_POSITION = SpeechInputSchema.MIN_POSITION
+        const val MAX_POSITION = SpeechInputSchema.MAX_POSITION
+        const val MAX_INPUT_LENGTH = SpeechInputSchema.MAX_LENGTH
+        const val MAX_CAPTURE_LENGTH = SpeechInputSchema.MAX_CAPTURE_LENGTH
 
-        fun isValidInput(text: String): Boolean {
-            val trimmed = text.trim()
-            return trimmed.isNotEmpty() && trimmed.length <= MAX_INPUT_LENGTH
-        }
+        fun isValidInput(text: String): Boolean = SpeechInputSchema.validateSpeechText(text).isValid
     }
 }
