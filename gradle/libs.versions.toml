@@ -8,7 +8,7 @@ coroutines = "1.7.3"
 datastore = "1.0.0"
 timber = "5.0.1"
 junit = "4.13.2"
-truth = "1.1.5"
+truth = "1.4.5"
 vosk = "0.3.47"
 ktlintPlugin = "12.1.0"
 
