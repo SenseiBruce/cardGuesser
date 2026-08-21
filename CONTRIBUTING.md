@@ -5,6 +5,12 @@
 - JDK 17+
 - Android SDK 34 (or use Docker Compose — see README)
 
+## Setup
+
+```bash
+./scripts/setup.sh
+```
+
 ## Workflow
 
 1. Create a focused branch for one feature or fix.
@@ -15,13 +21,22 @@
 ## Verify before opening a PR
 
 ```bash
-make check
-# or
-./scripts/test.sh
+./gradlew test
 ./gradlew :app:jacocoTestCoverageVerification ktlintCheck :app:lintDebug --no-daemon
+# or
+make check
 ```
 
-Branch protection on `main` should require the CI `test` job (and preferably `build` / `lint` / `dependency-audit`) to pass before merge.
+## Branch protection (maintainers)
+
+On GitHub → Settings → Branches → `main` protection rules, require status checks:
+
+- `test`
+- `build`
+- `lint`
+- `dependency-audit`
+
+Do not allow bypassing these checks for administrators in production workflows.
 
 Or in isolation:
 

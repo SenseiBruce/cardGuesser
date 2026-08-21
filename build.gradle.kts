@@ -14,3 +14,16 @@ buildscript {
 dependencyLocking {
     lockAllConfigurations()
 }
+
+// Canonical suite entrypoint: `./gradlew test` (used by CI, Makefile, and scanners).
+tasks.register("test") {
+    group = "verification"
+    description = "Runs the Android unit test suite (:app:testDebugUnitTest)"
+    dependsOn(":app:testDebugUnitTest")
+}
+
+tasks.register("build") {
+    group = "build"
+    description = "Assembles the debug APK"
+    dependsOn(":app:assembleDebug")
+}
