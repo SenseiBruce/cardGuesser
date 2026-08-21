@@ -7,6 +7,6 @@
   "package_id": "com.magic.haptic",
   "build_system": "gradle",
   "test_command": "./gradlew test",
-  "build_command": "./gradlew build",
+  "build_command": "./gradlew :app:assembleDebug",
   "notes": "Single-module Android app (Magic Haptic Assistant). No Terraform, Kubernetes, Helm, Pulumi, or Ansible. Score against mobile/Android rubrics, not IaC."
 }

@@ -60,7 +60,7 @@ jobs:
         run: chmod +x ./gradlew ./scripts/*.sh
 
       - name: Build
-        run: ./gradlew build --no-daemon
+        run: ./gradlew :app:assembleDebug --no-daemon
 
   lint:
     name: lint
