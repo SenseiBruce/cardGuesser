@@ -5,23 +5,17 @@ All notable changes to Magic Haptic Assistant are documented here.
 ## [Unreleased]
 
 ### Added
-- Discoverable test entrypoints: `Makefile`, `scripts/test.sh`, `scripts/build.sh`, and a CI job named `test`.
-- `.repo-meta.json` declaring primary class `mobile`/`android` (not infra/IaC).
-- `.env.example` and expanded README quick-start via `make test` / `make build`.
-- `SpeechJsonExtractor` with unit tests; `AudioListenerService` delegates JSON extraction to it.
-- `DeckValidatorTest`, `ServiceEventBusTest`, `NumberWordConverterTest`, and TriggerParser input-validation tests.
-- `CardViewModel` shared by `ControlFragment` / `ReferenceFragment`, with `CardViewModelTest`.
-- JaCoCo `jacocoTestCoverageVerification` (50% line coverage on core packages) enforced in CI.
-- Trivy filesystem dependency audit job in CI (`dependency-audit`).
+- Canonical `./gradlew test` / `./gradlew build` root tasks; CI runs `./gradlew test` explicitly.
+- `SpeechProcessor` pure pipeline extracted from `AudioListenerService`, with unit tests.
+- `SpeechInputSchema` for speech/position/debounce validation at the parser boundary.
+- Structured `AppLogger.formatMessage` fields + `CrashReporter` with init/record tests.
+- `scripts/setup.sh` for `.env` / `local.properties` bootstrap; expanded `.env.example`.
+- README **Project type** banner clarifying this is an Android/Kotlin app, not IaC.
 
 ### Changed
-- `NumberWordConverter` ignores optional `and` between tens/units (e.g. "thirty and five").
-- `TriggerParser` rejects blank/oversized input and negative debounce values.
-- CI split into separate `test`, `build`, `lint`, and `dependency-audit` jobs.
+- JaCoCo gate raised to 60% line coverage on core packages (includes `SpeechProcessor`).
+- Vosk/service error paths emit structured log fields and report via `CrashReporter`.
 
 ## [Previous]
 
-### Added
-- Unit tests for `AppDataStore` / `CardRepository`; JaCoCo; ktlint; Timber `AppLogger`.
-- Gradle lockfiles, Dependabot, Docker Compose / Dockerfile / devcontainer.
-- `CONTRIBUTING.md`, `CHANGELOG.md`, `local.properties.example`.
+See git history for prior buyer-fit rounds (lockfiles, Docker, ktlint, Trivy, ViewModel, etc.).

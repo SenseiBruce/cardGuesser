@@ -22,10 +22,10 @@ jobs:
           cache: gradle
 
       - name: Grant execute permission for scripts
-        run: chmod +x ./gradlew ./scripts/test.sh ./scripts/build.sh
+        run: chmod +x ./gradlew ./scripts/*.sh
 
-      - name: test
-        run: ./scripts/test.sh
+      - name: Run tests
+        run: ./gradlew test --no-daemon
 
       - name: Generate JaCoCo coverage report
         run: ./gradlew :app:jacocoTestReport --no-daemon
@@ -57,10 +57,10 @@ jobs:
           cache: gradle
 
       - name: Grant execute permission for scripts
-        run: chmod +x ./gradlew ./scripts/build.sh
+        run: chmod +x ./gradlew ./scripts/*.sh
 
-      - name: build
-        run: ./scripts/build.sh
+      - name: Build
+        run: ./gradlew build --no-daemon
 
   lint:
     name: lint

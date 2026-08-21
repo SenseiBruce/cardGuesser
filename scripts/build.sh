@@ -3,4 +3,4 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 chmod +x ./gradlew
-exec ./gradlew :app:assembleDebug --no-daemon "$@"
+exec ./gradlew build --no-daemon "$@"

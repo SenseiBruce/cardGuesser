@@ -4,6 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import com.magic.haptic.util.CrashReporter
 import timber.log.Timber
 
 class MagicApp : Application() {
@@ -12,6 +13,8 @@ class MagicApp : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        // No-op backend by default; swap for Sentry/Crashlytics when a DSN/API key is configured.
+        CrashReporter.init(CrashReporter.NoOpBackend())
         createNotificationChannel()
     }
 

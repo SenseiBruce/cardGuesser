@@ -1,11 +1,16 @@
-.PHONY: test build lint coverage assemble check
+.PHONY: test build lint coverage assemble check setup
 
 # Standard entry points so static scanners and fresh clones find a runnable suite.
+# Primary: ./gradlew test  (also invoked by scripts/test.sh and CI)
+
+setup:
+	./scripts/setup.sh
+
 test:
-	./scripts/test.sh
+	./gradlew test --no-daemon
 
 build:
-	./scripts/build.sh
+	./gradlew build --no-daemon
 
 assemble: build
 
@@ -13,6 +18,6 @@ lint:
 	./gradlew :app:lintDebug ktlintCheck --no-daemon
 
 coverage:
-	./gradlew :app:testDebugUnitTest :app:jacocoTestReport :app:jacocoTestCoverageVerification --no-daemon
+	./gradlew test :app:jacocoTestReport :app:jacocoTestCoverageVerification --no-daemon
 
 check: test lint coverage

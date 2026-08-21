@@ -84,7 +84,8 @@ tasks.register<JacocoReport>("jacocoTestReport") {
             "**/ui/*Activity*.*",
             "**/ui/*Dialog*.*",
             "**/ui/*Adapter*.*",
-            "**/service/**",
+            "**/service/AudioListenerService*.*",
+            "**/service/NotificationHelper*.*",
             "**/speech/VoskRecognizerManager*.*",
             "**/haptic/HapticPlayer*.*",
             "**/MagicApp*.*",
@@ -113,7 +114,7 @@ tasks.register<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
             limit {
                 counter = "LINE"
                 value = "COVEREDRATIO"
-                minimum = "0.50".toBigDecimal()
+                minimum = "0.60".toBigDecimal()
             }
         }
     }
@@ -131,7 +132,8 @@ tasks.register<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
             "**/ui/*Activity*.*",
             "**/ui/*Dialog*.*",
             "**/ui/*Adapter*.*",
-            "**/service/**",
+            "**/service/AudioListenerService*.*",
+            "**/service/NotificationHelper*.*",
             "**/speech/VoskRecognizerManager*.*",
             "**/haptic/HapticPlayer*.*",
             "**/MagicApp*.*",

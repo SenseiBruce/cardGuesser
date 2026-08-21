@@ -1,5 +1,8 @@
 # Magic Haptic Assistant
 
+**Project type:** Android mobile application (Kotlin) — **not** infrastructure / IaC.  
+There is no Terraform, Kubernetes, Helm, Pulumi, or Ansible in this repository.
+
 A premium, stealthy tool designed for magicians to discreetly receive information about a spectator's chosen card via haptic feedback.
 
 ## Features
@@ -19,7 +22,7 @@ A premium, stealthy tool designed for magicians to discreetly receive informatio
 | `card` | Deck presets and position → card lookup |
 | `data` | Preferences (`AppDataStore`), shared models, event bus |
 | `speech` | Vosk model unpack + continuous recognition |
-| `service` | Foreground audio listener orchestration |
+| `service` | Foreground audio listener orchestration (`SpeechProcessor` pipeline) |
 | `ui` | Activities/fragments for control, settings, and toolkit |
 
 ## Requirements
@@ -32,29 +35,26 @@ A premium, stealthy tool designed for magicians to discreetly receive informatio
 
 ```bash
 git clone <repo-url> && cd cardGuesser
-chmod +x ./gradlew ./scripts/test.sh ./scripts/build.sh
+./scripts/setup.sh          # creates .env + local.properties hints
 
-# Optional: copy local SDK path
-# cp local.properties.example local.properties
-
-make test      # or: ./scripts/test.sh
-make build     # or: ./scripts/build.sh
-make coverage  # unit tests + JaCoCo report + 50% line gate
-make lint      # Android lint + ktlint
-```
-
-Equivalent Gradle commands:
-
-```bash
-./gradlew :app:assembleDebug
-./gradlew :app:testDebugUnitTest
+# Canonical commands (also what CI runs):
+./gradlew test              # unit test suite
+./gradlew build             # assemble debug APK
 ./gradlew :app:jacocoTestReport :app:jacocoTestCoverageVerification
 ./gradlew :app:lintDebug ktlintCheck
 ```
 
-### One-command containerized tests
+Make aliases:
 
-Buyers and contributors can exercise the suite without a local Android SDK:
+```bash
+make setup
+make test
+make build
+make coverage   # tests + JaCoCo + 60% line gate on core packages
+make lint
+```
+
+### One-command containerized tests
 
 ```bash
 docker compose run --rm unit-tests
@@ -98,13 +98,22 @@ The assistant uses two pulse types: **S** (Short) and **L** (Long).
 
 ## Dependency locking
 
-Gradle lockfiles are committed (`gradle.lockfile`, `app/gradle.lockfile`). After changing dependencies:
+Gradle lockfiles are committed (`app/gradle.lockfile`, `settings-gradle.lockfile`). After changing dependencies:
 
 ```bash
 ./gradlew dependencies --write-locks
 ```
 
 Dependabot opens weekly PRs for Gradle and GitHub Actions updates.
+
+## Branch protection
+
+Configure GitHub branch protection on `main` so these required status checks must pass before merge:
+
+- `test`
+- `build`
+- `lint`
+- `dependency-audit`
 
 ## Stealth tips
 

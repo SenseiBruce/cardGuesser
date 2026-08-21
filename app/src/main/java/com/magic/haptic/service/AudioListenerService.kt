@@ -15,6 +15,8 @@ import com.magic.haptic.parser.NumberWordConverter
 import com.magic.haptic.parser.TriggerParser
 import com.magic.haptic.speech.SpeechJsonExtractor
 import com.magic.haptic.speech.VoskRecognizerManager
+import com.magic.haptic.util.AppLogger
+import com.magic.haptic.util.CrashReporter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -31,6 +33,7 @@ class AudioListenerService : Service() {
     private lateinit var hapticPlayer: HapticPlayer
     private lateinit var dataStore: AppDataStore
     private lateinit var notificationHelper: NotificationHelper
+    private lateinit var speechProcessor: SpeechProcessor
 
     private val serviceScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private var currentHapticConfig = HapticConfig(100, 300, 150, 500) // Normal default
@@ -45,6 +48,7 @@ class AudioListenerService : Service() {
         cardRepository = CardRepository(dataStore)
         hapticEncoder = HapticEncoder()
         hapticPlayer = HapticPlayer(this)
+        speechProcessor = SpeechProcessor(triggerParser, cardRepository, hapticEncoder)
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
             startForeground(1, notificationHelper.buildNotification(), android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE)
@@ -100,6 +104,16 @@ class AudioListenerService : Service() {
                 }
 
                 override fun onError(e: Exception) {
+                    AppLogger.e(
+                        "speech_recognition_error",
+                        e,
+                        fields =
+                            mapOf(
+                                "event" to "speech_error",
+                                "errorType" to (e::class.simpleName ?: "Exception"),
+                            ),
+                    )
+                    CrashReporter.record(e, mapOf("component" to "AudioListenerService"))
                     ServiceEventBus.updateStatus(ServiceStatus.ERROR)
                     // Retry logic after 1s
                     serviceScope.launch {
@@ -112,13 +126,9 @@ class AudioListenerService : Service() {
     }
 
     private suspend fun processSpeech(text: String) {
-        val trigger = triggerParser.parse(text) ?: return
-
-        ServiceEventBus.emitTrigger(trigger)
-        val card = cardRepository.getCard(trigger.position) ?: return
-
-        val pattern = hapticEncoder.encode(card, currentHapticConfig) ?: return
-        hapticPlayer.vibrate(pattern)
+        val result = speechProcessor.process(text, currentHapticConfig) ?: return
+        ServiceEventBus.emitTrigger(result.trigger)
+        hapticPlayer.vibrate(result.pattern)
     }
 
     private fun observeSettings() {
