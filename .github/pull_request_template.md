@@ -11,9 +11,10 @@ Brief description of the change and why it is needed.
 
 ## Checklist
 
-- [ ] Tests pass locally (`./gradlew test`, `./gradlew ktlintCheck :app:lintDebug`)
+- [ ] `./gradlew test` passes locally
+- [ ] `./gradlew ktlintCheck` passes (or `ktlintFormat` applied)
 - [ ] `CHANGELOG.md` updated for user-visible changes
-- [ ] No secrets, tokens, or local.properties committed
+- [ ] No secrets, tokens, or `local.properties` committed
 
 ## Test plan
 

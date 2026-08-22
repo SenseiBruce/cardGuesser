@@ -13,12 +13,5 @@ body:
     id: device
     attributes:
       label: Device / Android version
-      description: e.g. Pixel 7 / Android 14
-    validations:
-      required: false
-  - type: input
-    id: version
-    attributes:
-      label: App version or commit
     validations:
       required: false

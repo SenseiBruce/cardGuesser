@@ -8,20 +8,14 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 4
 
-[*.{kt,kts}]
-indent_size = 4
-
-[*.{yml,yaml}]
+[*.{yml,yaml,json,md}]
 indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
 
-[*.xml]
-indent_size = 4
-
 [Makefile]
 indent_style = tab
 
-[*.gradle]
+[*.{kt,kts}]
 indent_size = 4
