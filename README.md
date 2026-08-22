@@ -121,5 +121,14 @@ Configure GitHub branch protection on `main` so these required status checks mus
 2. Test haptic sensitivity in the **Toolkit** tab before performing.
 3. Keep the device where vibration is felt clearly but not heard.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, style (ktlint), and PR expectations.
+Please open bugs and feature requests with the issue templates under `.github/ISSUE_TEMPLATE/`.
+
+## License
+
+This project is licensed under the MIT License — see [LICENSE](LICENSE).
+
 ---
 *Built for the Modern Mystery Performer.*

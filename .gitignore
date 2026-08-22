@@ -1,20 +1,32 @@
-# Java
+# Java / Kotlin
 *.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
 
 # Android
 *.apk
 *.ap_
+*.aab
 *.dex
-*.class
 bin/
 gen/
 out/
-build/
-app/build/
+.externalNativeBuild/
+.cxx/
+captures/
 
 # Gradle
 .gradle/
 build/
+app/build/
+local.properties
 
 # IDE
 .idea/
@@ -24,20 +36,33 @@ build/
 .project
 .classpath
 .settings/
+*.swp
+*~
 
 # OS
 .DS_Store
+Thumbs.db
 
-# Local properties
-local.properties
+# Secrets / env
+.env
+.env.*
+!.env.example
 
-# Local logs
+# Local logs and scratch build output
 app_log.txt
+*.log
+compile_err*.txt
+build.log
 
 # Coverage / reports (generated)
 *.exec
 coverage/
+reports/
 
 # Lockfile write temp
 *.lockfile.written
 
+# Native / NDK
+obj/
+libs/
+!app/src/**/libs/

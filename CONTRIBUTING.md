@@ -1,4 +1,7 @@
-# Contributing
+# Contributing to cardGuesser
+
+Thank you for helping improve Magic Haptic Assistant. This guide follows the same
+open-source practices used by mature projects such as [Flask](https://github.com/pallets/flask).
 
 ## Prerequisites
 
@@ -47,3 +50,9 @@ docker compose run --rm unit-tests
 ## Style
 
 ktlint is enforced in CI (`./gradlew ktlintCheck`). Run `./gradlew ktlintFormat` before committing Kotlin changes.
+Use `.editorconfig` for consistent formatting across editors.
+
+## Security
+
+Do not commit API keys, tokens, `.env`, or `local.properties`. Report security issues privately
+to the repository owner.
