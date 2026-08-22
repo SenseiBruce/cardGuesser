@@ -1,0 +1,24 @@
+name: Bug report
+description: Report a reproducible bug
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Steps to reproduce and expected vs actual behavior.
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device / Android version
+      description: e.g. Pixel 7 / Android 14
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: App version or commit
+    validations:
+      required: false
