@@ -103,12 +103,106 @@
                 app:layout_constraintTop_toBottomOf="@id/tvQuickTestHeader" />
 
             <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider2"
+                android:id="@+id/dividerDrill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 app:dividerColor="@color/deep_velvet"
                 app:layout_constraintTop_toBottomOf="@id/cardGrid" />
+
+            <TextView
+                android:id="@+id/tvDrillHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="── IDENTIFICATION DRILL ──"
+                android:textColor="@color/antique_gold"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dividerDrill" />
+
+            <TextView
+                android:id="@+id/tvDrillStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Feel the pattern, then tap the card. Pocket practice without looking."
+                android:textColor="@color/magic_white"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/tvDrillHeader" />
+
+            <Button
+                android:id="@+id/btnStartDrill"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="PLAY PATTERN"
+                android:textColor="@color/antique_gold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDrillStatus" />
+
+            <LinearLayout
+                android:id="@+id/drillOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/btnStartDrill">
+
+                <Button
+                    android:id="@+id/btnDrill1"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:text="—"
+                    android:textColor="@color/antique_gold" />
+
+                <Button
+                    android:id="@+id/btnDrill2"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:text="—"
+                    android:textColor="@color/antique_gold" />
+
+                <Button
+                    android:id="@+id/btnDrill3"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:text="—"
+                    android:textColor="@color/antique_gold" />
+
+                <Button
+                    android:id="@+id/btnDrill4"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:text="—"
+                    android:textColor="@color/antique_gold" />
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:dividerColor="@color/deep_velvet"
+                app:layout_constraintTop_toBottomOf="@id/drillOptions" />
 
             <!-- Real-time Speech Log -->
             <TextView

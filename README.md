@@ -11,6 +11,7 @@ A premium, stealthy tool designed for magicians to discreetly receive informatio
 - **Offline Intelligence**: Uses Vosk Speech Recognition for total privacy and zero latency.
 - **Precision Haptics**: Encodes all 52 cards into unique, tactile vibration patterns.
 - **Customizable Stacks**: Built-in support for popular stacks (Mnemonica, Aronson) and full custom stack editing.
+- **Identification Drill**: In Toolkit, feel a random haptic pattern and pick the card from four options.
 - **Encrypted Logs**: Review your performance and detected phrases in a secure toolkit log.
 
 ## Architecture
