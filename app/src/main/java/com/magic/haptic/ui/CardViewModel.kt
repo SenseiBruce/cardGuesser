@@ -29,6 +29,13 @@ class CardViewModel(
             cardRepository.getCurrentDeck(),
         )
 
+    val currentDeckId: StateFlow<String> =
+        dataStore.currentDeckId.stateIn(
+            viewModelScope,
+            SharingStarted.Eagerly,
+            "DEFAULT",
+        )
+
     val hapticConfig: StateFlow<HapticConfig> =
         dataStore.hapticConfig.stateIn(
             viewModelScope,
