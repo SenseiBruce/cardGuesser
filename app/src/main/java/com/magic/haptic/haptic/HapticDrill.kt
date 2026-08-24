@@ -7,12 +7,22 @@ data class DrillRound(
     val options: List<String>,
 )
 
+data class DrillStats(
+    val correct: Int = 0,
+    val attempts: Int = 0,
+    val streak: Int = 0,
+    val bestStreak: Int = 0,
+)
+
 /**
  * Identification drill: play a haptic pattern, then pick the card from a short list.
  */
 class HapticDrill(
     private val random: Random = Random.Default,
 ) {
+    var stats: DrillStats = DrillStats()
+        private set
+
     fun nextRound(
         deck: List<String>,
         optionCount: Int = 4,
@@ -28,4 +38,20 @@ class HapticDrill(
         round: DrillRound,
         guess: String,
     ): Boolean = guess.equals(round.target, ignoreCase = true)
+
+    fun recordGuess(
+        round: DrillRound,
+        guess: String,
+    ): Boolean {
+        val ok = isCorrect(round, guess)
+        val streak = if (ok) stats.streak + 1 else 0
+        stats =
+            DrillStats(
+                correct = stats.correct + if (ok) 1 else 0,
+                attempts = stats.attempts + 1,
+                streak = streak,
+                bestStreak = maxOf(stats.bestStreak, streak),
+            )
+        return ok
+    }
 }

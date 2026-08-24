@@ -25,6 +25,24 @@ class HapticDrillTest {
         assertThat(drill.isCorrect(round, "AS")).isFalse()
     }
 
+    @Test
+    fun recordGuessTracksStreakAndBest() {
+        val drill = HapticDrill()
+        val queen = DrillRound(target = "QD", options = listOf("AS", "QD", "KH", "2C"))
+        val ace = DrillRound(target = "AS", options = listOf("AS", "QD", "KH", "2C"))
+
+        assertThat(drill.recordGuess(queen, "QD")).isTrue()
+        assertThat(drill.recordGuess(ace, "AS")).isTrue()
+        assertThat(drill.stats.streak).isEqualTo(2)
+        assertThat(drill.stats.bestStreak).isEqualTo(2)
+
+        assertThat(drill.recordGuess(queen, "AS")).isFalse()
+        assertThat(drill.stats.streak).isEqualTo(0)
+        assertThat(drill.stats.correct).isEqualTo(2)
+        assertThat(drill.stats.attempts).isEqualTo(3)
+        assertThat(drill.stats.bestStreak).isEqualTo(2)
+    }
+
     @Test(expected = IllegalArgumentException::class)
     fun nextRoundRejectsTinyDeck() {
         HapticDrill().nextRound(listOf("AS", "KH"))

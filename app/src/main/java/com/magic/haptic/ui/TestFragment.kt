@@ -32,8 +32,6 @@ class TestFragment : Fragment() {
     private lateinit var appDataStore: AppDataStore
     private val drill = HapticDrill()
     private var currentRound: DrillRound? = null
-    private var drillCorrect = 0
-    private var drillAttempts = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -145,20 +143,21 @@ class TestFragment : Fragment() {
             button.text = round.options[index]
             button.isEnabled = true
         }
-        binding.tvDrillStatus.text = "Pattern playing. Choose the card. Score $drillCorrect/$drillAttempts"
+        binding.tvDrillStatus.text =
+            "Pattern playing. Choose the card. Score ${drill.stats.correct}/${drill.stats.attempts} streak ${drill.stats.streak}"
         binding.btnStartDrill.text = "REPLAY"
     }
 
     private fun gradeDrill(guess: String) {
         val round = currentRound ?: return
-        drillAttempts += 1
-        val correct = drill.isCorrect(round, guess)
-        if (correct) {
-            drillCorrect += 1
-            binding.tvDrillStatus.text = "Correct: ${round.target}. Score $drillCorrect/$drillAttempts"
-        } else {
-            binding.tvDrillStatus.text = "Miss. It was ${round.target}. Score $drillCorrect/$drillAttempts"
-        }
+        val correct = drill.recordGuess(round, guess)
+        val score = "Score ${drill.stats.correct}/${drill.stats.attempts} streak ${drill.stats.streak} (best ${drill.stats.bestStreak})"
+        binding.tvDrillStatus.text =
+            if (correct) {
+                "Correct: ${round.target}. $score"
+            } else {
+                "Miss. It was ${round.target}. $score"
+            }
         listOf(binding.btnDrill1, binding.btnDrill2, binding.btnDrill3, binding.btnDrill4)
             .forEach { it.isEnabled = false }
         binding.btnStartDrill.text = "NEXT"
