@@ -18,4 +18,6 @@
     <string name="reference_copied">Copied</string>
     <string name="copy_haptic_config">Copy haptic config</string>
     <string name="haptic_config_copied">Haptic config copied</string>
+    <string name="copy_last_trigger">Copy trigger</string>
+    <string name="last_trigger_copied">Last trigger copied</string>
 </resources>
