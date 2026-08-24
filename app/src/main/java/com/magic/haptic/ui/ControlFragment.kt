@@ -2,6 +2,9 @@ package com.magic.haptic.ui
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,6 +24,7 @@ import com.magic.haptic.data.ServiceEventBus
 import com.magic.haptic.data.ServiceStatus
 import com.magic.haptic.databinding.FragmentControlBinding
 import com.magic.haptic.service.AudioListenerService
+import com.magic.haptic.util.SessionSummaryFormatter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -59,6 +64,9 @@ class ControlFragment : Fragment() {
 
         binding.btnToggleService.setOnClickListener {
             toggleService()
+        }
+        binding.btnCopySession.setOnClickListener {
+            copySessionSummary()
         }
 
         observeService()
@@ -120,6 +128,20 @@ class ControlFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun copySessionSummary() {
+        val text =
+            SessionSummaryFormatter.format(
+                duration = binding.tvDuration.text.toString(),
+                triggerCount = binding.tvTriggerCount.text.toString(),
+                lastCard = binding.tvLastCard.text.toString(),
+                lastPhrase = binding.tvLastPhrase.text.toString(),
+            )
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("session", text))
+        Toast.makeText(requireContext(), getString(R.string.session_copied), Toast.LENGTH_SHORT).show()
     }
 
     private fun updateStatusUi(status: ServiceStatus) {
