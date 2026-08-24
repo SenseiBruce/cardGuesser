@@ -59,6 +59,9 @@ class TestFragment : Fragment() {
         player = HapticPlayer(requireContext())
 
         setupSpeechLog()
+        binding.btnClearSpeechLog.setOnClickListener {
+            adapter.clear()
+        }
         setupManualVibrate()
         setupQuickTest()
         setupDrill()
