@@ -14,4 +14,6 @@
     <string name="session_copied">Copied</string>
     <string name="copy_settings">Copy</string>
     <string name="settings_copied">Copied</string>
+    <string name="copy_reference">Copy</string>
+    <string name="reference_copied">Copied</string>
 </resources>
