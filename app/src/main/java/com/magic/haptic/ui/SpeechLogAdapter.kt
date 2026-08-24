@@ -20,6 +20,8 @@ class SpeechLogAdapter : RecyclerView.Adapter<SpeechLogAdapter.ViewHolder>() {
         notifyItemInserted(0)
     }
 
+    fun snapshot(): List<SpeechLogEntry> = entries.toList()
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
