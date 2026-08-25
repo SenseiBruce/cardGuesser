@@ -28,6 +28,7 @@ import com.magic.haptic.util.SessionSummaryFormatter
 import com.magic.haptic.util.LastTriggerFormatter
 import com.magic.haptic.util.TriggerCountFormatter
 import com.magic.haptic.util.SessionDuration
+import com.magic.haptic.util.ServiceStatusCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -80,6 +81,8 @@ class ControlFragment : Fragment() {
         binding.btnCopyTriggerCount.setOnClickListener { copyTriggerCount() }
         binding.tvDuration.setOnClickListener {
             copySessionDuration()
+        binding.tvStatus.setOnClickListener {
+            copyServiceStatus()
         }
     }
 
@@ -169,6 +172,14 @@ class ControlFragment : Fragment() {
 
         binding.tvBtnLabel.text = if (status == ServiceStatus.STOPPED) "START LISTENING" else "STOP LISTENING"
         binding.cardToggleButton.strokeColor = ContextCompat.getColor(requireContext(), colorRes)
+    }
+
+    private fun copyServiceStatus() {
+        val label = ServiceStatusCopy.clipboardText(ServiceEventBus.status.value)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("service status", label))
+        Toast.makeText(requireContext(), "Copied service status", Toast.LENGTH_SHORT).show()
     }
 
     private fun updateDuration() {
