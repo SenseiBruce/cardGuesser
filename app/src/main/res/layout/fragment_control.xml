@@ -136,6 +136,15 @@
                         android:textColor="@color/magic_white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnCopyTriggerCount"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/copy_trigger_count"
+                        android:textColor="@color/antique_gold" />
                 </LinearLayout>
             </LinearLayout>
 

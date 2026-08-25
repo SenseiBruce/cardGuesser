@@ -19,6 +19,7 @@ All notable changes to Magic Haptic Assistant are documented here.
 - Structured `AppLogger.formatMessage` fields + `CrashReporter` with init/record tests.
 - `scripts/setup.sh` for `.env` / `local.properties` bootstrap; expanded `.env.example`.
 - README **Project type** banner clarifying this is an Android/Kotlin app, not IaC.
+- Control tab can copy the session trigger count.
 
 ### Changed
 - JaCoCo gate raised to 60% line coverage on core packages (includes `SpeechProcessor`).
