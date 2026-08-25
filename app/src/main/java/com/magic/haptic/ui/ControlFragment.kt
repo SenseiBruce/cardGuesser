@@ -29,6 +29,7 @@ import com.magic.haptic.util.LastTriggerFormatter
 import com.magic.haptic.util.TriggerCountFormatter
 import com.magic.haptic.util.SessionDuration
 import com.magic.haptic.util.ServiceStatusCopy
+import com.magic.haptic.util.LastCardCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -83,6 +84,8 @@ class ControlFragment : Fragment() {
             copySessionDuration()
         binding.tvStatus.setOnClickListener {
             copyServiceStatus()
+        binding.tvLastCard.setOnClickListener {
+            copyLastCard()
         }
     }
 
@@ -180,6 +183,12 @@ class ControlFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("service status", label))
         Toast.makeText(requireContext(), "Copied service status", Toast.LENGTH_SHORT).show()
+    private fun copyLastCard() {
+        val label = LastCardCopy.clipboardText(binding.tvLastCard.text.toString())
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("last card", label))
+        Toast.makeText(requireContext(), "Copied last card", Toast.LENGTH_SHORT).show()
     }
 
     private fun updateDuration() {
