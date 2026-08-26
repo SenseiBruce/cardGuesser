@@ -28,6 +28,14 @@ class SpeechLogAdapter : RecyclerView.Adapter<SpeechLogAdapter.ViewHolder>() {
         notifyItemRangeRemoved(0, count)
     }
 
+    private val entries = mutableListOf<SpeechLogEntry>()
+    private val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+
+    fun addEntry(entry: SpeechLogEntry) {
+        entries.add(0, entry)
+        notifyItemInserted(0)
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -41,6 +49,7 @@ class SpeechLogAdapter : RecyclerView.Adapter<SpeechLogAdapter.ViewHolder>() {
         position: Int,
     ) {
         val entry = buffer.get(position)
+        val entry = entries[position]
         holder.binding.tvTimestamp.text = sdf.format(Date(entry.timestamp))
         holder.binding.tvText.text = entry.text
 
@@ -49,6 +58,7 @@ class SpeechLogAdapter : RecyclerView.Adapter<SpeechLogAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int = buffer.size
+    override fun getItemCount(): Int = entries.size
 
     class ViewHolder(val binding: ItemSpeechLogBinding) : RecyclerView.ViewHolder(binding.root)
 }

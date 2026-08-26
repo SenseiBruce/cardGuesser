@@ -21,6 +21,9 @@ import com.magic.haptic.databinding.FragmentSettingsBinding
 import com.magic.haptic.util.SettingsSummaryFormatter
 import com.magic.haptic.util.HapticConfigFormatter
 import com.magic.haptic.util.CurrentDeckCopy
+import com.magic.haptic.data.AppDataStore
+import com.magic.haptic.databinding.FragmentSettingsBinding
+import com.magic.haptic.util.HapticSpeedCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -62,6 +65,9 @@ class SettingsFragment : Fragment() {
 
         binding.tvStackOrder.setOnClickListener {
             copyCurrentDeck()
+
+        binding.tvHapticSensitivity.setOnClickListener {
+            copyHapticSpeed()
         }
     }
 
@@ -291,6 +297,20 @@ class SettingsFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("current deck", label))
         Toast.makeText(requireContext(), "Copied current deck", Toast.LENGTH_SHORT).show()
+    private fun copyHapticSpeed() {
+        val preset =
+            when {
+                binding.rbFast.isChecked -> "FAST"
+                binding.rbNormal.isChecked -> "NORMAL"
+                binding.rbSlow.isChecked -> "SLOW"
+                binding.rbCustom.isChecked -> "CUSTOM"
+                else -> ""
+            }
+        val label = HapticSpeedCopy.clipboardText(preset)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("haptic speed", label))
+        Toast.makeText(requireContext(), "Copied haptic speed", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
