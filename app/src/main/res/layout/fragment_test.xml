@@ -107,7 +107,6 @@
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/dividerDrill"
-                android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -215,12 +214,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="12dp"
-            <!-- Real-time Speech Log -->
-            <TextView
-                android:id="@+id/tvSpeechLogHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:text="── PERCEPTION LOG ──"
                 android:textColor="@color/antique_gold"
                 android:textSize="12sp"
