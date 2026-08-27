@@ -27,6 +27,7 @@ import com.magic.haptic.service.AudioListenerService
 import com.magic.haptic.util.SessionSummaryFormatter
 import com.magic.haptic.util.LastTriggerFormatter
 import com.magic.haptic.util.TriggerCountFormatter
+import com.magic.haptic.util.SessionDuration
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -77,6 +78,9 @@ class ControlFragment : Fragment() {
         setupGlowAnimation()
         binding.btnCopyLastTrigger.setOnClickListener { copyLastTrigger() }
         binding.btnCopyTriggerCount.setOnClickListener { copyTriggerCount() }
+        binding.tvDuration.setOnClickListener {
+            copySessionDuration()
+        }
     }
 
     private fun setupGlowAnimation() {
@@ -172,11 +176,15 @@ class ControlFragment : Fragment() {
         if (start == 0L) return
 
         val diff = (System.currentTimeMillis() - start) / 1000
-        val hours = diff / 3600
-        val minutes = (diff % 3600) / 60
-        val seconds = diff % 60
+        binding.tvDuration.text = SessionDuration.formatElapsedSeconds(diff)
+    }
 
-        binding.tvDuration.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+    private fun copySessionDuration() {
+        val label = SessionDuration.clipboardText(binding.tvDuration.text.toString())
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("session duration", label))
+        Toast.makeText(requireContext(), "Copied session duration", Toast.LENGTH_SHORT).show()
     }
 
     private fun copyLastTrigger() {
