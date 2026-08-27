@@ -39,6 +39,9 @@
                     android:layout_gravity="center"
                     android:padding="8dp"
                     android:text="● STOPPED"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Copy service status"
                     android:textColor="@color/antique_gold"
                     android:textSize="14sp"
                     android:textStyle="bold" />

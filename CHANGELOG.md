@@ -13,6 +13,7 @@ All notable changes to Magic Haptic Assistant are documented here.
 - Settings tab Copy button pastes a summary of deck, haptic speed, debounce, and disguise
 - Cheat Sheet Copy button pastes position, card, and haptic pattern
 - Tap session duration on the Control tab to copy `HH:MM:SS` to the clipboard.
+- Tap the Control tab status label to copy the listener state.
 - Flask-style repo hygiene: root `LICENSE` (MIT), `.editorconfig`, GitHub issue/PR templates
 - Canonical `./gradlew test` / `./gradlew build` root tasks; CI runs `./gradlew test` explicitly.
 - `SpeechProcessor` pure pipeline extracted from `AudioListenerService`, with unit tests.
