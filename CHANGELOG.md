@@ -23,6 +23,7 @@ All notable changes to Magic Haptic Assistant are documented here.
 - Tap the Test tab manual lookup result to copy the card code
 - Tap STACK ORDER to copy the currently selected deck
 - Tap HAPTIC SENSITIVITY to copy the current speed preset
+- Tapping **STEALTH DISGUISE** copies the notification title
 - Flask-style repo hygiene: root `LICENSE` (MIT), `.editorconfig`, GitHub issue/PR templates
 - Canonical `./gradlew test` / `./gradlew build` root tasks; CI runs `./gradlew test` explicitly.
 - `SpeechProcessor` pure pipeline extracted from `AudioListenerService`, with unit tests.

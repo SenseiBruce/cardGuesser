@@ -270,6 +270,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tvStealthDisguise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="STEALTH DISGUISE"
