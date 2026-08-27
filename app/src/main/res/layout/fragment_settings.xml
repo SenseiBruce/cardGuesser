@@ -53,8 +53,12 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tvStackOrder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Copy current deck"
                         android:text="STACK ORDER"
                         android:textColor="@color/antique_gold"
                         android:textSize="12sp"

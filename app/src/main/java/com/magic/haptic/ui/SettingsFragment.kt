@@ -20,6 +20,7 @@ import com.magic.haptic.data.HapticConfig
 import com.magic.haptic.databinding.FragmentSettingsBinding
 import com.magic.haptic.util.SettingsSummaryFormatter
 import com.magic.haptic.util.HapticConfigFormatter
+import com.magic.haptic.util.CurrentDeckCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -58,6 +59,10 @@ class SettingsFragment : Fragment() {
             }
         }
         binding.btnCopyHapticConfig.setOnClickListener { copyHapticConfig() }
+
+        binding.tvStackOrder.setOnClickListener {
+            copyCurrentDeck()
+        }
     }
 
     private fun setupDeckSpinner() {
@@ -279,6 +284,13 @@ class SettingsFragment : Fragment() {
             getString(R.string.haptic_config_copied),
             Toast.LENGTH_SHORT,
         ).show()
+    private fun copyCurrentDeck() {
+        val selected = binding.spinnerDeck.selectedItem?.toString()
+        val label = CurrentDeckCopy.clipboardText(selected)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("current deck", label))
+        Toast.makeText(requireContext(), "Copied current deck", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
