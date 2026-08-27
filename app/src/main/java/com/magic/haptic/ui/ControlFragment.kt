@@ -26,6 +26,7 @@ import com.magic.haptic.databinding.FragmentControlBinding
 import com.magic.haptic.service.AudioListenerService
 import com.magic.haptic.util.SessionSummaryFormatter
 import com.magic.haptic.util.LastTriggerFormatter
+import com.magic.haptic.util.TriggerCountFormatter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -39,6 +40,7 @@ class ControlFragment : Fragment() {
 
     private var glowAnimator: ObjectAnimator? = null
     private var latestDisplay: CardViewModel.TriggerDisplay? = null
+    private var latestTriggerCount: Int = 0
 
     private val handler = Handler(Looper.getMainLooper())
     private val timerRunnable =
@@ -74,6 +76,7 @@ class ControlFragment : Fragment() {
         observeService()
         setupGlowAnimation()
         binding.btnCopyLastTrigger.setOnClickListener { copyLastTrigger() }
+        binding.btnCopyTriggerCount.setOnClickListener { copyTriggerCount() }
     }
 
     private fun setupGlowAnimation() {
@@ -112,6 +115,7 @@ class ControlFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             ServiceEventBus.triggerCount.collectLatest { count ->
+                latestTriggerCount = count
                 binding.tvTriggerCount.text = count.toString()
             }
         }
@@ -194,6 +198,14 @@ class ControlFragment : Fragment() {
         Toast.makeText(
             requireContext(),
             getString(R.string.last_trigger_copied),
+    private fun copyTriggerCount() {
+        val text = TriggerCountFormatter.format(latestTriggerCount)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("trigger-count", text))
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.trigger_count_copied),
             Toast.LENGTH_SHORT,
         ).show()
     }
