@@ -8,6 +8,7 @@ All notable changes to Magic Haptic Assistant are documented here.
 - Identification drill in Toolkit: play a haptic pattern and choose the card from four options
 - Drill streak + best-streak tracking while you identify cards
 - Cheat Sheet **Share** exports the active 52-card stack as numbered plain text
+- Long-press a cheat-sheet row to copy that card's position, name, and pattern
 - Test tab Perception Log **Clear** button empties the speech log
 - Control tab **Copy** exports live session duration, trigger count, and last detection
 - Settings tab Copy button pastes a summary of deck, haptic speed, debounce, and disguise

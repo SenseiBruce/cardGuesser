@@ -23,6 +23,7 @@ import com.magic.haptic.data.HapticPattern
 import com.magic.haptic.haptic.HapticPlayer
 import com.magic.haptic.util.ReferenceDeckFormatter
 import com.magic.haptic.util.ReferenceDeckRow
+import com.magic.haptic.util.ReferenceRowCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import com.magic.haptic.data.AppDataStore
@@ -73,6 +74,8 @@ class ReferenceFragment : Fragment() {
             }.collectLatest { (deck, deckId) ->
                 latestCards = deck
                 latestDeckName = deckId
+            }
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             cardViewModel.currentDeck.collectLatest { deck ->
@@ -100,6 +103,8 @@ class ReferenceFragment : Fragment() {
                 putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_deck_subject, latestDeckName))
             }
         startActivity(Intent.createChooser(send, getString(R.string.share_deck_chooser_title)))
+    }
+
     private fun copyReferenceDeck() {
         val text = ReferenceDeckFormatter.format(latestRows)
         val clipboard =
@@ -107,6 +112,14 @@ class ReferenceFragment : Fragment() {
         clipboard.setPrimaryClip(ClipData.newPlainText("cheat-sheet", text))
         Toast.makeText(requireContext(), getString(R.string.reference_copied), Toast.LENGTH_SHORT)
             .show()
+    }
+
+    private fun copyReferenceRow(item: ReferenceItem) {
+        val label = ReferenceRowCopy.clipboardText(item.position, item.cardName, item.patternDesc)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("cheat-sheet-row", label))
+        Toast.makeText(requireContext(), "Copied cheat-sheet row", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
@@ -147,6 +160,10 @@ class ReferenceFragment : Fragment() {
                 item.patternObj?.let { pattern ->
                     hapticPlayer.vibrate(pattern)
                 }
+            }
+            holder.itemView.setOnLongClickListener {
+                copyReferenceRow(item)
+                true
             }
         }
 
