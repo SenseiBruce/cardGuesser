@@ -23,6 +23,7 @@ import com.magic.haptic.haptic.HapticDrill
 import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
 import com.magic.haptic.util.SpeechLogFormatter
+import com.magic.haptic.util.ManualCardInfoCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -67,6 +68,10 @@ class TestFragment : Fragment() {
         setupDrill()
         observeSpeech()
         binding.btnCopySpeechLog.setOnClickListener { copySpeechLog() }
+
+        binding.tvManualCardInfo.setOnClickListener {
+            copyManualCardInfo()
+        }
     }
 
     private fun setupSpeechLog() {
@@ -188,6 +193,12 @@ class TestFragment : Fragment() {
         clipboard.setPrimaryClip(ClipData.newPlainText("perception-log", text))
         Toast.makeText(requireContext(), getString(R.string.speech_log_copied), Toast.LENGTH_SHORT)
             .show()
+    private fun copyManualCardInfo() {
+        val label = ManualCardInfoCopy.clipboardText(binding.tvManualCardInfo.text)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("manual lookup", label))
+        Toast.makeText(requireContext(), "Copied manual lookup", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
