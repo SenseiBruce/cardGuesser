@@ -175,6 +175,14 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/tvLastHeader"
                         app:layout_constraintBottom_toBottomOf="@id/tvLastHeader" />
+                        android:id="@+id/btnCopyLastTrigger"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/copy_last_trigger"
+                        android:textColor="@color/antique_gold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tvLastCard"

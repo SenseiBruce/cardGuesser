@@ -25,6 +25,7 @@ All notable changes to Magic Haptic Assistant are documented here.
 - Vosk/service error paths emit structured log fields and report via `CrashReporter`.
 - Test tab Copy log copies the perception log to the clipboard.
 - Settings can copy the current haptic preset and timings.
+- Control tab can copy the last detected trigger (card, phrase, pattern).
 
 ## [Previous]
 

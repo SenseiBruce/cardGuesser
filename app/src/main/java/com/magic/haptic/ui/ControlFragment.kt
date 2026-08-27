@@ -25,6 +25,7 @@ import com.magic.haptic.data.ServiceStatus
 import com.magic.haptic.databinding.FragmentControlBinding
 import com.magic.haptic.service.AudioListenerService
 import com.magic.haptic.util.SessionSummaryFormatter
+import com.magic.haptic.util.LastTriggerFormatter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -37,6 +38,7 @@ class ControlFragment : Fragment() {
     }
 
     private var glowAnimator: ObjectAnimator? = null
+    private var latestDisplay: CardViewModel.TriggerDisplay? = null
 
     private val handler = Handler(Looper.getMainLooper())
     private val timerRunnable =
@@ -71,6 +73,7 @@ class ControlFragment : Fragment() {
 
         observeService()
         setupGlowAnimation()
+        binding.btnCopyLastTrigger.setOnClickListener { copyLastTrigger() }
     }
 
     private fun setupGlowAnimation() {
@@ -117,6 +120,7 @@ class ControlFragment : Fragment() {
             ServiceEventBus.lastTrigger.collectLatest { trigger ->
                 if (trigger != null) {
                     val display = cardViewModel.describeTrigger(trigger)
+                    latestDisplay = display
                     binding.tvLastPhrase.text = "Phrase: \"${display.rawText}\""
                     binding.tvLastCard.text = display.card ?: "??"
                     binding.tvLastPattern.text =
@@ -169,6 +173,29 @@ class ControlFragment : Fragment() {
         val seconds = diff % 60
 
         binding.tvDuration.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
+    private fun copyLastTrigger() {
+        val display = latestDisplay
+        val text =
+            if (display == null) {
+                "Last detected trigger: none"
+            } else {
+                LastTriggerFormatter.format(
+                    display.position,
+                    display.card,
+                    display.rawText,
+                    display.patternDescription,
+                )
+            }
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("last-trigger", text))
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.last_trigger_copied),
+            Toast.LENGTH_SHORT,
+        ).show()
     }
 
     override fun onDestroyView() {
