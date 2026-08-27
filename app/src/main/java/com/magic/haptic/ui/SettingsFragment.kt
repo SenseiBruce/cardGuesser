@@ -29,6 +29,7 @@ import com.magic.haptic.databinding.FragmentSettingsBinding
 import com.magic.haptic.util.NotifTitleCopy
 import com.magic.haptic.util.NotifBodyCopy
 import com.magic.haptic.util.DebounceCopy
+import com.magic.haptic.util.ShortPulseCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -88,6 +89,12 @@ class SettingsFragment : Fragment() {
         }
         binding.etDebounce.setOnLongClickListener {
             copyDebounce()
+
+        binding.tilShort.setOnClickListener {
+            copyShortPulse()
+        }
+        binding.etShort.setOnLongClickListener {
+            copyShortPulse()
             true
         }
     }
@@ -350,6 +357,12 @@ class SettingsFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("debounce", label))
         Toast.makeText(requireContext(), "Copied debounce", Toast.LENGTH_SHORT).show()
+    private fun copyShortPulse() {
+        val label = ShortPulseCopy.clipboardText(binding.etShort.text)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("etShort", label))
+        Toast.makeText(requireContext(), "Copied short pulse", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
