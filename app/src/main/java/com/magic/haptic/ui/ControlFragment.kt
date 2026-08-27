@@ -34,6 +34,7 @@ import com.magic.haptic.util.LastPhraseCopy
 import com.magic.haptic.util.LastPatternCopy
 import com.magic.haptic.util.SessionTriggersCopy
 import com.magic.haptic.util.ListenLabelCopy
+import com.magic.haptic.util.SessionClockCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -98,6 +99,8 @@ class ControlFragment : Fragment() {
             copySessionTriggers()
         binding.tvBtnLabel.setOnClickListener {
             copyListenLabel()
+        binding.tvDuration.setOnClickListener {
+            copySessionClock()
         }
     }
 
@@ -225,6 +228,12 @@ class ControlFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("listen control", label))
         Toast.makeText(requireContext(), "Copied listen control", Toast.LENGTH_SHORT).show()
+    private fun copySessionClock() {
+        val label = SessionClockCopy.clipboardText(binding.tvDuration.text)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("session clock", label))
+        Toast.makeText(requireContext(), "Copied session clock", Toast.LENGTH_SHORT).show()
     }
 
     private fun updateDuration() {
