@@ -10,4 +10,6 @@
     <string name="share_deck_chooser_title">Share reference deck</string>
     <string name="share_deck_subject">Magic Haptic — %1$s</string>
     <string name="clear_speech_log">Clear</string>
+    <string name="copy_session">Copy</string>
+    <string name="session_copied">Copied</string>
 </resources>

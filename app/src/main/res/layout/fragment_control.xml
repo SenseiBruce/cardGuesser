@@ -165,6 +165,17 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <Button
+                        android:id="@+id/btnCopySession"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/copy_session"
+                        android:textColor="@color/antique_gold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tvLastHeader"
+                        app:layout_constraintBottom_toBottomOf="@id/tvLastHeader" />
+
                     <TextView
                         android:id="@+id/tvLastCard"
                         android:layout_width="wrap_content"
