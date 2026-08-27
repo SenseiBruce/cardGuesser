@@ -1,12 +1,16 @@
 package com.magic.haptic.ui
 
 import android.content.Intent
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +20,8 @@ import com.magic.haptic.card.ReferenceDeckFormatter
 import com.magic.haptic.data.AppDataStore
 import com.magic.haptic.data.HapticPattern
 import com.magic.haptic.haptic.HapticPlayer
+import com.magic.haptic.util.ReferenceDeckFormatter
+import com.magic.haptic.util.ReferenceDeckRow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -25,6 +31,7 @@ class ReferenceFragment : Fragment() {
     private lateinit var hapticPlayer: HapticPlayer
     private var latestDeckName: String = "DEFAULT"
     private var latestCards: List<String> = emptyList()
+    private var latestRows: List<ReferenceDeckRow> = emptyList()
 
     private val cardViewModel: CardViewModel by viewModels {
         CardViewModel.Factory(AppDataStore(requireContext()))
@@ -51,6 +58,10 @@ class ReferenceFragment : Fragment() {
             shareCurrentDeck()
         }
 
+        view.findViewById<Button>(R.id.btnCopyReference).setOnClickListener {
+            copyReferenceDeck()
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             combine(cardViewModel.currentDeck, cardViewModel.currentDeckId) { deck, deckId ->
                 deck to deckId
@@ -62,6 +73,10 @@ class ReferenceFragment : Fragment() {
                     deck.mapIndexed { index, cardName ->
                         val pattern = cardViewModel.patternFor(cardName, config)
                         ReferenceItem(index + 1, cardName, pattern?.description ?: "--", pattern)
+                    }
+                latestRows =
+                    mappedItems.map { item ->
+                        ReferenceDeckRow(item.position, item.cardName, item.patternDesc)
                     }
                 rvReference?.adapter = ReferenceAdapter(mappedItems)
             }
@@ -77,6 +92,13 @@ class ReferenceFragment : Fragment() {
                 putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_deck_subject, latestDeckName))
             }
         startActivity(Intent.createChooser(send, getString(R.string.share_deck_chooser_title)))
+    private fun copyReferenceDeck() {
+        val text = ReferenceDeckFormatter.format(latestRows)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("cheat-sheet", text))
+        Toast.makeText(requireContext(), getString(R.string.reference_copied), Toast.LENGTH_SHORT)
+            .show()
     }
 
     override fun onDestroyView() {
