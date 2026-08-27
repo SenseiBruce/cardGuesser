@@ -30,11 +30,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/copy_settings"
+                android:textColor="@color/antique_gold" />
+
+            <Button
                 android:id="@+id/btnCopyHapticConfig"
                 style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/copy_haptic_config"
                 android:textColor="@color/antique_gold" />
 
@@ -59,8 +62,6 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:contentDescription="Copy current deck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="STACK ORDER"
                         android:textColor="@color/antique_gold"
                         android:textSize="12sp"
@@ -99,8 +100,6 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:id="@+id/tvHapticSensitivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
