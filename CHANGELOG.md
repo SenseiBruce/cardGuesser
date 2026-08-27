@@ -24,6 +24,7 @@ All notable changes to Magic Haptic Assistant are documented here.
 - JaCoCo gate raised to 60% line coverage on core packages (includes `SpeechProcessor`).
 - Vosk/service error paths emit structured log fields and report via `CrashReporter`.
 - Test tab Copy log copies the perception log to the clipboard.
+- Settings can copy the current haptic preset and timings.
 
 ## [Previous]
 

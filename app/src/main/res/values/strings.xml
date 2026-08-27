@@ -16,4 +16,6 @@
     <string name="settings_copied">Copied</string>
     <string name="copy_reference">Copy</string>
     <string name="reference_copied">Copied</string>
+    <string name="copy_haptic_config">Copy haptic config</string>
+    <string name="haptic_config_copied">Haptic config copied</string>
 </resources>

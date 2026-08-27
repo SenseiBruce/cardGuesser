@@ -16,8 +16,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.magic.haptic.R
 import com.magic.haptic.data.AppDataStore
+import com.magic.haptic.data.HapticConfig
 import com.magic.haptic.databinding.FragmentSettingsBinding
 import com.magic.haptic.util.SettingsSummaryFormatter
+import com.magic.haptic.util.HapticConfigFormatter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -26,6 +28,8 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var appDataStore: AppDataStore
+    private var latestPreset: String = "NORMAL"
+    private var latestConfig: HapticConfig = HapticConfig(100, 300, 150, 500)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +52,12 @@ class SettingsFragment : Fragment() {
         setupNotificationDisguise()
         setupDebounce()
         binding.btnCopySettings.setOnClickListener { copySettingsSummary() }
+        viewLifecycleOwner.lifecycleScope.launch {
+            appDataStore.hapticConfig.collectLatest { config ->
+                latestConfig = config
+            }
+        }
+        binding.btnCopyHapticConfig.setOnClickListener { copyHapticConfig() }
     }
 
     private fun setupDeckSpinner() {
@@ -87,6 +97,7 @@ class SettingsFragment : Fragment() {
     private fun setupHapticSpeed() {
         viewLifecycleOwner.lifecycleScope.launch {
             appDataStore.speedPreset.collectLatest { preset ->
+                latestPreset = preset
                 when (preset) {
                     "FAST" -> binding.rbFast.isChecked = true
                     "NORMAL" -> binding.rbNormal.isChecked = true
@@ -258,6 +269,16 @@ class SettingsFragment : Fragment() {
         clipboard.setPrimaryClip(ClipData.newPlainText("settings", text))
         Toast.makeText(requireContext(), getString(R.string.settings_copied), Toast.LENGTH_SHORT)
             .show()
+    private fun copyHapticConfig() {
+        val text = HapticConfigFormatter.format(latestPreset, latestConfig)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("haptic-config", text))
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.haptic_config_copied),
+            Toast.LENGTH_SHORT,
+        ).show()
     }
 
     override fun onDestroyView() {
