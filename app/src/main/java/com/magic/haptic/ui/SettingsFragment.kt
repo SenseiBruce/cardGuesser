@@ -1,5 +1,8 @@
 package com.magic.haptic.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,10 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.magic.haptic.R
 import com.magic.haptic.data.AppDataStore
 import com.magic.haptic.databinding.FragmentSettingsBinding
+import com.magic.haptic.util.SettingsSummaryFormatter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -41,6 +47,7 @@ class SettingsFragment : Fragment() {
         setupHapticSpeed()
         setupNotificationDisguise()
         setupDebounce()
+        binding.btnCopySettings.setOnClickListener { copySettingsSummary() }
     }
 
     private fun setupDeckSpinner() {
@@ -227,6 +234,30 @@ class SettingsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun copySettingsSummary() {
+        val speed =
+            when {
+                binding.rbFast.isChecked -> "FAST"
+                binding.rbSlow.isChecked -> "SLOW"
+                binding.rbCustom.isChecked -> "CUSTOM"
+                else -> "NORMAL"
+            }
+        val deck = binding.spinnerDeck.selectedItem?.toString() ?: "DEFAULT"
+        val text =
+            SettingsSummaryFormatter.format(
+                deckId = deck,
+                speedPreset = speed,
+                debounceSec = binding.etDebounce.text?.toString().orEmpty().ifBlank { "3" },
+                notifTitle = binding.etNotifTitle.text?.toString().orEmpty(),
+                notifBody = binding.etNotifBody.text?.toString().orEmpty(),
+            )
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("settings", text))
+        Toast.makeText(requireContext(), getString(R.string.settings_copied), Toast.LENGTH_SHORT)
+            .show()
     }
 
     override fun onDestroyView() {
