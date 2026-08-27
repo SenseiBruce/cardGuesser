@@ -14,6 +14,8 @@ import com.magic.haptic.data.AppDataStore
 import com.magic.haptic.data.HapticConfig
 import com.magic.haptic.data.ServiceEventBus
 import com.magic.haptic.databinding.FragmentTestBinding
+import com.magic.haptic.haptic.DrillRound
+import com.magic.haptic.haptic.HapticDrill
 import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
 import kotlinx.coroutines.flow.collectLatest
@@ -28,6 +30,8 @@ class TestFragment : Fragment() {
     private lateinit var encoder: HapticEncoder
     private lateinit var player: HapticPlayer
     private lateinit var appDataStore: AppDataStore
+    private val drill = HapticDrill()
+    private var currentRound: DrillRound? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +56,7 @@ class TestFragment : Fragment() {
         setupSpeechLog()
         setupManualVibrate()
         setupQuickTest()
+        setupDrill()
         observeSpeech()
     }
 
@@ -111,6 +116,52 @@ class TestFragment : Fragment() {
                 }
             binding.cardGrid.addView(button)
         }
+    }
+
+    private fun setupDrill() {
+        val optionButtons =
+            listOf(binding.btnDrill1, binding.btnDrill2, binding.btnDrill3, binding.btnDrill4)
+        binding.btnStartDrill.setOnClickListener { startDrillRound() }
+        optionButtons.forEach { button ->
+            button.setOnClickListener {
+                val guess = button.text.toString()
+                gradeDrill(guess)
+            }
+        }
+    }
+
+    private fun startDrillRound() {
+        val round = drill.nextRound(cardRepository.getCurrentDeck())
+        currentRound = round
+        val config = HapticConfig(100, 300, 150, 500)
+        val pattern = encoder.encode(round.target, config)
+        if (pattern != null) {
+            player.vibrate(pattern)
+        }
+        val buttons = listOf(binding.btnDrill1, binding.btnDrill2, binding.btnDrill3, binding.btnDrill4)
+        buttons.forEachIndexed { index, button ->
+            button.text = round.options[index]
+            button.isEnabled = true
+        }
+        binding.tvDrillStatus.text =
+            "Pattern playing. Choose the card. Score ${drill.stats.correct}/${drill.stats.attempts} streak ${drill.stats.streak}"
+        binding.btnStartDrill.text = "REPLAY"
+    }
+
+    private fun gradeDrill(guess: String) {
+        val round = currentRound ?: return
+        val correct = drill.recordGuess(round, guess)
+        val score = "Score ${drill.stats.correct}/${drill.stats.attempts} streak ${drill.stats.streak} (best ${drill.stats.bestStreak})"
+        binding.tvDrillStatus.text =
+            if (correct) {
+                "Correct: ${round.target}. $score"
+            } else {
+                "Miss. It was ${round.target}. $score"
+            }
+        listOf(binding.btnDrill1, binding.btnDrill2, binding.btnDrill3, binding.btnDrill4)
+            .forEach { it.isEnabled = false }
+        binding.btnStartDrill.text = "NEXT"
+        currentRound = null
     }
 
     private fun observeSpeech() {
