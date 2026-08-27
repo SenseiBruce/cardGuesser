@@ -17,6 +17,7 @@ All notable changes to Magic Haptic Assistant are documented here.
 - Tap the last detected card on the Control tab to copy it.
 - Tap the last-phrase line on Control to copy the spoken trigger text
 - Tap the last-pattern line on Control to copy the haptic pattern description
+- Tap the session trigger count on Control to copy it
 - Flask-style repo hygiene: root `LICENSE` (MIT), `.editorconfig`, GitHub issue/PR templates
 - Canonical `./gradlew test` / `./gradlew build` root tasks; CI runs `./gradlew test` explicitly.
 - `SpeechProcessor` pure pipeline extracted from `AudioListenerService`, with unit tests.
