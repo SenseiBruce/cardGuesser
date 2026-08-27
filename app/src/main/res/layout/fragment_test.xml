@@ -107,6 +107,7 @@
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/dividerDrill"
+                android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -214,6 +215,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="12dp"
+            <!-- Real-time Speech Log -->
+            <TextView
+                android:id="@+id/tvSpeechLogHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:text="── PERCEPTION LOG ──"
                 android:textColor="@color/antique_gold"
                 android:textSize="12sp"
@@ -243,6 +250,10 @@
                 app:layout_constraintTop_toTopOf="@id/tvSpeechLogHeader"
                 app:layout_constraintBottom_toBottomOf="@id/tvSpeechLogHeader" />
 
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider2" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSpeechLog"
                 android:layout_width="match_parent"
@@ -251,6 +262,7 @@
                 android:clipToPadding="false"
                 android:fadeScrollbars="true"
                 app:layout_constraintTop_toBottomOf="@id/btnCopySpeechLog" />
+                app:layout_constraintTop_toBottomOf="@id/tvSpeechLogHeader" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

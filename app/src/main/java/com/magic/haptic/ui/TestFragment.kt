@@ -24,6 +24,8 @@ import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
 import com.magic.haptic.util.SpeechLogFormatter
 import com.magic.haptic.util.ManualCardInfoCopy
+import com.magic.haptic.haptic.HapticEncoder
+import com.magic.haptic.haptic.HapticPlayer
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -72,6 +74,9 @@ class TestFragment : Fragment() {
         binding.tvManualCardInfo.setOnClickListener {
             copyManualCardInfo()
         }
+        setupManualVibrate()
+        setupQuickTest()
+        observeSpeech()
     }
 
     private fun setupSpeechLog() {

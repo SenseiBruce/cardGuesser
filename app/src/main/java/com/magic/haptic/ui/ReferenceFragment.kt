@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -24,6 +25,10 @@ import com.magic.haptic.util.ReferenceDeckFormatter
 import com.magic.haptic.util.ReferenceDeckRow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import com.magic.haptic.data.AppDataStore
+import com.magic.haptic.data.HapticPattern
+import com.magic.haptic.haptic.HapticPlayer
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class ReferenceFragment : Fragment() {
@@ -68,6 +73,9 @@ class ReferenceFragment : Fragment() {
             }.collectLatest { (deck, deckId) ->
                 latestCards = deck
                 latestDeckName = deckId
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            cardViewModel.currentDeck.collectLatest { deck ->
                 val config = cardViewModel.hapticConfig.value
                 val mappedItems =
                     deck.mapIndexed { index, cardName ->

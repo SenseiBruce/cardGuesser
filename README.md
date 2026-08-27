@@ -15,6 +15,7 @@ A premium, stealthy tool designed for magicians to discreetly receive informatio
 - **Shareable Cheat Sheet**: Export the active 52-card stack as numbered plain text from the Cheat Sheet tab.
 - **Encrypted Logs**: Review your performance and detected phrases in a secure toolkit log.
 - **Encrypted Logs**: Review your performance and detected phrases in a secure toolkit log, with a Test-tab Clear for the Perception Log.
+- **Encrypted Logs**: Review your performance and detected phrases in a secure toolkit log.
 
 ## Architecture
 

@@ -102,6 +102,9 @@ class ControlFragment : Fragment() {
         binding.tvDuration.setOnClickListener {
             copySessionClock()
         }
+
+        observeService()
+        setupGlowAnimation()
     }
 
     private fun setupGlowAnimation() {
@@ -281,6 +284,11 @@ class ControlFragment : Fragment() {
             getString(R.string.trigger_count_copied),
             Toast.LENGTH_SHORT,
         ).show()
+        val hours = diff / 3600
+        val minutes = (diff % 3600) / 60
+        val seconds = diff % 60
+
+        binding.tvDuration.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
     }
 
     override fun onDestroyView() {
