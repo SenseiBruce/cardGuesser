@@ -5,6 +5,7 @@ All notable changes to Magic Haptic Assistant are documented here.
 ## [Unreleased]
 
 ### Added
+- Long-press the identification drill status to copy score and streak
 - Identification drill in Toolkit: play a haptic pattern and choose the card from four options
 - Drill streak + best-streak tracking while you identify cards
 - Cheat Sheet **Share** exports the active 52-card stack as numbered plain text
