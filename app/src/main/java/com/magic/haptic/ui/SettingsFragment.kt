@@ -30,6 +30,7 @@ import com.magic.haptic.util.NotifTitleCopy
 import com.magic.haptic.util.NotifBodyCopy
 import com.magic.haptic.util.DebounceCopy
 import com.magic.haptic.util.ShortPulseCopy
+import com.magic.haptic.util.LongPulseCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -71,30 +72,45 @@ class SettingsFragment : Fragment() {
 
         binding.tvStackOrder.setOnClickListener {
             copyCurrentDeck()
+        }
 
         binding.tvHapticSensitivity.setOnClickListener {
             copyHapticSpeed()
+        }
 
         binding.tvStealthDisguise.setOnClickListener {
             copyNotifTitle()
+        }
 
         binding.tilNotifBody.setOnClickListener {
             copyNotifBody()
         }
         binding.etNotifBody.setOnLongClickListener {
             copyNotifBody()
+            true
+        }
 
         binding.tilDebounce.setOnClickListener {
             copyDebounce()
         }
         binding.etDebounce.setOnLongClickListener {
             copyDebounce()
+            true
+        }
 
         binding.tilShort.setOnClickListener {
             copyShortPulse()
         }
         binding.etShort.setOnLongClickListener {
             copyShortPulse()
+            true
+        }
+
+        binding.tilLong.setOnClickListener {
+            copyLongPulse()
+        }
+        binding.etLong.setOnLongClickListener {
+            copyLongPulse()
             true
         }
     }
@@ -308,6 +324,8 @@ class SettingsFragment : Fragment() {
         clipboard.setPrimaryClip(ClipData.newPlainText("settings", text))
         Toast.makeText(requireContext(), getString(R.string.settings_copied), Toast.LENGTH_SHORT)
             .show()
+    }
+
     private fun copyHapticConfig() {
         val text = HapticConfigFormatter.format(latestPreset, latestConfig)
         val clipboard =
@@ -318,6 +336,8 @@ class SettingsFragment : Fragment() {
             getString(R.string.haptic_config_copied),
             Toast.LENGTH_SHORT,
         ).show()
+    }
+
     private fun copyCurrentDeck() {
         val selected = binding.spinnerDeck.selectedItem?.toString()
         val label = CurrentDeckCopy.clipboardText(selected)
@@ -325,6 +345,8 @@ class SettingsFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("current deck", label))
         Toast.makeText(requireContext(), "Copied current deck", Toast.LENGTH_SHORT).show()
+    }
+
     private fun copyHapticSpeed() {
         val preset =
             when {
@@ -339,30 +361,46 @@ class SettingsFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("haptic speed", label))
         Toast.makeText(requireContext(), "Copied haptic speed", Toast.LENGTH_SHORT).show()
+    }
+
     private fun copyNotifTitle() {
         val label = NotifTitleCopy.clipboardText(binding.etNotifTitle.text)
         val clipboard =
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("notification title", label))
         Toast.makeText(requireContext(), "Copied notification title", Toast.LENGTH_SHORT).show()
+    }
+
     private fun copyNotifBody() {
         val label = NotifBodyCopy.clipboardText(binding.etNotifBody.text)
         val clipboard =
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("notification body", label))
         Toast.makeText(requireContext(), "Copied notification body", Toast.LENGTH_SHORT).show()
+    }
+
     private fun copyDebounce() {
         val label = DebounceCopy.clipboardText(binding.etDebounce.text)
         val clipboard =
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("debounce", label))
         Toast.makeText(requireContext(), "Copied debounce", Toast.LENGTH_SHORT).show()
+    }
+
     private fun copyShortPulse() {
         val label = ShortPulseCopy.clipboardText(binding.etShort.text)
         val clipboard =
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("etShort", label))
         Toast.makeText(requireContext(), "Copied short pulse", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun copyLongPulse() {
+        val label = LongPulseCopy.clipboardText(binding.etLong.text)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("etLong", label))
+        Toast.makeText(requireContext(), "Copied long pulse", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
