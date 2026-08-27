@@ -6,4 +6,7 @@
     <string name="tab_reference">Cheat Sheet</string>
     <string name="copy_speech_log">Copy log</string>
     <string name="speech_log_copied">Perception log copied</string>
+    <string name="share_deck">Share</string>
+    <string name="share_deck_chooser_title">Share reference deck</string>
+    <string name="share_deck_subject">Magic Haptic — %1$s</string>
 </resources>

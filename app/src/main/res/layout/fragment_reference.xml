@@ -8,17 +8,29 @@
 
     <TextView
         android:id="@+id/tvHeader"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="12dp"
         android:text="Magician's Cheat Sheet"
         android:textColor="@color/antique_gold"
         android:textSize="20sp"
         android:textStyle="bold"
         android:fontFamily="sans-serif-medium"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnShareDeck"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnShareDeck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/share_deck"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvHeader"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHeader" />
 
     <TextView
         android:id="@+id/tvSubHeader"

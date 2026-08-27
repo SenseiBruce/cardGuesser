@@ -1,24 +1,30 @@
 package com.magic.haptic.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.magic.haptic.R
+import com.magic.haptic.card.ReferenceDeckFormatter
 import com.magic.haptic.data.AppDataStore
 import com.magic.haptic.data.HapticPattern
 import com.magic.haptic.haptic.HapticPlayer
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class ReferenceFragment : Fragment() {
     private var rvReference: RecyclerView? = null
     private lateinit var hapticPlayer: HapticPlayer
+    private var latestDeckName: String = "DEFAULT"
+    private var latestCards: List<String> = emptyList()
 
     private val cardViewModel: CardViewModel by viewModels {
         CardViewModel.Factory(AppDataStore(requireContext()))
@@ -41,9 +47,16 @@ class ReferenceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         hapticPlayer = HapticPlayer(requireContext())
+        view.findViewById<Button>(R.id.btnShareDeck).setOnClickListener {
+            shareCurrentDeck()
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            cardViewModel.currentDeck.collectLatest { deck ->
+            combine(cardViewModel.currentDeck, cardViewModel.currentDeckId) { deck, deckId ->
+                deck to deckId
+            }.collectLatest { (deck, deckId) ->
+                latestCards = deck
+                latestDeckName = deckId
                 val config = cardViewModel.hapticConfig.value
                 val mappedItems =
                     deck.mapIndexed { index, cardName ->
@@ -53,6 +66,17 @@ class ReferenceFragment : Fragment() {
                 rvReference?.adapter = ReferenceAdapter(mappedItems)
             }
         }
+    }
+
+    private fun shareCurrentDeck() {
+        val text = ReferenceDeckFormatter.format(latestDeckName, latestCards)
+        val send =
+            Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, text)
+                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_deck_subject, latestDeckName))
+            }
+        startActivity(Intent.createChooser(send, getString(R.string.share_deck_chooser_title)))
     }
 
     override fun onDestroyView() {
