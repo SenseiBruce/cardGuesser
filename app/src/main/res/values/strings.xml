@@ -4,4 +4,6 @@
     <string name="tab_test">Test</string>
     <string name="tab_settings">Settings</string>
     <string name="tab_reference">Cheat Sheet</string>
+    <string name="copy_speech_log">Copy log</string>
+    <string name="speech_log_copied">Perception log copied</string>
 </resources>

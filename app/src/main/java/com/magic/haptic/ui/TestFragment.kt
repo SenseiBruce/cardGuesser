@@ -1,5 +1,8 @@
 package com.magic.haptic.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.magic.haptic.R
 import com.magic.haptic.card.CardRepository
 import com.magic.haptic.data.AppDataStore
 import com.magic.haptic.data.HapticConfig
@@ -18,6 +22,7 @@ import com.magic.haptic.haptic.DrillRound
 import com.magic.haptic.haptic.HapticDrill
 import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
+import com.magic.haptic.util.SpeechLogFormatter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -58,6 +63,7 @@ class TestFragment : Fragment() {
         setupQuickTest()
         setupDrill()
         observeSpeech()
+        binding.btnCopySpeechLog.setOnClickListener { copySpeechLog() }
     }
 
     private fun setupSpeechLog() {
@@ -170,6 +176,15 @@ class TestFragment : Fragment() {
                 adapter.addEntry(entry)
             }
         }
+    }
+
+    private fun copySpeechLog() {
+        val text = SpeechLogFormatter.format(adapter.snapshot())
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("perception-log", text))
+        Toast.makeText(requireContext(), getString(R.string.speech_log_copied), Toast.LENGTH_SHORT)
+            .show()
     }
 
     override fun onDestroyView() {
