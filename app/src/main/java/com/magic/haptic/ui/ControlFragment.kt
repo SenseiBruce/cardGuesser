@@ -33,6 +33,7 @@ import com.magic.haptic.util.LastCardCopy
 import com.magic.haptic.util.LastPhraseCopy
 import com.magic.haptic.util.LastPatternCopy
 import com.magic.haptic.util.SessionTriggersCopy
+import com.magic.haptic.util.ListenLabelCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -95,6 +96,8 @@ class ControlFragment : Fragment() {
             copyLastPattern()
         binding.tvTriggerCount.setOnClickListener {
             copySessionTriggers()
+        binding.tvBtnLabel.setOnClickListener {
+            copyListenLabel()
         }
     }
 
@@ -216,6 +219,12 @@ class ControlFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("session triggers", label))
         Toast.makeText(requireContext(), "Copied session triggers", Toast.LENGTH_SHORT).show()
+    private fun copyListenLabel() {
+        val label = ListenLabelCopy.clipboardText(binding.tvBtnLabel.text)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("listen control", label))
+        Toast.makeText(requireContext(), "Copied listen control", Toast.LENGTH_SHORT).show()
     }
 
     private fun updateDuration() {
