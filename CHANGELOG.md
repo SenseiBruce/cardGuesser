@@ -8,6 +8,7 @@ All notable changes to Magic Haptic Assistant are documented here.
 - Identification drill in Toolkit: play a haptic pattern and choose the card from four options
 - Drill streak + best-streak tracking while you identify cards
 - Cheat Sheet **Share** exports the active 52-card stack as numbered plain text
+- Test tab Perception Log **Clear** button empties the speech log
 - Flask-style repo hygiene: root `LICENSE` (MIT), `.editorconfig`, GitHub issue/PR templates
 - Canonical `./gradlew test` / `./gradlew build` root tasks; CI runs `./gradlew test` explicitly.
 - `SpeechProcessor` pure pipeline extracted from `AudioListenerService`, with unit tests.
