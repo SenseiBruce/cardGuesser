@@ -27,6 +27,7 @@ import com.magic.haptic.util.HapticSpeedCopy
 import com.magic.haptic.data.AppDataStore
 import com.magic.haptic.databinding.FragmentSettingsBinding
 import com.magic.haptic.util.NotifTitleCopy
+import com.magic.haptic.util.NotifBodyCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -74,6 +75,13 @@ class SettingsFragment : Fragment() {
 
         binding.tvStealthDisguise.setOnClickListener {
             copyNotifTitle()
+
+        binding.tilNotifBody.setOnClickListener {
+            copyNotifBody()
+        }
+        binding.etNotifBody.setOnLongClickListener {
+            copyNotifBody()
+            true
         }
     }
 
@@ -323,6 +331,12 @@ class SettingsFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("notification title", label))
         Toast.makeText(requireContext(), "Copied notification title", Toast.LENGTH_SHORT).show()
+    private fun copyNotifBody() {
+        val label = NotifBodyCopy.clipboardText(binding.etNotifBody.text)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("notification body", label))
+        Toast.makeText(requireContext(), "Copied notification body", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
