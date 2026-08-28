@@ -31,6 +31,7 @@ import com.magic.haptic.util.NotifBodyCopy
 import com.magic.haptic.util.DebounceCopy
 import com.magic.haptic.util.ShortPulseCopy
 import com.magic.haptic.util.LongPulseCopy
+import com.magic.haptic.util.SeparatorGapCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -111,6 +112,14 @@ class SettingsFragment : Fragment() {
         }
         binding.etLong.setOnLongClickListener {
             copyLongPulse()
+            true
+        }
+
+        binding.tilSep.setOnClickListener {
+            copySeparatorGap()
+        }
+        binding.etSep.setOnLongClickListener {
+            copySeparatorGap()
             true
         }
     }
@@ -401,6 +410,14 @@ class SettingsFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("etLong", label))
         Toast.makeText(requireContext(), "Copied long pulse", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun copySeparatorGap() {
+        val label = SeparatorGapCopy.clipboardText(binding.etSep.text)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("etSep", label))
+        Toast.makeText(requireContext(), "Copied separator gap", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
