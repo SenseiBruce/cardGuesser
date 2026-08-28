@@ -21,6 +21,7 @@ import com.magic.haptic.databinding.FragmentSettingsBinding
 import com.magic.haptic.util.SettingsSummaryFormatter
 import com.magic.haptic.util.HapticConfigFormatter
 import com.magic.haptic.util.CurrentDeckCopy
+import com.magic.haptic.util.CustomDeckCopy
 import com.magic.haptic.data.AppDataStore
 import com.magic.haptic.databinding.FragmentSettingsBinding
 import com.magic.haptic.util.HapticSpeedCopy
@@ -43,6 +44,7 @@ class SettingsFragment : Fragment() {
     private lateinit var appDataStore: AppDataStore
     private var latestPreset: String = "NORMAL"
     private var latestConfig: HapticConfig = HapticConfig(100, 300, 150, 500)
+    private var latestCustomDeck: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,6 +70,11 @@ class SettingsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             appDataStore.hapticConfig.collectLatest { config ->
                 latestConfig = config
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            appDataStore.customDeckData.collectLatest { data ->
+                latestCustomDeck = data
             }
         }
         binding.btnCopyHapticConfig.setOnClickListener { copyHapticConfig() }
@@ -164,6 +171,10 @@ class SettingsFragment : Fragment() {
 
         binding.btnEditCustomDeck.setOnClickListener {
             DeckCustomizerDialog(appDataStore).show(childFragmentManager, "DeckCustomizer")
+        }
+        binding.btnEditCustomDeck.setOnLongClickListener {
+            copyCustomDeck()
+            true
         }
     }
 
@@ -363,6 +374,14 @@ class SettingsFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("current deck", label))
         Toast.makeText(requireContext(), "Copied current deck", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun copyCustomDeck() {
+        val label = CustomDeckCopy.clipboardText(latestCustomDeck)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("custom stack", label))
+        Toast.makeText(requireContext(), "Copied custom stack", Toast.LENGTH_SHORT).show()
     }
 
     private fun copyHapticSpeed() {
