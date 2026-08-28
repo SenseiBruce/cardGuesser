@@ -25,6 +25,7 @@ import com.magic.haptic.haptic.HapticPlayer
 import com.magic.haptic.util.SpeechLogFormatter
 import com.magic.haptic.util.ManualCardInfoCopy
 import com.magic.haptic.util.IdentificationRoundCopy
+import com.magic.haptic.util.DrillStatsCopy
 import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
 import kotlinx.coroutines.flow.collectLatest
@@ -79,6 +80,7 @@ class TestFragment : Fragment() {
             copyIdentificationRound()
             true
         }
+        binding.tvDrillStatus.setOnClickListener { copyDrillStats() }
         setupManualVibrate()
         setupQuickTest()
         observeSpeech()
@@ -212,6 +214,16 @@ class TestFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("identification-round", label))
         Toast.makeText(requireContext(), "Copied identification round", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun copyDrillStats() {
+        val stats = drill.stats
+        val label =
+            DrillStatsCopy.clipboardText(stats.correct, stats.attempts, stats.streak, stats.bestStreak)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("drill-stats", label))
+        Toast.makeText(requireContext(), "Copied drill stats", Toast.LENGTH_SHORT).show()
     }
 
     private fun copyManualCardInfo() {
