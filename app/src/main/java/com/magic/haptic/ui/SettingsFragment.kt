@@ -31,6 +31,7 @@ import com.magic.haptic.util.NotifBodyCopy
 import com.magic.haptic.util.DebounceCopy
 import com.magic.haptic.util.ShortPulseCopy
 import com.magic.haptic.util.LongPulseCopy
+import com.magic.haptic.util.PulseGapCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -111,6 +112,14 @@ class SettingsFragment : Fragment() {
         }
         binding.etLong.setOnLongClickListener {
             copyLongPulse()
+            true
+        }
+
+        binding.tilGap.setOnClickListener {
+            copyPulseGap()
+        }
+        binding.etGap.setOnLongClickListener {
+            copyPulseGap()
             true
         }
     }
@@ -401,6 +410,14 @@ class SettingsFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("etLong", label))
         Toast.makeText(requireContext(), "Copied long pulse", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun copyPulseGap() {
+        val label = PulseGapCopy.clipboardText(binding.etGap.text)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("etGap", label))
+        Toast.makeText(requireContext(), "Copied pulse gap", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
