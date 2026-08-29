@@ -23,6 +23,7 @@ class AppDataStore(private val dataStore: DataStore<Preferences>) {
         val DEBOUNCE_SEC = intPreferencesKey("debounce_sec")
         val NOTIF_TITLE = stringPreferencesKey("notif_title")
         val NOTIF_BODY = stringPreferencesKey("notif_body")
+        val MANUAL_POSITION = stringPreferencesKey("manual_position")
 
         // Custom Haptic values
         val CUSTOM_SHORT = longPreferencesKey("custom_short")
@@ -43,6 +44,7 @@ class AppDataStore(private val dataStore: DataStore<Preferences>) {
     val debounceSec: Flow<Int> = dataStore.data.map { it[DEBOUNCE_SEC] ?: 3 }
     val notifTitle: Flow<String> = dataStore.data.map { it[NOTIF_TITLE] ?: "System Optimizer" }
     val notifBody: Flow<String> = dataStore.data.map { it[NOTIF_BODY] ?: "Running..." }
+    val manualPosition: Flow<String> = dataStore.data.map { it[MANUAL_POSITION] ?: "" }
 
     val hapticConfig: Flow<HapticConfig> =
         kotlinx.coroutines.flow.combine(
@@ -97,5 +99,9 @@ class AppDataStore(private val dataStore: DataStore<Preferences>) {
             it[NOTIF_TITLE] = title
             it[NOTIF_BODY] = body
         }
+    }
+
+    suspend fun saveManualPosition(position: String) {
+        dataStore.edit { it[MANUAL_POSITION] = position }
     }
 }
