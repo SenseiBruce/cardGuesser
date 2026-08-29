@@ -147,13 +147,14 @@
                             android:textColor="@color/magic_white" />
                     </RadioGroup>
 
-                    <RadioButton
-                        android:id="@+id/rbCustom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/antique_gold"
-                        android:text="Custom Timings"
-                        android:textColor="@color/magic_white" />
+                        <RadioButton
+                            android:id="@+id/rbCustom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/antique_gold"
+                            android:contentDescription="Copy custom timings"
+                            android:text="Custom Timings"
+                            android:textColor="@color/magic_white" />
 
                     <LinearLayout
                         android:id="@+id/llCustomHaptic"

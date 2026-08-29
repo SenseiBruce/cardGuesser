@@ -34,6 +34,7 @@ import com.magic.haptic.util.ShortPulseCopy
 import com.magic.haptic.util.LongPulseCopy
 import com.magic.haptic.util.PulseGapCopy
 import com.magic.haptic.util.SeparatorGapCopy
+import com.magic.haptic.util.CustomTimingsCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -78,6 +79,10 @@ class SettingsFragment : Fragment() {
             }
         }
         binding.btnCopyHapticConfig.setOnClickListener { copyHapticConfig() }
+        binding.rbCustom.setOnLongClickListener {
+            copyCustomTimings()
+            true
+        }
 
         binding.tvStackOrder.setOnClickListener {
             copyCurrentDeck()
@@ -454,6 +459,20 @@ class SettingsFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("etSep", label))
         Toast.makeText(requireContext(), "Copied separator gap", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun copyCustomTimings() {
+        val label =
+            CustomTimingsCopy.clipboardText(
+                binding.etShort.text,
+                binding.etLong.text,
+                binding.etGap.text,
+                binding.etSep.text,
+            )
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("custom-timings", label))
+        Toast.makeText(requireContext(), "Copied custom timings", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
