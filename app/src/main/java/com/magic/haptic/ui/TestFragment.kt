@@ -24,6 +24,7 @@ import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
 import com.magic.haptic.util.SpeechLogFormatter
 import com.magic.haptic.util.SpeechLogCountCopy
+import com.magic.haptic.util.LatestSpeechLogCopy
 import com.magic.haptic.util.ManualCardInfoCopy
 import com.magic.haptic.util.ManualPositionCopy
 import com.magic.haptic.util.IdentificationRoundCopy
@@ -78,6 +79,7 @@ class TestFragment : Fragment() {
             copySpeechLogCount()
             true
         }
+        binding.tvSpeechLogHeader.setOnClickListener { copyLatestSpeechLog() }
 
         binding.tvManualCardInfo.setOnClickListener {
             copyManualCardInfo()
@@ -206,6 +208,15 @@ class TestFragment : Fragment() {
                 adapter.addEntry(entry)
             }
         }
+    }
+
+    private fun copyLatestSpeechLog() {
+        val latest = adapter.snapshot().lastOrNull()?.text
+        val label = LatestSpeechLogCopy.clipboardText(latest)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("latest-perception", label))
+        Toast.makeText(requireContext(), "Copied latest perception", Toast.LENGTH_SHORT).show()
     }
 
     private fun copySpeechLogCount() {
