@@ -56,6 +56,14 @@ class AppDataStoreTest {
         }
 
     @Test
+    fun saveManualPosition_persistsAndRoundTrips() =
+        testScope.runTest {
+            val store = createStore("manual")
+            store.saveManualPosition("17")
+            assertThat(store.manualPosition.first()).isEqualTo("17")
+        }
+
+    @Test
     fun defaults_areUsedWhenUnset() =
         testScope.runTest {
             val store = createStore("defaults")

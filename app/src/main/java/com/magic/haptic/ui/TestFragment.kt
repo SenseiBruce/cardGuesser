@@ -4,6 +4,8 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -88,6 +90,7 @@ class TestFragment : Fragment() {
             copyManualPosition()
             true
         }
+        restoreManualPosition()
         binding.tvDrillHeader.setOnLongClickListener {
             copyIdentificationRound()
             true
@@ -96,6 +99,37 @@ class TestFragment : Fragment() {
         setupManualVibrate()
         setupQuickTest()
         observeSpeech()
+    }
+
+    private fun restoreManualPosition() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            appDataStore.manualPosition.collectLatest { stored ->
+                if (binding.etManualPosition.text.toString() != stored) {
+                    binding.etManualPosition.setText(stored)
+                }
+            }
+        }
+        binding.etManualPosition.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    lifecycleScope.launch { appDataStore.saveManualPosition(s?.toString().orEmpty()) }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {}
+            },
+        )
     }
 
     private fun setupSpeechLog() {
