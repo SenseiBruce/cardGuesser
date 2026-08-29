@@ -122,6 +122,9 @@
                 android:textColor="@color/antique_gold"
                 android:textSize="12sp"
                 android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Copy identification target"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dividerDrill" />
