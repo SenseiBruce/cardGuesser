@@ -30,6 +30,7 @@ import com.magic.haptic.util.LatestSpeechLogCopy
 import com.magic.haptic.util.ManualCardInfoCopy
 import com.magic.haptic.util.ManualPositionCopy
 import com.magic.haptic.util.IdentificationRoundCopy
+import com.magic.haptic.util.IdentificationTargetCopy
 import com.magic.haptic.util.DrillStatsCopy
 import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
@@ -93,6 +94,7 @@ class TestFragment : Fragment() {
         }
         restoreManualPosition()
         restoreDrillStats()
+        binding.tvDrillHeader.setOnClickListener { copyIdentificationTarget() }
         binding.tvDrillHeader.setOnLongClickListener {
             copyIdentificationRound()
             true
@@ -277,6 +279,14 @@ class TestFragment : Fragment() {
         clipboard.setPrimaryClip(ClipData.newPlainText("perception-log", text))
         Toast.makeText(requireContext(), getString(R.string.speech_log_copied), Toast.LENGTH_SHORT)
             .show()
+    }
+
+    private fun copyIdentificationTarget() {
+        val label = IdentificationTargetCopy.clipboardText(currentRound?.target)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("identification-target", label))
+        Toast.makeText(requireContext(), "Copied identification target", Toast.LENGTH_SHORT).show()
     }
 
     private fun copyIdentificationRound() {
