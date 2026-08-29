@@ -43,6 +43,16 @@ class HapticDrillTest {
         assertThat(drill.stats.bestStreak).isEqualTo(2)
     }
 
+    @Test
+    fun restoreStatsReplacesCounters() {
+        val drill = HapticDrill()
+        drill.restoreStats(DrillStats(correct = 4, attempts = 5, streak = 2, bestStreak = 3))
+        assertThat(drill.stats.correct).isEqualTo(4)
+        assertThat(drill.stats.attempts).isEqualTo(5)
+        assertThat(drill.stats.streak).isEqualTo(2)
+        assertThat(drill.stats.bestStreak).isEqualTo(3)
+    }
+
     @Test(expected = IllegalArgumentException::class)
     fun nextRoundRejectsTinyDeck() {
         HapticDrill().nextRound(listOf("AS", "KH"))

@@ -54,4 +54,14 @@ class HapticDrill(
             )
         return ok
     }
+
+    fun restoreStats(value: DrillStats) {
+        stats =
+            DrillStats(
+                correct = value.correct.coerceAtLeast(0),
+                attempts = value.attempts.coerceAtLeast(0),
+                streak = value.streak.coerceAtLeast(0),
+                bestStreak = value.bestStreak.coerceAtLeast(0),
+            )
+    }
 }

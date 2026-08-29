@@ -8,7 +8,9 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.magic.haptic.haptic.DrillStats
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -24,6 +26,10 @@ class AppDataStore(private val dataStore: DataStore<Preferences>) {
         val NOTIF_TITLE = stringPreferencesKey("notif_title")
         val NOTIF_BODY = stringPreferencesKey("notif_body")
         val MANUAL_POSITION = stringPreferencesKey("manual_position")
+        val DRILL_CORRECT = intPreferencesKey("drill_correct")
+        val DRILL_ATTEMPTS = intPreferencesKey("drill_attempts")
+        val DRILL_STREAK = intPreferencesKey("drill_streak")
+        val DRILL_BEST_STREAK = intPreferencesKey("drill_best_streak")
 
         // Custom Haptic values
         val CUSTOM_SHORT = longPreferencesKey("custom_short")
@@ -45,6 +51,15 @@ class AppDataStore(private val dataStore: DataStore<Preferences>) {
     val notifTitle: Flow<String> = dataStore.data.map { it[NOTIF_TITLE] ?: "System Optimizer" }
     val notifBody: Flow<String> = dataStore.data.map { it[NOTIF_BODY] ?: "Running..." }
     val manualPosition: Flow<String> = dataStore.data.map { it[MANUAL_POSITION] ?: "" }
+    val drillStats: Flow<DrillStats> =
+        combine(
+            dataStore.data.map { it[DRILL_CORRECT] ?: 0 },
+            dataStore.data.map { it[DRILL_ATTEMPTS] ?: 0 },
+            dataStore.data.map { it[DRILL_STREAK] ?: 0 },
+            dataStore.data.map { it[DRILL_BEST_STREAK] ?: 0 },
+        ) { correct, attempts, streak, best ->
+            DrillStats(correct = correct, attempts = attempts, streak = streak, bestStreak = best)
+        }
 
     val hapticConfig: Flow<HapticConfig> =
         kotlinx.coroutines.flow.combine(
@@ -103,5 +118,14 @@ class AppDataStore(private val dataStore: DataStore<Preferences>) {
 
     suspend fun saveManualPosition(position: String) {
         dataStore.edit { it[MANUAL_POSITION] = position }
+    }
+
+    suspend fun saveDrillStats(stats: DrillStats) {
+        dataStore.edit {
+            it[DRILL_CORRECT] = stats.correct.coerceAtLeast(0)
+            it[DRILL_ATTEMPTS] = stats.attempts.coerceAtLeast(0)
+            it[DRILL_STREAK] = stats.streak.coerceAtLeast(0)
+            it[DRILL_BEST_STREAK] = stats.bestStreak.coerceAtLeast(0)
+        }
     }
 }

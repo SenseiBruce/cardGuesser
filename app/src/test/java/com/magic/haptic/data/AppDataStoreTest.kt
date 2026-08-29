@@ -64,6 +64,25 @@ class AppDataStoreTest {
         }
 
     @Test
+    fun saveDrillStats_persistsAndRoundTrips() =
+        testScope.runTest {
+            val store = createStore("drill")
+            store.saveDrillStats(
+                com.magic.haptic.haptic.DrillStats(
+                    correct = 4,
+                    attempts = 6,
+                    streak = 2,
+                    bestStreak = 3,
+                ),
+            )
+            val stats = store.drillStats.first()
+            assertThat(stats.correct).isEqualTo(4)
+            assertThat(stats.attempts).isEqualTo(6)
+            assertThat(stats.streak).isEqualTo(2)
+            assertThat(stats.bestStreak).isEqualTo(3)
+        }
+
+    @Test
     fun defaults_areUsedWhenUnset() =
         testScope.runTest {
             val store = createStore("defaults")
