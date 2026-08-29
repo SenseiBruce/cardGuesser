@@ -24,6 +24,7 @@ import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
 import com.magic.haptic.util.SpeechLogFormatter
 import com.magic.haptic.util.ManualCardInfoCopy
+import com.magic.haptic.util.ManualPositionCopy
 import com.magic.haptic.util.IdentificationRoundCopy
 import com.magic.haptic.util.DrillStatsCopy
 import com.magic.haptic.haptic.HapticEncoder
@@ -75,6 +76,10 @@ class TestFragment : Fragment() {
 
         binding.tvManualCardInfo.setOnClickListener {
             copyManualCardInfo()
+        }
+        binding.etManualPosition.setOnLongClickListener {
+            copyManualPosition()
+            true
         }
         binding.tvDrillHeader.setOnLongClickListener {
             copyIdentificationRound()
@@ -232,6 +237,14 @@ class TestFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("manual lookup", label))
         Toast.makeText(requireContext(), "Copied manual lookup", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun copyManualPosition() {
+        val label = ManualPositionCopy.clipboardText(binding.etManualPosition.text)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("manual position", label))
+        Toast.makeText(requireContext(), "Copied manual position", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
