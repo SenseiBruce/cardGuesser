@@ -36,6 +36,7 @@ import com.magic.haptic.util.PulseGapCopy
 import com.magic.haptic.util.SeparatorGapCopy
 import com.magic.haptic.util.CustomTimingsCopy
 import com.magic.haptic.util.NotifDisguiseCopy
+import com.magic.haptic.util.DeckSpinnerCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -159,6 +160,10 @@ class SettingsFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, presets)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerDeck.adapter = adapter
+        binding.spinnerDeck.setOnLongClickListener {
+            copyDeckSpinner()
+            true
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             appDataStore.currentDeckId.collectLatest { id ->
@@ -379,6 +384,15 @@ class SettingsFragment : Fragment() {
             getString(R.string.haptic_config_copied),
             Toast.LENGTH_SHORT,
         ).show()
+    }
+
+    private fun copyDeckSpinner() {
+        val selected = binding.spinnerDeck.selectedItem?.toString()
+        val label = DeckSpinnerCopy.clipboardText(selected)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("deck spinner", label))
+        Toast.makeText(requireContext(), "Copied deck spinner", Toast.LENGTH_SHORT).show()
     }
 
     private fun copyCurrentDeck() {
