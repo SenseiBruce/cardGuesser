@@ -34,6 +34,7 @@ import com.magic.haptic.util.DrillStatsCopy
 import com.magic.haptic.haptic.HapticEncoder
 import com.magic.haptic.haptic.HapticPlayer
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class TestFragment : Fragment() {
@@ -91,6 +92,7 @@ class TestFragment : Fragment() {
             true
         }
         restoreManualPosition()
+        restoreDrillStats()
         binding.tvDrillHeader.setOnLongClickListener {
             copyIdentificationRound()
             true
@@ -130,6 +132,12 @@ class TestFragment : Fragment() {
                 ) {}
             },
         )
+    }
+
+    private fun restoreDrillStats() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            drill.restoreStats(appDataStore.drillStats.first())
+        }
     }
 
     private fun setupSpeechLog() {
@@ -234,6 +242,7 @@ class TestFragment : Fragment() {
             .forEach { it.isEnabled = false }
         binding.btnStartDrill.text = "NEXT"
         currentRound = null
+        lifecycleScope.launch { appDataStore.saveDrillStats(drill.stats) }
     }
 
     private fun observeSpeech() {
