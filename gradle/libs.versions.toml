@@ -10,7 +10,7 @@ timber = "5.0.1"
 junit = "4.13.2"
 truth = "1.4.5"
 vosk = "0.3.47"
-ktlintPlugin = "12.1.0"
+ktlintPlugin = "14.2.0"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
