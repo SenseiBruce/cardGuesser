@@ -35,6 +35,7 @@ import com.magic.haptic.util.LongPulseCopy
 import com.magic.haptic.util.PulseGapCopy
 import com.magic.haptic.util.SeparatorGapCopy
 import com.magic.haptic.util.CustomTimingsCopy
+import com.magic.haptic.util.NotifDisguiseCopy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -94,6 +95,14 @@ class SettingsFragment : Fragment() {
 
         binding.tvStealthDisguise.setOnClickListener {
             copyNotifTitle()
+        }
+        binding.tvStealthDisguise.setOnLongClickListener {
+            copyNotifDisguise()
+            true
+        }
+        binding.etNotifTitle.setOnLongClickListener {
+            copyNotifDisguise()
+            true
         }
 
         binding.tilNotifBody.setOnClickListener {
@@ -411,6 +420,15 @@ class SettingsFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText("notification title", label))
         Toast.makeText(requireContext(), "Copied notification title", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun copyNotifDisguise() {
+        val label =
+            NotifDisguiseCopy.clipboardText(binding.etNotifTitle.text, binding.etNotifBody.text)
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("notification disguise", label))
+        Toast.makeText(requireContext(), "Copied notification disguise", Toast.LENGTH_SHORT).show()
     }
 
     private fun copyNotifBody() {
